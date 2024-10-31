@@ -1,8 +1,10 @@
 #include "PlayScene.h"
 #include <DxLib.h>
+#include "Player.h"
 
 PlayScene::PlayScene()
 {
+	Instantiate<Player>();
 }
 
 PlayScene::~PlayScene()
