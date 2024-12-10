@@ -6,7 +6,7 @@
 Stage::Stage()
 {
 
-	hImage = LoadGraph("data/background.png");
+	hImage = LoadGraph("data/background2.png");
 	backGroundX = 0;
 	backGroundY = 0;
 

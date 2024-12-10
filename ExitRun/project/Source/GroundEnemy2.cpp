@@ -12,7 +12,7 @@ GroundEnemy2::GroundEnemy2()
 {
 	hImage = LoadGraph("data/dog.png");
 	position.x = 1280;
-	position.y = 500;
+	position.y = 490;
 	speed.x = 0.0f;
 
 	//isShield = false;
@@ -26,39 +26,25 @@ GroundEnemy2::~GroundEnemy2()
 
 void GroundEnemy2::Update()
 {
-	position.x -= 8.5f;
-	std::list<Player*> player = FindGameObjects<Player>();
-	std::list<Shield*> shield = FindGameObjects<Shield>();
-
+	position.x -= 6.5f;
 	
-	for (Player* pl : player) {
-
-		//プレイヤーの中心座標
-		VECTOR2 plCenter;
-		plCenter.x = pl->position.x;
-		plCenter.y = pl->position.y;
-		//敵の中心座標
-		VECTOR2 GECenter;
-		GECenter.x = position.x;
-		GECenter.y = position.y;
-
-		//盾持ってるときに自分を消す
-		for (Shield* sh : shield) {
-			if (sh->isShield) {
-				if (CircleHit(plCenter, GECenter, 64)) {
-					DestroyMe();
-				}
-			}
-		}
-	}
 }
 
 void GroundEnemy2::Draw()
 {
 	DrawGraph(position.x, position.y, hImage, true);
+	//	debug
+	int width, height;
+	GetGraphSize(hImage, &width, &height);
+	VECTOR2 groundEnemyPos = getPosition();
+	DrawCircle(groundEnemyPos.x, groundEnemyPos.y, width / 2, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にする
+
 }
 
 VECTOR2 GroundEnemy2::getPosition() const
 {
-	return position;
+	int width, height;
+	GetGraphSize(hImage, &width, &height);
+	VECTOR2 groundEnemyPos = { position.x + width / 2, position.y + height / 2 };
+	return groundEnemyPos;
 }

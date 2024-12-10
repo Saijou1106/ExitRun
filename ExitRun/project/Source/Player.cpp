@@ -6,6 +6,10 @@
 #include "../ImGui/imgui.h"
 #include "Shield.h"
 #include "Enemy.h"
+#include "GroundEnemy1.h"
+#include "GroundEnemy2.h"
+#include "SkyEnemy1.h"
+#include "SkyEnemy2.h"
 
 
 //ジャンプゲーム作るとき便利
@@ -20,9 +24,9 @@ Player::Player()
 	aliveImage = LoadGraph("data/run1.png");
 	deadImage = LoadGraph("data/playerDead.png");
 	position.x = 120;
-	position.y = 500;
+	position.y = 455;
 	jumpCount = 0;  //ジャンプ回数の初期化
-	ground = 500;   //地面の位置
+	ground = 455;   //地面の位置
 	grounded = true;//地面にいる状態
 	maxJump = 2;   //最大ジャンプ回数
 	jumpPower = 10;//ジャンプ力
@@ -32,6 +36,9 @@ Player::Player()
 	isActivePlayer = true;
 	isDead = false;  //プレイヤーが死んだかどうか
 
+	int width, height;
+	GetGraphSize(aliveImage, &width, &height);
+	centerPosition = VECTOR2(width / 2, height / 2);
 }
 
 
@@ -76,44 +83,57 @@ void Player::Update()
 	std::list<Enemy*>enemis = FindGameObjects<Enemy>();//すべての敵オブジェクトがEnemy*として格納される
 	std::list<Shield*> shield = FindGameObjects<Shield>();
 
+	std::list<GroundEnemy1*>groundenemy1 = FindGameObjects< GroundEnemy1>();
+	std::list<GroundEnemy2*>groundenemy2 = FindGameObjects< GroundEnemy2>();
+	std::list<SkyEnemy1*>skyenemy1 = FindGameObjects< SkyEnemy1>();
+	std::list<SkyEnemy2*>skyenemy2 = FindGameObjects< SkyEnemy2>();
+
 
 	for (Enemy* enemy : enemis) 
 	{
+		
+
 		VECTOR2 enemyPos = enemy->getPosition();  // 各敵の位置を取得
-		VECTOR2 playerPos = position;            //プレイヤーの位置を取得
+		//int width, height;
+		//GetGraphSize(aliveImage, &width, &height);
+		//VECTOR2 playerPos = { position.x + centerPosition.x, position.y + centerPosition.x };//画像の中心座標,プレイヤーの位置を取得
+		VECTOR2 playerPos = GetCenterPosition();//画像の中心座標,プレイヤーの位置を取得
 
-		if (CircleHit(playerPos, enemyPos, 64))//プレイヤーと敵が当たったら
+		if (CircleHit(playerPos, enemyPos, 48))//プレイヤーと敵が当たったら
 		{
-			if (shield.size() == 0)//プレイヤーが盾を所持していない場合
 			{
-				DestroyMe();  //プレイヤー削除
-				break;
-			}
-			else
-			{
-				int count = 0;//プレイヤーが持ってない盾の数の初期化
+  				int count = 0;//プレイヤーが持ってない盾の数の初期化
 
-				for (Shield* sh : shield)
+				 for (Shield* sh : shield)
 				{
 					if (sh->isShield)//プレイヤーが盾を所持している時
 					{
 						sh->DestroyMe();//盾だけ消える(シールド無効化)
+						enemy->DestroyMe();
 						break;
 					}
+
 					count++;
+
+					//	ゲーム中に盾はあるがプレイヤーは持ってない
+					if (count >= shield.size())
+					{
+						//プレイヤーが盾を所持していない場合
+						isDead = true; //プレイヤーが死んだことを記録
+						DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
+						break;
+					}
 				}
-				//	ゲーム中に盾はあるがプレイヤーは持ってない
-				if (count >= shield.size())
-				{
-					//プレイヤーが盾を所持していない場合
-					isDead = true; //プレイヤーが死んだことを記録
-					DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
-					break;
-				}
+				 if (shield.size() == 0)
+				 {
+					 //プレイヤーが盾を所持していない場合
+					 isDead = true; //プレイヤーが死んだことを記録
+					 DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
+				 }
 			}
 		}
 	}
-
+	
 	if (isDead) {
 		//プレイヤーが死んだら移動しない
 		return;
@@ -136,7 +156,12 @@ void Player::Draw()
 
 	}
 	
-
+	//	debug
+	int width, height;
+	GetGraphSize(aliveImage, &width, &height);
+	VECTOR2 playerPos = GetCenterPosition();//画像の中心座標,プレイヤーの位置を取得
+	DrawCircle(playerPos.x, playerPos.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にする
+	
 }
 
 void Player::DestroyMe()

@@ -8,7 +8,8 @@
 
 Shield::Shield()
 {
-	hImage = LoadGraph("data/shield.png");
+	shieldImage = LoadGraph("data/shield.png");
+	barrierImage = LoadGraph("data/barrier.png");
 	position.x = 1280;  
 	position.y = 500;
 	speed.x = 0.0f;
@@ -27,12 +28,12 @@ Shield::Shield()
 
 Shield::~Shield()
 {
-	DeleteGraph(hImage);
+	//DeleteGraph(hImage);
 }
 
 void Shield::Update()
 {
-	shieldCount = 0;//盾のカウント最初は0にしておく
+	//shieldCount = 0;//盾のカウント最初は0にしておく
 
 	position.x -= 3.5f;//盾の移動速度
 
@@ -40,9 +41,11 @@ void Shield::Update()
 	std::list<Player*> player = FindGameObjects<Player>();
 	for (Player* pl : player) {
 
-		VECTOR2 plCenter;//プレイヤーの中心座標
-		plCenter.x = pl->position.x;
-		plCenter.y = pl->position.y;
+		if (isShield) {
+			continue;
+		}
+
+		VECTOR2 player = pl->GetCenterPosition();//プレイヤーの中心座標
 
 
 		VECTOR2 SHCenter;//盾の中心座標
@@ -50,7 +53,7 @@ void Shield::Update()
 		SHCenter.y = position.y;
 
 
-		if (CircleHit(plCenter, SHCenter, 64)) {
+		if (CircleHit(player, SHCenter, 64)) {
 
 			isShield = true;          //盾がプレイヤーに獲得される
 			isFollowingPlayer = true; //盾がプレイヤーに追従し始める
@@ -58,15 +61,16 @@ void Shield::Update()
 		}
 	}
 
-	//もし盾がプレイヤーを追従している場合、プレイヤーの位置に基づいて縦の位置を更新
-	if (isFollowingPlayer) {
-		std::list<Player*> player = FindGameObjects<Player>();
-		for (Player* pl : player) {
-			//プレイヤーの位置に基づいて盾の位置をオフセットを使って更新
-			position.x = pl->position.x + offsetX; //X方向のオフセット
-			position.y = pl->position.y + offsetY; //X方向のオフセット
-		}
-	}
+	////もし盾がプレイヤーを追従している場合、プレイヤーの位置に基づいて縦の位置を更新
+	//if (isFollowingPlayer) {
+	//	std::list<Player*> player = FindGameObjects<Player>();
+	//	for (Player* pl : player) {
+	//		//プレイヤーの位置に基づいて盾の位置をオフセットを使って更新
+	//		position.x = pl->position.x + offsetX; //X方向のオフセット
+	//		position.y = pl->position.y + offsetY; //X方向のオフセット
+	//		DrawGraph(position.x, position.y, barrierImage, TRUE);
+	//	}
+	//}
 
 
 }
@@ -78,15 +82,30 @@ void Shield::Draw()
 		return;
 	}
 
-	DrawGraph(position.x, position.y, hImage, TRUE);
+	if (!isFollowingPlayer) {
+		DrawGraph(position.x, position.y, shieldImage, TRUE);
+	}
+	
 
 	//盾の所持数に応じて左上に盾を並べて表示する処理
 	if (shieldCount >= 1) {
 		for (int i = 0; i < shieldCount; i++) {
-			DrawGraph(10 + i *50, 10, hImage, TRUE);
+			DrawGraph(10 + i *50, 10, shieldImage, TRUE);
 
 		}
 	}
+
+	//もし盾がプレイヤーを追従している場合、プレイヤーの位置に基づいて縦の位置を更新
+	if (isFollowingPlayer) {
+		std::list<Player*> player = FindGameObjects<Player>();
+		for (Player* pl : player) {
+			//プレイヤーの位置に基づいて盾の位置をオフセットを使って更新
+			position.x = pl->position.x + offsetX; //X方向のオフセット
+			position.y = pl->position.y + offsetY; //X方向のオフセット
+			DrawGraph(position.x, position.y, barrierImage, TRUE);
+		}
+	}
+
 
 }
 

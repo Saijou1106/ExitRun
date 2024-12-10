@@ -11,7 +11,7 @@ GroundEnemy1::GroundEnemy1()
 {
 	hImage = LoadGraph("data/maguroRed.png");
 	position.x = 1280;
-	position.y = 500;
+	position.y = 450;
 	speed.x = 0.0f;
 
 
@@ -27,31 +27,6 @@ GroundEnemy1::~GroundEnemy1()
 void GroundEnemy1::Update()
 {
 	position.x -= 3.0f;
-	std::list<Player*> player = FindGameObjects<Player>();
-	std::list<Shield*> shield = FindGameObjects<Shield>();
-
-	
-	for (Player* pl : player) {
-
-		VECTOR2 plCenter;//プレイヤーの中心座標
-		plCenter.x = pl->position.x;
-		plCenter.y = pl->position.y;
-	
-		VECTOR2 GECenter;//敵の中心座標
-		  GECenter.x = position.x;
-          GECenter.y = position.y;
-       
-		  //プレイヤーが盾持ってるときに自分を消す
-		  for (Shield* sh : shield) {
-			  if (sh->isShield){
-				  if (CircleHit(plCenter, GECenter, 64)) {
-					  DestroyMe();
-				  }
-			  }
-		  }
-		  
-    }
-
 	
 	
 }
@@ -59,8 +34,18 @@ void GroundEnemy1::Update()
 void GroundEnemy1::Draw()
 {
 	DrawGraph(position.x, position.y, hImage, true);
+
+	//	debug
+	int width, height;
+	GetGraphSize(hImage, &width, &height);
+	DrawCircle(position.x + width / 2, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にする
+
 }
+
 VECTOR2 GroundEnemy1::getPosition() const
 {
-	return position;
+	int width, height;
+	GetGraphSize(hImage, &width, &height);
+	VECTOR2 groundEnemyPos = { position.x + width / 2, position.y + height / 2 };
+	return groundEnemyPos;
 }

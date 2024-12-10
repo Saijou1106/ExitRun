@@ -25,10 +25,11 @@ private:
 	bool isFollowingPlayer;  // 盾がプレイヤーに追従しているかのフラグ
 	bool isActivePlayer; 
 
+	VECTOR2 centerPosition;
+
 public:
 	Player();
 	VECTOR2 position;
-	//Shield shield;  //盾をプレイヤーに持たせる
 	void Update();
 	void Jump();//ジャンプ処理
 	void Draw();
@@ -38,7 +39,10 @@ public:
 	float velocity;//速度
 	
 	
-	
+	VECTOR2 GetCenterPosition() { 
+		VECTOR2 playerPos = { position.x + centerPosition.x, position.y + centerPosition.x };//画像の中心座標,プレイヤーの位置を取得
+		return playerPos;
+	};
 	
 	
 

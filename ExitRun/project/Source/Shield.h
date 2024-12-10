@@ -14,7 +14,8 @@ public:
 	void Draw()override;
 	void stopFollowing(); //追従停止メソッド
 	
-	int hImage;
+	int shieldImage;
+	int barrierImage;
 	VECTOR2 speed;	   //盾の速度
 	VECTOR2 position;  //盾の位置
 	bool isShield;     //プレイヤーが盾を保持

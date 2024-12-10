@@ -25,37 +25,22 @@ void SkyEnemy2::Update()
 	position.y += 5* sinf(timer);//幅×sin(角)
 
 	position.x -= 2.0f;
-	std::list<Player*> player = FindGameObjects<Player>();
-	std::list<Shield*> shield = FindGameObjects<Shield>();
-
-	for (Player* pl : player) {
-
-		//プレイヤーの中心座標
-		VECTOR2 plMid;
-		plMid.x = pl->position.x + 32;
-		plMid.y = pl->position.y + 32;
-		//敵の中心座標
-		VECTOR2 seMid;
-		seMid.x = position.x + 32;
-		seMid.y = position.y + 32;
-
-		//盾持ってるときに自分を消す
-		for (Shield* sh : shield) {
-			if (sh->isShield) {
-				if (CircleHit(plMid, seMid, 64)) {
-					DestroyMe();
-				}
-			}
-		}
-	}
+	
 }
 
 void SkyEnemy2::Draw()
 {
 	DrawGraph(position.x, position.y, hImage, true);
+	//	debug
+	int width, height;
+	GetGraphSize(hImage, &width, &height);
+	DrawCircle(position.x + width / 2, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にする
 }
 
 VECTOR2 SkyEnemy2::getPosition() const
 {
-	return position;
+	int width, height;
+	GetGraphSize(hImage, &width, &height);
+	VECTOR2 groundEnemyPos = { position.x + width / 2, position.y + height / 2 };
+	return groundEnemyPos;
 }
