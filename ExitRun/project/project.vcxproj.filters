@@ -54,12 +54,9 @@
     <ClCompile Include="Source\Player.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="Source\GameOver.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
-=======
->>>>>>> parent of 45e3c67 (ゲームオーバー画面)
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -123,6 +120,9 @@
     </ClInclude>
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Source\Player.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameOver.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
   </ItemGroup>
