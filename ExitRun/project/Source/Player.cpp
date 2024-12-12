@@ -2,21 +2,29 @@
 #include "DxLib.h"
 #include "TitleScene.h"
 #include "PlayScene.h"
+#include "Screen.h"
+#include "../ImGui/imgui.h"
+
+//ジャンプゲーム作るとき便利
+const float Gravity = 0.4f;
+const float JumpHeight = 64;
+const float V0 = -sqrtf(2.0f * Gravity * JumpHeight);
+          //V0は初速
 
 
 Player::Player() 
 {
 	hImage = LoadGraph("data/run1.png");
-	playerX = 120;
-	playerY = 200;
-	jumpCount = 0;
-	ground = 200;
-	grounded = true;
+	position.x = 120;
+	position.y = 500;
+	jumpCount = 0;  //ジャンプ回数の初期化
+	ground = 500;   //地面の位置
+	grounded = true;//地面にいる状態
 	maxJump = 2;   //最大ジャンプ回数
-	jumpPower = 5;//ジャンプ力
-	gravity = 1;   //重力
+	jumpPower = 8;//ジャンプ力
 	velocityY = 0; //Y方向の速度
 
+	prevSpaceKeyState = false;  //最初はスペースキーが押されていない
 }
 
 
@@ -24,54 +32,42 @@ Player::Player()
 void Player::Update()
 {
 
-	//Y座標の更新（上に動かすために減算）
-	playerY -= velocityY;
+	//Y座標の更新（垂直移動）
+	position.y -= velocityY;
 
-
-	//初期状態では重力を適用しない
-	//if (grounded) {
-		//velocityY = 0; //地面にいる時は速度を0に設定
-	//}
-	
 
 	//地面にいない時だけ重力を適用
 	if(!grounded){
-		velocityY -= gravity;
+		velocityY -= Gravity;//重力で下に引っ張る
 	}
 
 	
 	//地面に着地した時の処理
-	if (playerY >= ground) {
-		playerY = ground;
-		velocityY = 0; //Yの速度0にする
-		onGround();
-	}
-
-	//スペースキーでジャンプ
-	if (CheckHitKey(KEY_INPUT_SPACE)) {
-		//地面にいるか、ジャンプ回数が１回のとき
-		if (grounded || (jumpCount <= maxJump)) {
-			Jump();//ジャンプ処理
-		}
-		
-	}
-//ジャンプ2回したらそれ以上ジャンプできないようにする
-	if (jumpCount >= maxJump) {
-		jumpCount = maxJump;
+	if (position.y >= ground) {
+		position.y = ground;  //地面に着地
+		velocityY = 0;        //Yの速度0にする
+		grounded = true;      //地面に接した状態
+		jumpCount = 0;        //ジャンプ回数をリセット
 	}
 
 
+	//スペースキーが押された瞬間だけ反応させる
+	bool currentSpaceKeyState = CheckHitKey(KEY_INPUT_SPACE);
+	if (currentSpaceKeyState && !prevSpaceKeyState) {
+		if (grounded  || jumpCount < maxJump) {//地面にいるか、ジャンプ回数が残っていれば
+			Jump();
+		}	
+	}
 
-	
-	//地面にいないとき（ジャンプ中）にジャンプカウントが1だったらもう一度ジャンプできる
-	
+	//前回のスペースキーの状態を更新
+	prevSpaceKeyState = currentSpaceKeyState;
 }
 
 void Player::Draw()
 {
-	//プレイヤーを矩形で表現（座標：　x, y, サイズ：32×32）
+	
 	//DrawBox(playerX - 16, playerY - 16, playerX + 16, playerY + 16, GetColor(255, 255, 255), TRUE);
-	DrawGraph(playerX, playerY, hImage, TRUE);
+	DrawGraph(position.x, position.y, hImage, TRUE);
 }
 
 //ジャンプ処理
@@ -83,12 +79,6 @@ void Player::Jump()
 
 }
 
-//地面にいることをセット
-void Player::onGround()
-{
-	grounded = true;
-	jumpCount = 0; //地面にいたらジャンプ回数リセット
-}
 
 //プレイヤーが地面にいるかの確認
 bool Player::isOnGround() const
