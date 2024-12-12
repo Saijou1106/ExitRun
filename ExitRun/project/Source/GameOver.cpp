@@ -23,7 +23,7 @@ void GameOver::Draw()
 
 	int size = GetFontSize();
 	SetFontSize(50);
-	DrawString(200, 200, "GOAL", GetColor(25, 155, 0));
+	DrawString(200, 200, "GAMEOVER", GetColor(25, 155, 0));
 	if (timer >= 1.0f) {
 		SetFontSize(25);
 		DrawFormatString(200, 300, GetColor(255, 255, 255), "SCORE %06d", score);
