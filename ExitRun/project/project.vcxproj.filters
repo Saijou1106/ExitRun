@@ -50,12 +50,37 @@
     <ClCompile Include="Library\Time.cpp">
       <Filter>Library</Filter>
     </ClCompile>
-    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Source\Player.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameOver.cpp">
       <Filter>TitleScene</Filter>
+    <ClCompile Include="Source\Vector2.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GroundEnemy1.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GroundEnemy2.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SkyEnemy1.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SkyEnemy2.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Stage.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shield.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Floor.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>PlayScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,12 +143,40 @@
     <ClInclude Include="Library\Time.h">
       <Filter>Library</Filter>
     </ClInclude>
-    <ClInclude Include="Stage.h" />
     <ClInclude Include="Source\Player.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameOver.h">
       <Filter>TitleScene</Filter>
+    <ClInclude Include="Source\Vector2.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GroundEnemy1.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SkyEnemy2.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SkyEnemy1.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GroundEnemy2.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shield.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Stage.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Floor.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\stage1.h">
+      <Filter>PlayScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
