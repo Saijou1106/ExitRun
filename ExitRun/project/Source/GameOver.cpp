@@ -10,7 +10,7 @@ GameOver::~GameOver()
 {
 }
 
-int score = 2000;
+int score = 1000;
 
 void GameOver::Update()
 {
