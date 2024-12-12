@@ -3,7 +3,6 @@
 
 GameOver::GameOver()
 {
-	timer = 0.0f;
 }
 
 GameOver::~GameOver()
@@ -14,13 +13,10 @@ int score = 1000;
 
 void GameOver::Update()
 {
-	timer += 0.1f;
 }
 
 void GameOver::Draw()
 {
-
-
 	int size = GetFontSize();
 	SetFontSize(50);
 	DrawString(200, 200, "GOAL", GetColor(25, 155, 0));
