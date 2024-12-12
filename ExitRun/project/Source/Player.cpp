@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "TitleScene.h"
 #include "PlayScene.h"
+#include "GameOver.h"
 
 
 Player::Player() 
@@ -23,6 +24,10 @@ Player::Player()
 
 void Player::Update()
 {
+	if (CheckHitKey(KEY_INPUT_H))
+	{
+		Instantiate<GameOver>();
+	}
 
 	//Y座標の更新（上に動かすために減算）
 	playerY -= velocityY;

@@ -55,14 +55,11 @@
       <Filter>PlayScene</Filter>
     </ClCompile>
 <<<<<<< HEAD
-<<<<<<< HEAD
     <ClCompile Include="Source\GameOver.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
 =======
 >>>>>>> parent of 45e3c67 (ゲームオーバー画面)
-=======
->>>>>>> parent of ba9df24 (ゲームオーバー1)
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -145,5 +142,10 @@
     <Filter Include="ImGui">
       <UniqueIdentifier>{a717257b-67b3-4bfa-834c-1e34032b33b0}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\GameOver.cpp.rej">
+      <Filter>PlayScene</Filter>
+    </None>
   </ItemGroup>
 </Project>
