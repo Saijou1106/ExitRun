@@ -8,6 +8,7 @@ public:
 	void Update()override;
 	void Draw()override;
 
-	float timer;
-	int hImage;
+	float timer; // 表示される間の時間
+	int GameOverImage;
+	int score; // スコア
 };

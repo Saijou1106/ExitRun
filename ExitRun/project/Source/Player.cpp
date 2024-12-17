@@ -46,10 +46,7 @@ Player::Player()
 
 void Player::Update()
 {
-	if (CheckHitKey(KEY_INPUT_H))
-	{
-		Instantiate<GameOver>();
-	}
+	
 	//ImGui::Begin("hennsuu");
 	//ImGui::InputFloat("Timer", &timer);
 	//ImGui::End;数値見れる
@@ -104,7 +101,7 @@ void Player::Update()
 		//VECTOR2 playerPos = { position.x + centerPosition.x, position.y + centerPosition.x };//画像の中心座標,プレイヤーの位置を取得
 		VECTOR2 playerPos = GetCenterPosition();//画像の中心座標,プレイヤーの位置を取得
 
-		if (CircleHit(playerPos, enemyPos, 48))//プレイヤーと敵が当たったら
+		if (CircleHit(playerPos, enemyPos,32))//プレイヤーと敵が当たったら
 		{
 			{
   				int count = 0;//プレイヤーが持ってない盾の数の初期化
@@ -125,7 +122,7 @@ void Player::Update()
 					{
 						//プレイヤーが盾を所持していない場合
 						isDead = true; //プレイヤーが死んだことを記録
-						DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
+						DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる
 						break;
 					}
 				}
@@ -133,7 +130,8 @@ void Player::Update()
 				 {
 					 //プレイヤーが盾を所持していない場合
 					 isDead = true; //プレイヤーが死んだことを記録
-					 DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
+					 DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる
+			
 				 }
 			}
 		}
@@ -143,17 +141,21 @@ void Player::Update()
 		//プレイヤーが死んだら移動しない
 		return;
 	}
-
-
-	
 }
 
 void Player::Draw()
 {
-
+	
 	if (isDead) {
 		//死んだときの画像を描画
 		DrawGraph(position.x, position.y, deadImage, TRUE);
+		Instantiate<GameOver>();
+
+		if (CheckHitKey(KEY_INPUT_SPACE)) {
+			SceneManager::ChangeScene("RESULT");
+			//SceneManager::ChangeScene("");
+		}
+	
 	}
 	else {
 		//生きている時の画像を描画
@@ -161,6 +163,7 @@ void Player::Draw()
 
 	}
 	
+
 	//	debug
 	int width, height;
 	GetGraphSize(aliveImage, &width, &height);
