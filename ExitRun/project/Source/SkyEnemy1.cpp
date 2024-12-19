@@ -1,6 +1,7 @@
 #include "SkyEnemy1.h"
 #include "Player.h"
 #include "../Library/GameObject.h"
+#include "GameManager.h"
 
 SkyEnemy1::SkyEnemy1()
 {
@@ -17,9 +18,10 @@ SkyEnemy1::~SkyEnemy1()
 
 void SkyEnemy1::Update()
 {
-	position.x -= 3.0f;
-	
-	
+	GameManager* gm = FindGameObject<GameManager>();
+	if (gm->playable) {
+		position.x -= 3.0f;
+	}
 }
 
 void SkyEnemy1::Draw()

@@ -12,7 +12,6 @@
 #include "SkyEnemy1.h"
 #include "SkyEnemy2.h"
 
-
 //ジャンプゲーム作るとき便利
 const float Gravity = 0.5f;
 const float JumpHeight = 64;
@@ -101,7 +100,7 @@ void Player::Update()
 		//VECTOR2 playerPos = { position.x + centerPosition.x, position.y + centerPosition.x };//画像の中心座標,プレイヤーの位置を取得
 		VECTOR2 playerPos = GetCenterPosition();//画像の中心座標,プレイヤーの位置を取得
 
-		if (CircleHit(playerPos, enemyPos,32))//プレイヤーと敵が当たったら
+		if (CircleHit(playerPos, enemyPos, 48))//プレイヤーと敵が当たったら
 		{
 			{
   				int count = 0;//プレイヤーが持ってない盾の数の初期化

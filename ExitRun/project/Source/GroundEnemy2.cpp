@@ -5,6 +5,7 @@
 #include "Screen.h"
 #include "Player.h"
 #include "GroundEnemy2.h"
+#include "GameManager.h"
 
 
 
@@ -26,8 +27,10 @@ GroundEnemy2::~GroundEnemy2()
 
 void GroundEnemy2::Update()
 {
-	position.x -= 6.5f;
-	
+	GameManager* gm = FindGameObject<GameManager>();
+	if (gm->playable) {
+		position.x -= 6.5f;
+	}
 }
 
 void GroundEnemy2::Draw()

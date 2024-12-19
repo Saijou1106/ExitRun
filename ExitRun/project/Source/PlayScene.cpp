@@ -9,6 +9,7 @@
 #include "GroundEnemy2.h"
 #include "Shield.h" 
 #include "Floor.h"
+#include "GameManager.h"
 
 PlayScene::PlayScene()
 {
@@ -20,6 +21,8 @@ PlayScene::PlayScene()
 	Instantiate<SkyEnemy1>();
 	Instantiate<SkyEnemy2>();
 	Instantiate<Shield>();
+
+	Instantiate<GameManager>();
 	
 	//groundEnemy1 = Instantiate<GroundEnemy1>();
 }

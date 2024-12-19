@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "DxLib.h"
 #include "Enemy.h"
+#include "GameManager.h"
 
 Shield::Shield()
 {
@@ -33,46 +34,48 @@ Shield::~Shield()
 
 void Shield::Update()
 {
-	//shieldCount = 0;//盾のカウント最初は0にしておく
+	GameManager* gm = FindGameObject<GameManager>();
+	if (gm->playable) {
+		//shieldCount = 0;//盾のカウント最初は0にしておく
 
-	position.x -= 3.5f;//盾の移動速度
+		position.x -= 3.5f;//盾の移動速度
 
-	//プレイヤーと盾の衝突判定
-	std::list<Player*> player = FindGameObjects<Player>();
-	for (Player* pl : player) {
+		//プレイヤーと盾の衝突判定
+		std::list<Player*> player = FindGameObjects<Player>();
+		for (Player* pl : player) {
 
-		if (isShield) {
-			continue;
+			if (isShield) {
+				continue;
+			}
+
+			VECTOR2 player = pl->GetCenterPosition();//プレイヤーの中心座標
+
+
+			VECTOR2 SHCenter;//盾の中心座標
+			SHCenter.x = position.x;
+			SHCenter.y = position.y;
+
+
+			if (CircleHit(player, SHCenter, 64)) {
+
+				isShield = true;          //盾がプレイヤーに獲得される
+				isFollowingPlayer = true; //盾がプレイヤーに追従し始める
+				shieldCount++;
+			}
 		}
 
-		VECTOR2 player = pl->GetCenterPosition();//プレイヤーの中心座標
+		////もし盾がプレイヤーを追従している場合、プレイヤーの位置に基づいて縦の位置を更新
+		//if (isFollowingPlayer) {
+		//	std::list<Player*> player = FindGameObjects<Player>();
+		//	for (Player* pl : player) {
+		//		//プレイヤーの位置に基づいて盾の位置をオフセットを使って更新
+		//		position.x = pl->position.x + offsetX; //X方向のオフセット
+		//		position.y = pl->position.y + offsetY; //X方向のオフセット
+		//		DrawGraph(position.x, position.y, barrierImage, TRUE);
+		//	}
+		//}
 
-
-		VECTOR2 SHCenter;//盾の中心座標
-		SHCenter.x = position.x;
-		SHCenter.y = position.y;
-
-
-		if (CircleHit(player, SHCenter, 64)) {
-
-			isShield = true;          //盾がプレイヤーに獲得される
-			isFollowingPlayer = true; //盾がプレイヤーに追従し始める
-			shieldCount++;
-		}
 	}
-
-	////もし盾がプレイヤーを追従している場合、プレイヤーの位置に基づいて縦の位置を更新
-	//if (isFollowingPlayer) {
-	//	std::list<Player*> player = FindGameObjects<Player>();
-	//	for (Player* pl : player) {
-	//		//プレイヤーの位置に基づいて盾の位置をオフセットを使って更新
-	//		position.x = pl->position.x + offsetX; //X方向のオフセット
-	//		position.y = pl->position.y + offsetY; //X方向のオフセット
-	//		DrawGraph(position.x, position.y, barrierImage, TRUE);
-	//	}
-	//}
-
-
 }
 
 void Shield::Draw()

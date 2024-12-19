@@ -4,6 +4,7 @@
 #include "PlayScene.h"
 #include "Screen.h"
 #include "Player.h"
+#include "GameManager.h"
 
 //#include "Vector2.cpp"
 
@@ -26,9 +27,10 @@ GroundEnemy1::~GroundEnemy1()
 
 void GroundEnemy1::Update()
 {
+	GameManager* gm = FindGameObject<GameManager>();
+	if (gm->playable) {
 	position.x -= 3.0f;
-	
-	
+}
 }
 
 void GroundEnemy1::Draw()

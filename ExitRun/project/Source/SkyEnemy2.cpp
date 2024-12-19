@@ -1,6 +1,7 @@
 #include "SkyEnemy2.h"
 #include "Player.h"
 #include "../Library/GameObject.h"
+#include "GameManager.h"
 
 SkyEnemy2::SkyEnemy2()
 {
@@ -20,12 +21,14 @@ SkyEnemy2::~SkyEnemy2()
 
 void SkyEnemy2::Update()
 {
-	//ã‰ºˆÚ“®‚Ì“®‚«
-	timer += 0.04f;
-	position.y += 5* sinf(timer);//•~sin(Šp)
+	GameManager* gm = FindGameObject<GameManager>();
+	if (gm->playable) {
+		//ã‰ºˆÚ“®‚Ì“®‚«
+		timer += 0.04f;
+		position.y += 5 * sinf(timer);//•~sin(Šp)
 
-	position.x -= 2.0f;
-	
+		position.x -= 2.0f;
+	}
 }
 
 void SkyEnemy2::Draw()
