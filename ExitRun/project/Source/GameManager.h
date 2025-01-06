@@ -1,5 +1,6 @@
 #pragma once
 #include "../Library/GameObject.h"
+#include "Player.h"
 
 enum class GAME_STATE
 {
@@ -8,13 +9,16 @@ enum class GAME_STATE
 	START_COUNT, // ゲーム開始カウント
 	TWO_WAIT, // 2 表示
 	ONE_WAIT, // 1 表示
+	START_WAIT,  // START 表示
 	RUN_START, // 走るのを始める
+	GAME_WAIT,  // ゲーム監視
+	MISS,  // ミス
 	GAME_OVER, // ゲームオーバー
 	RESULT, // 結果表示
-	SCORE, // スコア表示
 
-	CONTINUE_STATE = 10,    //  State継続 
+	CONTINUE_STATE = 20,    //  State継続 
 	NEXT_STATE,             //  次ステートへ 
+	NEXT_MISS, // ミス処理へ 
 	NEXT_EFFECT,   // 消し演出へ 
 	NEXT_END,    // ゲーム終了へ
 };
@@ -25,6 +29,8 @@ private:
 	int TWO_HANDLE;
 	int ONE_HANDLE;
 	int START_HANDLE;
+
+	Player* player;
 
 public:
 	GameManager();
@@ -42,8 +48,10 @@ public:
 	GAME_STATE START_COUNT(); // ゲーム開始カウント 3
 	GAME_STATE TWO_WAIT(); // 2 表示
 	GAME_STATE ONE_WAIT(); // 1 表示
+	GAME_STATE STRAT_WAIT(); // STRAT 表示
 	GAME_STATE RUN_START(); // 走るのを始める
+	GAME_STATE GAME_WAIT(); //ゲーム監視
+	GAME_STATE MISS(); // ミス処理
 	GAME_STATE GAME_OVER(); // ゲームオーバー
-	GAME_STATE RESULT(); // 結果表示
-	GAME_STATE SCORE(); // スコア表示
+	GAME_STATE RESULT();
 };

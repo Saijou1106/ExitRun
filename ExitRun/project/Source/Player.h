@@ -38,14 +38,12 @@ public:
 	bool isDead;    //プレイヤーが死んだかどうか
 	float velocity;//速度
 	
+	VECTOR2 startposition;
 	
 	VECTOR2 GetCenterPosition() { 
 		VECTOR2 playerPos = { position.x + centerPosition.x, position.y + centerPosition.x };//画像の中心座標,プレイヤーの位置を取得
 		return playerPos;
 	};
-	
-	
-
 
 };
 

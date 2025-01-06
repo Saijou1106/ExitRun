@@ -14,6 +14,7 @@ SkyEnemy1::SkyEnemy1()
 
 SkyEnemy1::~SkyEnemy1()
 {
+	DeleteGraph(hImage);
 }
 
 void SkyEnemy1::Update()

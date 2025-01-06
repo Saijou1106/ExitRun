@@ -7,8 +7,6 @@
 #include "GroundEnemy2.h"
 #include "GameManager.h"
 
-
-
 GroundEnemy2::GroundEnemy2()
 {
 	hImage = LoadGraph("data/dog.png");

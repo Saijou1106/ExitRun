@@ -2,9 +2,11 @@
 #include "../Library/Time.h"
 #include "Player.h"
 #include "assert.h"
+#include <math.h>
 
 GameOver::GameOver()
 {
+
 	GameOverImage = LoadGraph("data/logo_game_over2.png");
 	assert(GameOverImage > 0);
 	timer = 0.0f;
@@ -22,6 +24,8 @@ void GameOver::Update()
 
 void GameOver::Draw()
 {
+	Player* pl = FindGameObject<Player>();
+
 	DrawGraph(200, 100, GameOverImage, TRUE);
 	
 	int size = GetFontSize();
@@ -29,7 +33,8 @@ void GameOver::Draw()
 	
 	if (timer >= 1.0f) {
 		SetFontSize(25);
-		DrawFormatString(200, 300, GetColor(15, 15, 255), "SCORE %06d", score);
+		int score = pl->position.x - pl->startposition.x;
+		DrawFormatString(200, 300, GetColor(15, 15, 255), "SCORE:%6d", score);
 	}
 	if (timer >= 2.0f) {
 		DrawString(200, 500, "PUSU SPACE KEY", GetColor(15, 15, 255));
