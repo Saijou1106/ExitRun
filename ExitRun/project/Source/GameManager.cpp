@@ -123,6 +123,8 @@ void GameManager::Update()
 
 void GameManager::Draw()
 {
+	Player* pl = FindGameObject<Player>();
+
 	switch (gameState)
 	{
 	case GAME_STATE::INTI:
@@ -236,15 +238,23 @@ GAME_STATE GameManager::RUN_START()
 
 GAME_STATE GameManager::GAME_WAIT()
 {
-	Player* player = FindGameObject<Player>();
+	Player* pl = FindGameObject<Player>();
 
 	GAME_STATE result = GAME_STATE::GAME_WAIT;
 
+	int size = GetFontSize();
+
+	SetFontSize(45);
+	int score = (pl->position.x - pl->startposition.x) /64 ;
+	DrawFormatString(900, 10, GetColor(15, 15, 255), "SCORE:%6d", score);
+
 	// プレイヤーが死んだ場合ミス処理へ
-	if (player->isDead)
+	if (pl->isDead)
 	{
 		result = GAME_STATE::NEXT_MISS;
 	}
+
+	SetFontSize(size);
 
 	return result;
 }

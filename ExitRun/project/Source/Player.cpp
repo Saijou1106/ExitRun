@@ -51,6 +51,8 @@ void Player::Update()
 
 	if (gm->playable) {
 
+		position.x += 1.0f;
+
 		//ImGui::Begin("hennsuu");
 		//ImGui::InputFloat("Timer", &timer);
 		//ImGui::End;”’lŒ©‚ê‚é

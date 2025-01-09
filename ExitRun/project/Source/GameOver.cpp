@@ -33,7 +33,8 @@ void GameOver::Draw()
 	
 	if (timer >= 1.0f) {
 		SetFontSize(25);
-		int score = pl->position.x - pl->startposition.x;
+		//  スコア表示　プレイヤーが走り始める原点からの距離の表示
+		int score = ((pl->position.x - pl->startposition.x) - 1) / 64;
 		DrawFormatString(200, 300, GetColor(15, 15, 255), "SCORE:%6d", score);
 	}
 	if (timer >= 2.0f) {
