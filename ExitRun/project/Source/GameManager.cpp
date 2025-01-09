@@ -115,6 +115,11 @@ void GameManager::Update()
 			{
 				SceneManager::ChangeScene("RESULT");
 			}
+
+			if (CheckHitKey(KEY_INPUT_T))
+			{
+				SceneManager::ChangeScene("TITLE");
+			}
 		}
 		break;
 	}
