@@ -14,6 +14,7 @@ GameOver::GameOver()
 
 GameOver::~GameOver()
 {
+	DeleteGraph(GameOverImage);
 }
 
 
