@@ -21,8 +21,7 @@ SceneBase * SceneFactory::Create(const std::string & name)
 	{
 		return new PlayScene();
 	}
-	if (name == "RESULT")
-	{
+	if (name == "RESULT") {
 		return new ResultScene();
 	}
 	MessageBox(NULL, ("éüÇÃÉVÅ[ÉìÇÕÇ†ÇËÇ‹ÇπÇÒ\n" + name).c_str(), "SceneFactory", MB_ICONERROR | MB_OK);

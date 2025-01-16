@@ -2,47 +2,19 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Source\SceneFactory.cpp" />
-    <ClCompile Include="Source\Shield.cpp" />
-    <ClCompile Include="Source\SkyEnemy1.cpp" />
-    <ClCompile Include="Source\SkyEnemy2.cpp" />
-    <ClCompile Include="Source\Stage.cpp" />
-    <ClCompile Include="Source\TitleScene.cpp" />
-    <ClCompile Include="Source\Vector2.cpp" />
-    <ClCompile Include="Source\ResultScene.cpp" />
     <ClCompile Include="Library\App.cpp">
       <Filter>Library</Filter>
     </ClCompile>
     <ClCompile Include="Library\main.cpp">
       <Filter>Library</Filter>
     </ClCompile>
-    <ClCompile Include="Library\ObjectManager.cpp">
-      <Filter>Library</Filter>
-    </ClCompile>
-    <ClCompile Include="Library\SceneManager.cpp">
-      <Filter>Library</Filter>
-    </ClCompile>
-    <ClCompile Include="Library\Time.cpp">
-      <Filter>Library</Filter>
-    </ClCompile>
     <ClCompile Include="Source\BootScene.cpp">
       <Filter>BootScene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Enemy.cpp">
-      <Filter>PlayScene</Filter>
+    <ClCompile Include="Source\TitleScene.cpp">
+      <Filter>TitleScene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Floor.cpp">
-      <Filter>PlayScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameOver.cpp">
-      <Filter>PlayScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GroundEnemy1.cpp">
-      <Filter>PlayScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GroundEnemy2.cpp">
-      <Filter>PlayScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Player.cpp">
+    <ClCompile Include="Source\PlayScene.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui.cpp">
@@ -69,63 +41,86 @@
     <ClCompile Include="ImGui\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PlayScene.cpp">
+    <ClCompile Include="Library\ObjectManager.cpp">
+      <Filter>Library</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\SceneManager.cpp">
+      <Filter>Library</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Time.cpp">
+      <Filter>Library</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameManager.cpp" />
+    <ClCompile Include="Source\Vector2.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GroundEnemy1.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GroundEnemy2.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SkyEnemy1.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SkyEnemy2.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Stage.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shield.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Floor.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameManager.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
     <ClCompile Include="Source\HighScore.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameOver.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CsvReader.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\JumpEnemy.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object1.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ResultScene.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
     <ClInclude Include="Source\SceneFactory.h" />
-    <ClInclude Include="Source\Shield.h" />
-    <ClInclude Include="Source\SkyEnemy1.h" />
-    <ClInclude Include="Source\SkyEnemy2.h" />
-    <ClInclude Include="Source\Stage.h" />
-    <ClInclude Include="Source\stage1.h" />
-    <ClInclude Include="Source\TitleScene.h" />
-    <ClInclude Include="Source\Vector2.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="Source\ResultScene.h" />
     <ClInclude Include="Library\App.h">
-      <Filter>Library</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\GameObject.h">
-      <Filter>Library</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\ObjectManager.h">
       <Filter>Library</Filter>
     </ClInclude>
     <ClInclude Include="Library\SceneBase.h">
       <Filter>Library</Filter>
     </ClInclude>
-    <ClInclude Include="Library\SceneManager.h">
-      <Filter>Library</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\Time.h">
+    <ClInclude Include="Library\GameObject.h">
       <Filter>Library</Filter>
     </ClInclude>
     <ClInclude Include="Source\BootScene.h">
       <Filter>BootScene</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Enemy.h">
-      <Filter>PlayScene</Filter>
+    <ClInclude Include="Source\TitleScene.h">
+      <Filter>TitleScene</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Floor.h">
-      <Filter>PlayScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameManager.h">
-      <Filter>PlayScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameOver.h">
-      <Filter>PlayScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GroundEnemy1.h">
-      <Filter>PlayScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GroundEnemy2.h">
+    <ClInclude Include="Source\PlayScene.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imconfig.h">
@@ -158,31 +153,85 @@
     <ClInclude Include="ImGui\imstb_truetype.h">
       <Filter>ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="Library\ObjectManager.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\SceneManager.h">
+      <Filter>Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Time.h">
+      <Filter>Library</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Player.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PlayScene.h">
+    <ClInclude Include="Source\Vector2.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GroundEnemy1.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SkyEnemy2.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SkyEnemy1.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GroundEnemy2.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shield.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Stage.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Floor.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\stage1.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameManager.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
     <ClInclude Include="Source\HighScore.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameOver.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CsvReader.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\JumpEnemy.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object1.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ResultScene.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="project.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="BootScene">
-      <UniqueIdentifier>{4f47397e-1cbb-492a-8410-829ed8848126}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Library">
-      <UniqueIdentifier>{9760c595-4336-45f2-bf4d-2e54e33b2716}</UniqueIdentifier>
+      <UniqueIdentifier>{208c2106-181f-415c-a2e8-fa160c7f8651}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BootScene">
+      <UniqueIdentifier>{4e7a122b-01b5-4a1f-bdd8-381c4cb2403d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TitleScene">
+      <UniqueIdentifier>{a52f9c67-9c6c-4376-8f4c-07a10ecbc3db}</UniqueIdentifier>
     </Filter>
     <Filter Include="PlayScene">
-      <UniqueIdentifier>{1d29e205-e698-4cbb-ae47-5104fda1ab0f}</UniqueIdentifier>
+      <UniqueIdentifier>{8123ada4-16d1-40da-a8f3-3f9e93aafb30}</UniqueIdentifier>
     </Filter>
     <Filter Include="ImGui">
-      <UniqueIdentifier>{8e4cb03c-bf16-4545-918f-e90ec1360bf5}</UniqueIdentifier>
+      <UniqueIdentifier>{a717257b-67b3-4bfa-834c-1e34032b33b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

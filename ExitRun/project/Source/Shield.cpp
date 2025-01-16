@@ -13,6 +13,7 @@ Shield::Shield()
 	barrierImage = LoadGraph("data/barrier.png");
 	position.x = 1280;  
 	position.y = 575;
+
 	speed.x = 0.0f;
 
 	isShield = false;

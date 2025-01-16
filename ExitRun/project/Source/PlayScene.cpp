@@ -10,17 +10,23 @@
 #include "Shield.h" 
 #include "JumpEnemy.h"
 
+#include "GameManager.h"
+#include "Object1.h"
+
 
 PlayScene::PlayScene()
 {
 	Instantiate<Stage>();
 	Instantiate<Player>();
-	Instantiate<GroundEnemy1>();
 	Instantiate<GroundEnemy2>();
-	Instantiate<SkyEnemy1>();
+	Instantiate<GroundEnemy1>();
 	Instantiate<SkyEnemy2>();
 	Instantiate<Shield>();
 	Instantiate<JumpEnemy>();
+
+	Instantiate<GameManager>();
+	Instantiate<Object1>();
+
 }
 
 PlayScene::~PlayScene()

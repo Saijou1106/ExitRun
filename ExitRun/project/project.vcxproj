@@ -151,15 +151,17 @@
     <ClInclude Include="Library\SceneBase.h" />
     <ClInclude Include="Library\SceneManager.h" />
     <ClInclude Include="Library\Time.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Source\BootScene.h" />
-    <ClInclude Include="Source\GameManager.h" />
-    <ClInclude Include="Source\GameOver.h" />
+    <ClInclude Include="Source\CsvReader.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\Floor.h" />
+    <ClInclude Include="Source\GameManager.h" />
+    <ClInclude Include="Source\GameOver.h" />
     <ClInclude Include="Source\GroundEnemy1.h" />
     <ClInclude Include="Source\GroundEnemy2.h" />
     <ClInclude Include="Source\HighScore.h" />
+    <ClInclude Include="Source\JumpEnemy.h" />
+    <ClInclude Include="Source\Object1.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\ResultScene.h" />
     <ClInclude Include="Source\Screen.h" />
@@ -188,13 +190,16 @@
     <ClCompile Include="Library\SceneManager.cpp" />
     <ClCompile Include="Library\Time.cpp" />
     <ClCompile Include="Source\BootScene.cpp" />
-    <ClCompile Include="Source\GameManager.cpp" />
-    <ClCompile Include="Source\GameOver.cpp" />
+    <ClCompile Include="Source\CsvReader.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\Floor.cpp" />
+    <ClCompile Include="Source\GameManager.cpp" />
+    <ClCompile Include="Source\GameOver.cpp" />
     <ClCompile Include="Source\GroundEnemy1.cpp" />
     <ClCompile Include="Source\GroundEnemy2.cpp" />
     <ClCompile Include="Source\HighScore.cpp" />
+    <ClCompile Include="Source\JumpEnemy.cpp" />
+    <ClCompile Include="Source\Object1.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\PlayScene.cpp" />
     <ClCompile Include="Source\ResultScene.cpp" />
@@ -205,9 +210,6 @@
     <ClCompile Include="Source\Stage.cpp" />
     <ClCompile Include="Source\TitleScene.cpp" />
     <ClCompile Include="Source\Vector2.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="project.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

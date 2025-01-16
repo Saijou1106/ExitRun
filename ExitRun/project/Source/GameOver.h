@@ -7,8 +7,9 @@ public:
 	~GameOver();
 	void Update()override;
 	void Draw()override;
-
-	float timer; // 表示される間の時間
+	float timer;//表示される間の時間
 	int GameOverImage;
-	int score; // スコア
+	int NextImage;
+	int score;
 };
+

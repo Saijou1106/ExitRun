@@ -78,7 +78,7 @@ void GameManager::Update()
 		if (RUN_START() == GAME_STATE::NEXT_STATE)
 		{
 			playable = true;
-			gameState =  GAME_STATE::GAME_WAIT;
+			gameState = GAME_STATE::GAME_WAIT;
 		}
 		break;
 
@@ -86,10 +86,10 @@ void GameManager::Update()
 	case GAME_STATE::GAME_WAIT:
 		switch (GAME_WAIT())
 		{
-		 // ミス
+			// ミス
 		case GAME_STATE::NEXT_MISS:
-				gameState = GAME_STATE::MISS;
-				break;
+			gameState = GAME_STATE::MISS;
+			break;
 		}
 		break;
 
@@ -104,7 +104,7 @@ void GameManager::Update()
 	case GAME_STATE::GAME_OVER:
 		if (GAME_OVER() == GAME_STATE::NEXT_STATE)
 		{
-				gameState = GAME_STATE::RESULT;
+			gameState = GAME_STATE::RESULT;
 		}
 		break;
 
@@ -124,7 +124,8 @@ void GameManager::Update()
 		break;
 	}
 }
-	// 結果表示
+
+// 結果表示
 
 void GameManager::Draw()
 {
@@ -169,9 +170,10 @@ void GameManager::Draw()
 	}
 }
 
-	// 各GameState処理
 
-	GAME_STATE GameManager::Init()
+// 各GameState処理
+
+GAME_STATE GameManager::Init()
 {
 	GAME_STATE result = GAME_STATE::CONTINUE_STATE;
 	result = GAME_STATE::NEXT_STATE;
@@ -250,8 +252,8 @@ GAME_STATE GameManager::GAME_WAIT()
 	int size = GetFontSize();
 
 	SetFontSize(45);
-	int score = (pl->position.x - pl->startposition.x) /64 ;
-	DrawFormatString(900, 10, GetColor(15, 15, 255), "SCORE:%6d", score);
+	int score = (pl->position.x - pl->startposition.x) / 64;
+	DrawFormatString(900, 10, GetColor(0, 120, 0), "SCORE:%6d", score);
 
 	// プレイヤーが死んだ場合ミス処理へ
 	if (pl->isDead)
@@ -277,7 +279,7 @@ GAME_STATE GameManager::GAME_OVER()
 	GAME_STATE result = GAME_STATE::GAME_OVER;
 
 	playable = false;
-		
+
 	result = GAME_STATE::NEXT_STATE;
 	return result;
 }
@@ -289,4 +291,3 @@ GAME_STATE GameManager::RESULT()
 
 	return result;
 }
-

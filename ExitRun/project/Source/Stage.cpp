@@ -360,6 +360,12 @@ Stage::Stage()
 	backGroundY = 0;
 	floorX = 300;
 	floorY = 520;
+
+	backGroundImage = LoadGraph("data/background2.png");
+	floorImage = LoadGraph("data/floor3.png");
+	backGroundX = 0;
+	backGroundY = 0;
+
 	
 	scroll = 2;
 	//for (int j = 0; j < HEIGHT; j++) {
@@ -369,6 +375,7 @@ Stage::Stage()
 	//			p->position.x = i * 64;
 	//			p->position.y = j * 64;
 	//		}
+	//		
 	//	}
 	//}
 	//scroll = 0;
@@ -380,6 +387,7 @@ Stage::~Stage()
 
 void Stage::Draw()
 {
+
 	/*for (int j = 0; j < HEIGHT; j++) {
 
 	}*/
@@ -431,4 +439,63 @@ int Stage::IsWallUp(VECTOR2 pos)
 	}
 	return 0;
 }
+
+	//DrawGraph(backGroundX - scroll , backGroundY, backGroundImage , TRUE);
+
+	//for(int j = 0; j < HEIGHT; j++) {
+	//	int y = j * 64 + 100;
+	//	for (int i = 0; i < WIDTH; i++) {
+	//		int x = i * 64 + 100;
+	//		if (map[j][i] == 1) {//1‚¾‚Á‚½‚ç’n–Ê
+	//			DrawGraph(x- scroll, y, floorImage, TRUE);
+	//		}
+	//	}
+	//}
+	
+//}
+
+//int Stage::IsWallRight(VECTOR2 pos)
+//{
+//	int i = (pos.x - 100) / 64;
+//	int j = (pos.y - 100) / 64;
+//	if (map[j][i] == 1) {
+//		int push = ((int)pos.x - 100) % 64 + 1;
+//		return push;
+//	}
+//	return 0;
+//}
+//
+//int Stage::IsWallDown(VECTOR2 pos)
+//{
+//	int i = (pos.x - 100) / 64;
+//	int j = (pos.y - 100) / 64;
+//	if (map[j][i] == 1) {
+//		int push = ((int)pos.y - 100) % 64 + 1;
+//		return push;
+//	}
+//	return 0;
+//}
+//
+//int Stage::IsWallLeft(VECTOR2 pos)
+//{
+//	int i = (pos.x - 100) / 64;
+//	int j = (pos.y - 100) / 64;
+//	if (map[j][i] == 1) {
+//		int push = 64 - ((int)pos.x - 100) % 64;
+//		return push;
+//	}
+//	return 0;
+//}
+//
+//int Stage::IsWallUp(VECTOR2 pos)
+//{
+//	int i = (pos.x - 100) / 64;
+//	int j = (pos.y - 100) / 64;
+//	if (map[j][i] == 1) {
+//		int push = 64 - ((int)pos.y - 100) % 64;
+//		return push;
+//	}
+//	return 0;
+//}
+
 

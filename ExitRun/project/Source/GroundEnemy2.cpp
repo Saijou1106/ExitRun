@@ -16,7 +16,6 @@ GroundEnemy2::GroundEnemy2()
 	position.y = 575;
 	speed.x = 0.0f;
 
-	//isShield = false;
 	dead = false;
 }
 
@@ -39,6 +38,7 @@ void GroundEnemy2::Draw()
 	//	debug
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
+
 	DrawCircle(position.x + width / 2, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ğ¶ã‚¶‚á‚È‚­‚Ä’†S‚ğŠî€‚É‚·‚é
 
 }

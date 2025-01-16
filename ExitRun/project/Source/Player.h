@@ -2,6 +2,8 @@
 #include "../Library/GameObject.h"
 #include "Vector2.h"
 #include "Shield.h" 
+#include <math.h>
+
 
 class Player : public GameObject
 {
@@ -10,6 +12,7 @@ public:
 	Player();
 	~Player();
 	VECTOR2 position;
+	VECTOR2 startposition;
 	void Update();
 	void Jump();//ジャンプ処理
 	void Draw();
@@ -17,6 +20,12 @@ public:
 	bool isOnGround()const;//地面にいるかどうかを確認
 	bool isDead;    //プレイヤーが死んだかどうか
 	float velocity;//速度
+
+	bool isJumpUp; //上昇中
+	bool isJumpDown;//下降中
+	int jumpUpImage;
+	int jumpDownImage;
+
 	
 
 	const float Gravity = 0.5f; //重力
@@ -37,12 +46,16 @@ public:
 
 	int freamcounter;			
 
-	bool onGround;              //地面にいる状態
+
 	bool grounded;              //地面に接しているかどうか
 	bool prevSpaceKeyState;     //前回スペースキーが押されているか
 
 	bool isFollowingPlayer;  // 盾がプレイヤーに追従しているかのフラグ
 	bool isActivePlayer;
+
+
+	float timer;
+	//const float maxTimer = 3.0f;
 
 	VECTOR2 centerPosition;
 	VECTOR2 GetCenterPosition();
