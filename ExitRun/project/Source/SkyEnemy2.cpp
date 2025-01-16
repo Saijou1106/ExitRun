@@ -1,6 +1,7 @@
 #include "SkyEnemy2.h"
 #include "Player.h"
 #include "../Library/GameObject.h"
+#include "Stage.h"
 
 SkyEnemy2::SkyEnemy2()
 {
@@ -26,11 +27,13 @@ void SkyEnemy2::Update()
 
 	position.x -= 2.0f;
 	
+	
 }
 
 void SkyEnemy2::Draw()
 {
-	DrawGraph(position.x, position.y, hImage, true);
+	Stage* s = FindGameObject<Stage>();
+	DrawGraph(position.x , position.y, hImage, true);
 	//	debug
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
@@ -39,8 +42,9 @@ void SkyEnemy2::Draw()
 
 VECTOR2 SkyEnemy2::getPosition() const
 {
+	Stage* s = FindGameObject<Stage>();
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
-	VECTOR2 groundEnemyPos = { position.x + width / 2, position.y + height / 2 };
+	VECTOR2 groundEnemyPos = { position.x  + width / 2, position.y + height / 2 };
 	return groundEnemyPos;
 }

@@ -4,14 +4,15 @@
 #include "PlayScene.h"
 #include "Screen.h"
 #include "Player.h"
+#include "Stage.h"
 
 //#include "Vector2.cpp"
 
 GroundEnemy1::GroundEnemy1()
 {
 	hImage = LoadGraph("data/maguroRed.png");
-	position.x = 1280;
-	position.y = 450;
+	position.x = 1350;
+	position.y = 490;
 	speed.x = 0.0f;
 
 
@@ -26,19 +27,22 @@ GroundEnemy1::~GroundEnemy1()
 
 void GroundEnemy1::Update()
 {
-	position.x -= 3.0f;
+	/*Stage* s = FindGameObject<Stage>();
+	s->scroll += 2;*/
+	position.x -= 5.5f;
 	
 	
 }
 
 void GroundEnemy1::Draw()
 {
-	DrawGraph(position.x, position.y, hImage, true);
+	Stage* s = FindGameObject<Stage>();
+	DrawGraph(position.x , position.y, hImage, true);
 
 	//	debug
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
-	DrawCircle(position.x + width / 2, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ğ¶ã‚¶‚á‚È‚­‚Ä’†S‚ğŠî€‚É‚·‚é
+	DrawCircle(position.x  + width / 2, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ğ¶ã‚¶‚á‚È‚­‚Ä’†S‚ğŠî€‚É‚·‚é
 
 }
 
@@ -46,6 +50,6 @@ VECTOR2 GroundEnemy1::getPosition() const
 {
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
-	VECTOR2 groundEnemyPos = { position.x + width / 2, position.y + height / 2 };
+	VECTOR2 groundEnemyPos = { position.x  + width / 2, position.y + height / 2 };
 	return groundEnemyPos;
 }

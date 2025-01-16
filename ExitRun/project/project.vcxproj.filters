@@ -74,10 +74,22 @@
     <ClCompile Include="Source\Shield.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Floor.cpp">
+    <ClCompile Include="Source\Enemy.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Enemy.cpp">
+    <ClCompile Include="Source\JumpEnemy.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameOver.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameManager.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ResultScene.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object1.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
   </ItemGroup>
@@ -168,10 +180,25 @@
     <ClInclude Include="Source\Stage.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Floor.h">
+    <ClInclude Include="Source\stage1.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
-    <ClInclude Include="Source\stage1.h">
+    <ClInclude Include="Source\JumpEnemy.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameManager.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameOver.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ResultScene.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object1.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
   </ItemGroup>
