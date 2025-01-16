@@ -8,24 +8,19 @@
 #include "SkyEnemy2.h"
 #include "GroundEnemy2.h"
 #include "Shield.h" 
-#include "Floor.h"
-#include "GameManager.h"
-#include "ResultScene.h"
+#include "JumpEnemy.h"
+
 
 PlayScene::PlayScene()
 {
 	Instantiate<Stage>();
-	Instantiate<Floor>();
 	Instantiate<Player>();
 	Instantiate<GroundEnemy1>();
 	Instantiate<GroundEnemy2>();
 	Instantiate<SkyEnemy1>();
 	Instantiate<SkyEnemy2>();
 	Instantiate<Shield>();
-
-	Instantiate<GameManager>();
-	
-	//groundEnemy1 = Instantiate<GroundEnemy1>();
+	Instantiate<JumpEnemy>();
 }
 
 PlayScene::~PlayScene()
@@ -37,10 +32,13 @@ void PlayScene::Update()
 	if (CheckHitKey(KEY_INPUT_T)) {
 		SceneManager::ChangeScene("TITLE");
 	}
+	SceneBase::Update();
 }
 
 void PlayScene::Draw()
 {
-	Player* pl = FindGameObject<Player>();
+	SceneBase::Draw();
 
+	DrawString(0, 0, "PLAY SCENE", GetColor(255, 255, 255));
+	DrawString(100, 400, "Push [T]Key To Title", GetColor(255, 255, 255));
 }

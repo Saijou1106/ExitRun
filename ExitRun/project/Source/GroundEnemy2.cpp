@@ -5,13 +5,15 @@
 #include "Screen.h"
 #include "Player.h"
 #include "GroundEnemy2.h"
-#include "GameManager.h"
+#include "Stage.h"
+
+
 
 GroundEnemy2::GroundEnemy2()
 {
 	hImage = LoadGraph("data/dog.png");
 	position.x = 1280;
-	position.y = 490;
+	position.y = 575;
 	speed.x = 0.0f;
 
 	//isShield = false;
@@ -25,20 +27,19 @@ GroundEnemy2::~GroundEnemy2()
 
 void GroundEnemy2::Update()
 {
-	GameManager* gm = FindGameObject<GameManager>();
-	if (gm->playable) {
-		position.x -= 6.5f;
-	}
+	
+	position.x -= 6.5f;
+	
 }
 
 void GroundEnemy2::Draw()
 {
-	DrawGraph(position.x, position.y, hImage, true);
+	Stage* s = FindGameObject<Stage>();
+	DrawGraph(position.x , position.y, hImage, true);
 	//	debug
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
-	VECTOR2 groundEnemyPos = getPosition();
-	DrawCircle(groundEnemyPos.x, groundEnemyPos.y, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ğ¶ã‚¶‚á‚È‚­‚Ä’†S‚ğŠî€‚É‚·‚é
+	DrawCircle(position.x + width / 2, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ğ¶ã‚¶‚á‚È‚­‚Ä’†S‚ğŠî€‚É‚·‚é
 
 }
 
@@ -46,6 +47,6 @@ VECTOR2 GroundEnemy2::getPosition() const
 {
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
-	VECTOR2 groundEnemyPos = { position.x + width / 2, position.y + height / 2 };
+	VECTOR2 groundEnemyPos = { position.x  + width / 2, position.y + height / 2 };
 	return groundEnemyPos;
 }

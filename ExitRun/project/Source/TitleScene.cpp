@@ -3,6 +3,9 @@
 
 TitleScene::TitleScene()
 {
+	hImage = LoadGraph("data/title.png");
+	position.x = 0;
+	position.y = 0;
 }
 
 TitleScene::~TitleScene()
@@ -23,6 +26,7 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
+	DrawGraph(position.x, position.y,hImage, TRUE);
 	DrawString(0, 0, "TITLE SCENE", GetColor(255,255,255));
 	DrawString(100, 400, "Push [P]Key To Play", GetColor(255, 255, 255));
 }

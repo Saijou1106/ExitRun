@@ -1,5 +1,6 @@
 #pragma once
 #include "../Library/SceneBase.h"
+#include "Vector2.h"
 
 /// <summary>
 /// タイトルシーン
@@ -13,4 +14,6 @@ public:
 	~TitleScene();
 	void Update() override;
 	void Draw() override;
+	int hImage;
+	VECTOR2 position;
 };
