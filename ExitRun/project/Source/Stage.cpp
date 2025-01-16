@@ -20,7 +20,7 @@
 
 //	不要なのでコメントアウト(HORIKOSHI Masahiro)
 #if false
-const int WIDTH = 17;
+const int WIDTH = 1700;
 const int HEIGHT = 14;
 class stage
 {
@@ -54,31 +54,11 @@ const std::string mapFile[5] =
 
 Stage::Stage()
 {
-	// 0 = stage1 / 1 = stage2 / 3 = stage4 / 4 = stage5
-	// stage1からstage2への画面切り替えのプログラム必須
-	int mapNo = 0;
-	CsvReader reader(mapFile[mapNo]);//	Map番号に該当するmapファイルを読み込む
-
-
-
-#if false;
-	// ステージ2に移動（mapNoを1に変更）
-	int mapNo = 1;  
-	CsvReader reader2(mapFile[mapNo]);  // 新しいマップを読み込む
-
-	// ステージ3に移動（mapNoを2に変更）
-	int mapNo = 2;
-	CsvReader reader3(mapFile[mapNo]);
-
-	// stage4に移動
-	int mapNo = 3;
-	CsvReader reader4(mapFile[mapNo]);
-
-	// stage5に移動
-	int mapNo = 4;
-	CsvReader reader5(mapFile[mapNo]);
-#endif
-
+	//CsvReader reader("data/仮.csv");
+	int mapNo = 1;
+	CsvReader reader(mapFile[mapNo]);		//	Map番号に該当するmapファイルを読み込む
+	//　stage1からstage2への画面切り替えを作らなきゃいけない
+	
 	backGroundImage = LoadGraph("data/background2.png");
 	// 床用の画像読み込み
 	floorImage = LoadGraph("data/floor2.png");
@@ -311,8 +291,8 @@ Stage::Stage()
 				case 9:
 					{
 						Player* p = Instantiate<Player>();
-						p->position.x = 100 + i * CHIP_SIZE;	//	なぜ100足している？(HORIKOSHI Masahiro)
-						p->position.y =  100 + j * CHIP_SIZE;	//	なぜ100足している？(HORIKOSHI Masahiro)
+						p->position.x = i * CHIP_SIZE;	//	なぜ100足している？(HORIKOSHI Masahiro)
+						p->position.y = j * CHIP_SIZE;	//	なぜ100足している？(HORIKOSHI Masahiro)
 					}
 					break;
 				//	ランダム敵(仮に7としている)
@@ -360,12 +340,6 @@ Stage::Stage()
 	backGroundY = 0;
 	floorX = 300;
 	floorY = 520;
-
-	backGroundImage = LoadGraph("data/background2.png");
-	floorImage = LoadGraph("data/floor3.png");
-	backGroundX = 0;
-	backGroundY = 0;
-
 	
 	scroll = 2;
 	//for (int j = 0; j < HEIGHT; j++) {
@@ -375,7 +349,6 @@ Stage::Stage()
 	//			p->position.x = i * 64;
 	//			p->position.y = j * 64;
 	//		}
-	//		
 	//	}
 	//}
 	//scroll = 0;
@@ -387,7 +360,6 @@ Stage::~Stage()
 
 void Stage::Draw()
 {
-
 	/*for (int j = 0; j < HEIGHT; j++) {
 
 	}*/
@@ -430,72 +402,49 @@ void Stage::Draw()
 
 int Stage::IsWallUp(VECTOR2 pos)
 {
-	int i = (pos.x - 100) / 40;
-	int j = (pos.y - 100) / 40;
-	if (map[j][i] == 1)
+	int i = pos.x / CHIP_SIZE;
+	int j = pos.y / CHIP_SIZE;
+	if (map[j][i] == 1 || map[j][i] == 2)
 	{
-		int push = ((int)pos.x - 100) % 40 + 1;
+		int push = 64 - (int)pos.y % CHIP_SIZE;
 		return push;
 	}
 	return 0;
 }
 
-	//DrawGraph(backGroundX - scroll , backGroundY, backGroundImage , TRUE);
+int Stage::IsWallRight(VECTOR2 pos)
+{
+	int i = pos.x / CHIP_SIZE;
+	int j = pos.y / CHIP_SIZE;
+	if (map[j][i] == 1 || map[j][i] == 2)
+	{
+		int push = (int)pos.x % CHIP_SIZE + 1;
+		return push;
+	}
+	return 0;
+}
 
-	//for(int j = 0; j < HEIGHT; j++) {
-	//	int y = j * 64 + 100;
-	//	for (int i = 0; i < WIDTH; i++) {
-	//		int x = i * 64 + 100;
-	//		if (map[j][i] == 1) {//1だったら地面
-	//			DrawGraph(x- scroll, y, floorImage, TRUE);
-	//		}
-	//	}
-	//}
-	
-//}
+int Stage::IsWallLeft(VECTOR2 pos)
+{
+	int i = pos.x / CHIP_SIZE;
+	int j = pos.y / CHIP_SIZE;
+	if (map[j][i] == 1 || map[j][i] == 2)
+	{
+		int push = 64 - (int)pos.x % CHIP_SIZE;
+		return push;
+	}
+	return 0;
+}
 
-//int Stage::IsWallRight(VECTOR2 pos)
-//{
-//	int i = (pos.x - 100) / 64;
-//	int j = (pos.y - 100) / 64;
-//	if (map[j][i] == 1) {
-//		int push = ((int)pos.x - 100) % 64 + 1;
-//		return push;
-//	}
-//	return 0;
-//}
-//
-//int Stage::IsWallDown(VECTOR2 pos)
-//{
-//	int i = (pos.x - 100) / 64;
-//	int j = (pos.y - 100) / 64;
-//	if (map[j][i] == 1) {
-//		int push = ((int)pos.y - 100) % 64 + 1;
-//		return push;
-//	}
-//	return 0;
-//}
-//
-//int Stage::IsWallLeft(VECTOR2 pos)
-//{
-//	int i = (pos.x - 100) / 64;
-//	int j = (pos.y - 100) / 64;
-//	if (map[j][i] == 1) {
-//		int push = 64 - ((int)pos.x - 100) % 64;
-//		return push;
-//	}
-//	return 0;
-//}
-//
-//int Stage::IsWallUp(VECTOR2 pos)
-//{
-//	int i = (pos.x - 100) / 64;
-//	int j = (pos.y - 100) / 64;
-//	if (map[j][i] == 1) {
-//		int push = 64 - ((int)pos.y - 100) % 64;
-//		return push;
-//	}
-//	return 0;
-//}
-
+int Stage::IsWallDown(VECTOR2 pos)
+{
+	int i = pos.x / CHIP_SIZE;
+	int j = pos.y / CHIP_SIZE;
+	if (map[j][i] == 1 || map[j][i]==2)
+	{
+ 		int push = (int)pos.y % CHIP_SIZE + 1;
+		return push;
+	}
+	return 0;
+}
 
