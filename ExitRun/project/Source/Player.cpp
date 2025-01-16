@@ -29,14 +29,17 @@ const float V0 = -sqrtf(2.0f * Gravity * JumpHeight);
 Player::Player()
 {
 
+
 	deadImage = LoadGraph("data/dead.png");
 	hImage = LoadGraph("data/player1.png");
 	jumpUpImage = LoadGraph("data/JumpUp.png");
 	jumpDownImage = LoadGraph("data/JumpDown.png");
 
-	position.x = 100;
-	position.y = 500;
-	startposition.x = 100;
+	position.x = 120;
+	position.y = 575;
+
+	startposition.x = 120;
+
 
 	patternX = 0;
 	patternY = 0;

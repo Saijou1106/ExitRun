@@ -12,7 +12,7 @@ public:
 	Player();
 	~Player();
 	VECTOR2 position;
-	VECTOR2 startposition;
+
 	void Update();
 	void Jump();//ƒWƒƒƒ“ƒvˆ—
 	void Draw();
@@ -59,6 +59,7 @@ public:
 
 	VECTOR2 centerPosition;
 	VECTOR2 GetCenterPosition();
+	VECTOR startposition; // startposition
 };
 
 
