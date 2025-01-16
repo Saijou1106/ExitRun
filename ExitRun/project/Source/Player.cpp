@@ -28,6 +28,9 @@ Player::Player()
 
 	position.x = 120;
 	position.y = 575;
+
+	startposition.x = 120;
+
 	patternX = 0;
 	patternY = 0;
 	freamcounter = 0;

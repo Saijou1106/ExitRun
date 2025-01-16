@@ -46,6 +46,7 @@ public:
 
 	VECTOR2 centerPosition;
 	VECTOR2 GetCenterPosition();
+	VECTOR startposition; // startposition
 };
 
 
