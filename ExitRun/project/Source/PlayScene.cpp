@@ -10,6 +10,7 @@
 #include "Shield.h" 
 #include "Floor.h"
 #include "GameManager.h"
+#include "ResultScene.h"
 
 PlayScene::PlayScene()
 {

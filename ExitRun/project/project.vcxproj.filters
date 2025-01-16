@@ -73,6 +73,9 @@
       <Filter>PlayScene</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameManager.cpp" />
+    <ClCompile Include="Source\HighScore.cpp">
+      <Filter>PlayScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -159,6 +162,9 @@
       <Filter>PlayScene</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayScene.h">
+      <Filter>PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HighScore.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
   </ItemGroup>

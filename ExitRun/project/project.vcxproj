@@ -159,6 +159,7 @@
     <ClInclude Include="Source\Floor.h" />
     <ClInclude Include="Source\GroundEnemy1.h" />
     <ClInclude Include="Source\GroundEnemy2.h" />
+    <ClInclude Include="Source\HighScore.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\ResultScene.h" />
     <ClInclude Include="Source\Screen.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="Source\Floor.cpp" />
     <ClCompile Include="Source\GroundEnemy1.cpp" />
     <ClCompile Include="Source\GroundEnemy2.cpp" />
+    <ClCompile Include="Source\HighScore.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\PlayScene.cpp" />
     <ClCompile Include="Source\ResultScene.cpp" />

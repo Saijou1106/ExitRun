@@ -8,4 +8,8 @@ public:
 	~ResultScene();
 	void Update() override;
 	void Draw() override;
+
+	float timer; // 表示される間の時間
+
+	int HighScore; // ハイスコア
 };
