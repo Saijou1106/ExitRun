@@ -9,11 +9,17 @@
 /// </summary>
 class TitleScene : public SceneBase
 {
+private:
+	int hImage;
+	int spaceImage;
+	int frameCount; //フレームカウンタ
+	bool isVisible; //画像を描画するかどうかのフラグ
+	int bkinkInterval; //点滅間隔
 public:
 	TitleScene();
 	~TitleScene();
 	void Update() override;
 	void Draw() override;
-	int hImage;
 	VECTOR2 position;
+	VECTOR2 spaceKey;
 };
