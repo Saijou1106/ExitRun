@@ -33,11 +33,11 @@ void SkyEnemy2::Update()
 void SkyEnemy2::Draw()
 {
 	Stage* s = FindGameObject<Stage>();
-	DrawGraph(position.x , position.y, hImage, true);
+	DrawGraph(position.x - s->scroll, position.y, hImage, true);
 	//	debug
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
-	DrawCircle(position.x + width / 2, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ğ¶ã‚¶‚á‚È‚­‚Ä’†S‚ğŠî€‚É‚·‚é
+	DrawCircle(position.x + width / 2 - s->scroll, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ğ¶ã‚¶‚á‚È‚­‚Ä’†S‚ğŠî€‚É‚·‚é
 }
 
 VECTOR2 SkyEnemy2::getPosition() const
@@ -45,6 +45,6 @@ VECTOR2 SkyEnemy2::getPosition() const
 	Stage* s = FindGameObject<Stage>();
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
-	VECTOR2 groundEnemyPos = { position.x  + width / 2, position.y + height / 2 };
+	VECTOR2 groundEnemyPos = { position.x  + width / 2 - s->scroll, position.y + height / 2 };
 	return groundEnemyPos;
 }

@@ -19,7 +19,6 @@ PlayScene::PlayScene()
 	Instantiate<Stage>();
 	Instantiate<Player>();
 	Instantiate<GroundEnemy2>();
-	Instantiate<GroundEnemy1>();
 	Instantiate<SkyEnemy2>();
 	Instantiate<Shield>();
 	Instantiate<JumpEnemy>();

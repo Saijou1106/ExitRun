@@ -40,22 +40,21 @@ void GroundEnemy1::Update()
 void GroundEnemy1::Draw()
 {
 	Stage* s = FindGameObject<Stage>();
-	DrawGraph(position.x , position.y, hImage, true);
+	DrawGraph(position.x - s->scroll , position.y, hImage, true);
 
 	//	debug
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
 
-	
-	DrawCircle(position.x  + width / 2, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ð¶ã‚¶‚á‚È‚­‚Ä’†S‚ðŠî€‚É‚·‚é
-
-
+	//“–‚½‚è”»’è‚ð¶ã‚¶‚á‚È‚­‚Ä’†S‚ðŠî€‚É‚·‚é
+	DrawCircle(position.x  + width / 2 - s->scroll, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);
 }
 
 VECTOR2 GroundEnemy1::getPosition() const
 {
+	Stage* s = FindGameObject<Stage>();
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
-	VECTOR2 groundEnemyPos = { position.x  + width / 2, position.y + height / 2 };
+	VECTOR2 groundEnemyPos = { position.x  + width / 2 -s ->scroll, position.y + height / 2 };
 	return groundEnemyPos;
 }

@@ -11,6 +11,8 @@
 #include "SkyEnemy1.h"
 #include "SkyEnemy2.h"
 #include "Stage.h"
+#include "GameOver.h"
+#include "Object1.h"
 
 
 //ジャンプゲーム作るとき便利
@@ -71,7 +73,6 @@ void Player::Update()
 
 	//Y座標の更新（垂直移動）
 	position.y -= velocityY;
-
 
 	//地面にいない時だけ重力を適用
 	if(!grounded){
@@ -139,36 +140,45 @@ void Player::Update()
 
 		if (CircleHit(playerPos, enemyPos, 48))//プレイヤーと敵が当たったら
 		{
-			{
-  				int count = 0;//プレイヤーが持ってない盾の数の初期化
+  			int count = 0;//プレイヤーが持ってない盾の数の初期化
 
-				 for (Shield* sh : shield)
+			 for (Shield* sh : shield)
+	    	 {
+				 if (sh->isShield)//プレイヤーが盾を所持している時
+			     {
+					 sh->DestroyMe();//盾だけ消える
+					 enemy->DestroyMe();
+					 break;
+				 }
+
+				count++;
+
+			//	ゲーム中に盾はあるがプレイヤーは持ってない
+				if (count >= shield.size())
 				{
-					if (sh->isShield)//プレイヤーが盾を所持している時
-					{
-						sh->DestroyMe();//盾だけ消える(シールド無効化)
-						enemy->DestroyMe();
-						break;
-					}
-
-					count++;
-
-					//	ゲーム中に盾はあるがプレイヤーは持ってない
-					if (count >= shield.size())
-					{
-						//プレイヤーが盾を所持していない場合
-						isDead = true; //プレイヤーが死んだことを記録
-						DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
-						break;
-					}
+					//プレイヤーが盾を所持していない場合
+					isDead = true; //プレイヤーが死んだことを記録
+    				DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
+					break;
 				}
+			
 				 if (shield.size() == 0)
 				 {
 					 //プレイヤーが盾を所持していない場合
 					 isDead = true; //プレイヤーが死んだことを記録
 					 DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
 				 }
-			}
+			 }
+
+			 //if (playerPos.y < enemyPos.y)
+			 //{
+				// jumpCount = 1;
+				// velocityY = jumpPower / 1.1; //敵を踏んだ時の上に跳ねる高さ
+				// grounded = false;
+				// isDead = false;
+				// enemy->DestroyMe();
+				// break;
+			 //}
 		}
 	}
 	
@@ -183,6 +193,26 @@ void Player::Update()
 			patternX = (patternX + 1) % 2;  //patternXが0，1の後、0にする
 		}
 	}
+
+	std::list<Object1*>object = FindGameObjects< Object1>();
+
+	//とげの判定
+	for (Object1* ob : object)
+	{
+		VECTOR2 playerPos = GetCenterPosition();
+		VECTOR2 objectPos = ob->getObjectPosition();
+		if (CircleHit(playerPos, objectPos, 48))
+		{
+			for (Shield* sh : shield)
+			{
+				sh->DestroyMe();
+			}
+			isDead = true; //とげに触れたらシールドを持っていてもいなくてもプレイヤーは死亡
+			DestroyMe();
+			break;
+		}
+
+	}
 }
 
 void Player::Draw()
@@ -192,6 +222,7 @@ void Player::Draw()
 	if (isDead) {
 		//死んだときの画像を描画
 		DrawGraph(position.x - s->scroll , position.y, deadImage, TRUE);
+		Instantiate<GameOver>();
 	}
 	else {
 		//生きている時の画像を描画

@@ -11,8 +11,8 @@ Shield::Shield()
 {
 	shieldImage = LoadGraph("data/shield.png");
 	barrierImage = LoadGraph("data/barrier.png");
-	position.x = 1280;  
-	position.y = 575;
+	position.x = 350;  
+	position.y = 475;
 
 	speed.x = 0.0f;
 
@@ -73,7 +73,7 @@ void Shield::Update()
 
 void Shield::Draw()
 {
-	//Stage* s = FindGameObject<Stage>();
+	Stage* s = FindGameObject<Stage>();
 
 	if (!isActiveShield) {
 		//シールドが無効なら描画しない
@@ -100,19 +100,19 @@ void Shield::Draw()
 			//プレイヤーの位置に基づいて盾の位置をオフセットを使って更新
 			position.x = pl->position.x + offsetX; //X方向のオフセット
 			position.y = pl->position.y + offsetY; //X方向のオフセット
-			DrawGraph(position.x, position.y, barrierImage, TRUE);
+			DrawGraph(position.x - s->scroll, position.y, barrierImage, TRUE);
 		}
 	}
 
 	//	debug
 	int width, height;
-	GetGraphSize(shieldImage, &width, &height);
+	GetGraphSize(shieldImage , &width, &height);
 
 	 VECTOR2 SHCenter;//盾の中心座標
 	SHCenter.x = position.x + 32;
 	SHCenter.y = position.y + 32;//画像の中心座標,プレイヤーの位置を取得
 
-	DrawCircle(SHCenter.x, SHCenter.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にす
+	DrawCircle(SHCenter.x , SHCenter.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にす
 }
 
 //盾の追従停止メソッド
