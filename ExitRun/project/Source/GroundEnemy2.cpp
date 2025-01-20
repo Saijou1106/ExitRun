@@ -38,9 +38,7 @@ void GroundEnemy2::Draw()
 	//	debug
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
-
 	DrawCircle(position.x + width / 2 - s->scroll, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ğ¶ã‚¶‚á‚È‚­‚Ä’†S‚ğŠî€‚É‚·‚é
-
 }
 
 VECTOR2 GroundEnemy2::getPosition() const

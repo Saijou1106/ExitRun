@@ -19,6 +19,10 @@ public:
 	bool isDead;    //プレイヤーが死んだかどうか
 	float velocity;//速度
 	
+	bool isJumpUp; //上昇中
+	bool isJumpDown;//下降中
+	int jumpUpImage;
+	int jumpDownImage;
 
 	const float Gravity = 0.5f; //重力
 	float velocityY;	         //Y方向の速度(垂直方向)

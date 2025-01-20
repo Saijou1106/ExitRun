@@ -27,6 +27,8 @@ Player::Player()
 	//aliveImage = LoadGraph("data/run1.png");
 	deadImage = LoadGraph("data/dead.jpeg");
 	hImage = LoadGraph("data/player.png");
+	jumpUpImage = LoadGraph("data/JumpUp.png");
+	jumpDownImage = LoadGraph("data/JumpDown.png");
 
 	position.x = 120;
 	position.y = 575;
@@ -45,7 +47,10 @@ Player::Player()
 	prevSpaceKeyState = false;  //最初はスペースキーが押されていない
 	isActivePlayer = true;
 	isDead = false;  //プレイヤーが死んだかどうか
-	bool isWalk = true;
+
+	isJumpDown = false;
+	isJumpUp = false;
+    isWalk = true;
 
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
@@ -77,6 +82,20 @@ void Player::Update()
 	//地面にいない時だけ重力を適用
 	if(!grounded){
 		velocityY -= Gravity;//重力で下に引っ張る
+		if (velocityY > 0.0f) {
+			//上昇中
+			isJumpUp = true;
+			isJumpDown = false;
+			isWalk = false;
+		}
+		else {
+			isJumpUp = false;
+			isJumpDown = true;
+			isWalk = false;
+		}
+	}
+	else{
+		isWalk = true;
 	}
 
 	
@@ -146,10 +165,24 @@ void Player::Update()
 	    	 {
 				 if (sh->isShield)//プレイヤーが盾を所持している時
 			     {
+					 //if (playerPos.y < enemyPos.y)
+					 //{
+						// jumpCount = 1;
+						// velocityY = jumpPower / 1.1; //敵を踏んだ時の上に跳ねる高さ
+						// grounded = false;
+						// isDead = false;
+						// enemy->DestroyMe();
+						// break;
+					 //}
 					 sh->DestroyMe();//盾だけ消える
 					 enemy->DestroyMe();
 					 break;
 				 }
+				 //else {
+					// sh->DestroyMe();//盾だけ消える
+					// enemy->DestroyMe();
+					// break;
+				 //}
 
 				count++;
 
@@ -170,15 +203,15 @@ void Player::Update()
 				 }
 			 }
 
-			 //if (playerPos.y < enemyPos.y)
-			 //{
-				// jumpCount = 1;
-				// velocityY = jumpPower / 1.1; //敵を踏んだ時の上に跳ねる高さ
-				// grounded = false;
-				// isDead = false;
-				// enemy->DestroyMe();
-				// break;
-			 //}
+			 if (playerPos.y < enemyPos.y)
+			 {
+				 jumpCount = 1;
+				 velocityY = jumpPower / 1.1; //敵を踏んだ時の上に跳ねる高さ
+				 grounded = false;
+				 isDead = false;
+				 enemy->DestroyMe();
+				 break;
+			 }
 		}
 	}
 	
@@ -192,6 +225,8 @@ void Player::Update()
 		if (freamcounter % 7 == 0) {       //10フレームに一回画像出せる
 			patternX = (patternX + 1) % 2;  //patternXが0，1の後、0にする
 		}
+		isJumpUp = false;
+		isJumpDown = false;
 	}
 
 	std::list<Object1*>object = FindGameObjects< Object1>();
@@ -221,17 +256,24 @@ void Player::Draw()
 
 	if (isDead) {
 		//死んだときの画像を描画
+		isJumpUp = false;
+		isJumpDown = false;
+		isWalk = false;
 		DrawGraph(position.x - s->scroll , position.y, deadImage, TRUE);
 		Instantiate<GameOver>();
 	}
-	else {
+	if(isWalk){
 		//生きている時の画像を描画
-	    //DrawGraph(position.x - s ->scroll, position.y, hImage, TRUE);
-	
 						  // x,   y , 高さ, 幅
 		DrawRectGraph(position.x - s->scroll, position.y, patternX*64, patternY*64, 64, 64, hImage, TRUE);
-		//DrawRectGraph(position.x , position.y, 0, 0, 64, 64, hImage, TRUE);
-
+	}
+	if (isJumpUp) {
+		//上昇中に画面切り替え
+		DrawGraph(position.x - s->scroll, position.y, jumpUpImage, TRUE);
+	}
+	if (isJumpDown) {
+		//下降中に画面切り替え
+		DrawGraph(position.x - s->scroll, position.y, jumpDownImage, TRUE);
 	}
 
 	 	

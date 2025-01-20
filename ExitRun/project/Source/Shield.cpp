@@ -11,8 +11,8 @@ Shield::Shield()
 {
 	shieldImage = LoadGraph("data/shield.png");
 	barrierImage = LoadGraph("data/barrier.png");
-	position.x = 350;  
-	position.y = 475;
+	position.x = 250;  
+	position.y = 375;
 
 	speed.x = 0.0f;
 
@@ -62,7 +62,6 @@ void Shield::Update()
 
 
 		if (CircleHit(player, SHCenter, 32)) {
-
 			isShield = true;          //盾がプレイヤーに獲得される
 			isFollowingPlayer = true; //盾がプレイヤーに追従し始める
 			shieldCount++;
@@ -81,9 +80,8 @@ void Shield::Draw()
 	}
 
 	if (!isFollowingPlayer) {
-		DrawGraph(position.x , position.y, shieldImage, TRUE);
+		DrawGraph(position.x - s->scroll, position.y, shieldImage, TRUE);
 	}
-	
 
 	//盾の所持数に応じて左上に盾を並べて表示する処理
 	if (shieldCount >= 1) {
@@ -101,6 +99,7 @@ void Shield::Draw()
 			position.x = pl->position.x + offsetX; //X方向のオフセット
 			position.y = pl->position.y + offsetY; //X方向のオフセット
 			DrawGraph(position.x - s->scroll, position.y, barrierImage, TRUE);
+
 		}
 	}
 
@@ -112,7 +111,7 @@ void Shield::Draw()
 	SHCenter.x = position.x + 32;
 	SHCenter.y = position.y + 32;//画像の中心座標,プレイヤーの位置を取得
 
-	DrawCircle(SHCenter.x , SHCenter.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にす
+	DrawCircle(SHCenter.x - s->scroll, SHCenter.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にす
 }
 
 //盾の追従停止メソッド
