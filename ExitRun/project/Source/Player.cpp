@@ -26,7 +26,7 @@ Player::Player()
 {
 	//aliveImage = LoadGraph("data/run1.png");
 	deadImage = LoadGraph("data/dead.png");
-	hImage = LoadGraph("data/player2.png");
+	hImage = LoadGraph("data/run13.png");
 	jumpUpImage = LoadGraph("data/JumpUp.png");
 	jumpDownImage = LoadGraph("data/JumpDown.png");
 
@@ -68,8 +68,8 @@ void Player::Update()
 {
 	Stage* s = FindGameObject<Stage>();
 
-	s->scroll += 3;
-	position.x += 3.1f;
+	s->scroll += 5;
+	position.x += 5.1f;
 	int push = 0;
 	push = s->IsWallRight(position + VECTOR2(63, 0));
 	position.x -= push;
