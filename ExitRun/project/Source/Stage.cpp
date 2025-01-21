@@ -20,6 +20,8 @@
 #include "GroundEnemy2.h"
 #include "SkyEnemy1.h"
 #include "SkyEnemy2.h"
+#include "Object1.h"
+#include "JumpEnemy.h"
 
 //	不要なのでコメントアウト(HORIKOSHI Masahiro)
 #if false
@@ -60,12 +62,12 @@ Stage::Stage()
 
 	backGroundImage = LoadGraph("data/background2.png");
 	// 床用の画像読み込み
-	floorImage = LoadGraph("data/floor2.png");
-
-	//	ブロック用画像読み込み(HORIKOSHI Masahiro)
-	blockImage = LoadGraph("data/floor1.png");
+	floorImage = LoadGraph("data/floor3.png");
+	////	ブロック用画像読み込み(HORIKOSHI Masahiro)
+	//blockImage = LoadGraph("data/floor1.png");
 	//	背景chip用画像読み込み(HORIKOSHI Masahiro)
 	backChipImage = LoadGraph("data/backchip.png");
+	
 
 	mapNo = 0;
 	nextMapNo = -1;
@@ -90,7 +92,7 @@ void Stage::Update()
 void Stage::Draw()
 {
 	int drawScroll = scroll % (WORLD_WIDTH*CHIP_SIZE);
-	// ブロック = 2
+
 	for (int i = 0; i < WORLD_WIDTH; i++)
 	{
 		int x = ((i+WORLD_WIDTH+1) * CHIP_SIZE-drawScroll) % (WORLD_WIDTH*CHIP_SIZE) - CHIP_SIZE;
@@ -110,11 +112,55 @@ void Stage::Draw()
 				case 1:
 					DrawRectGraph(x,y, 0, 0, CHIP_SIZE, CHIP_SIZE, floorImage, TRUE);
 					break;
-				//	ブロック
+
+					// GroundEnemy2＝踏める敵
 				case 2:
-					DrawRectGraph(x,y, 0, 0, CHIP_SIZE, CHIP_SIZE, floorImage, TRUE);
-					break;
-				//	背景Chip(敵配置したところにも背景チップを置くように変更...HORIKOSHI Masahiro)
+				{
+					DrawRectGraph(x, y, 0, 0, CHIP_SIZE, CHIP_SIZE, backChipImage, TRUE);
+					//GroundEnemy2* enemy2 = Instantiate<GroundEnemy2>();
+					//enemy2->position.x = i * CHIP_SIZE;
+					//enemy2->position.y = j * CHIP_SIZE;
+				}
+				break;
+
+				// Object1＝とげ
+				case 3:
+				{
+					DrawRectGraph(x, y, 0, 0, CHIP_SIZE, CHIP_SIZE, backChipImage, TRUE);
+					//Object1* object1 = Instantiate<Object1>();
+					//object1->position.x = i * CHIP_SIZE;
+					//object1->position.y = j * CHIP_SIZE;
+				}
+				break;
+
+				// JumpEnemy = 跳ねる敵（カンフー）
+				case 4:
+				{
+					DrawRectGraph(x, y, 0, 0, CHIP_SIZE, CHIP_SIZE, backChipImage, TRUE);
+					//JumpEnemy* jumpEnemy = Instantiate<JumpEnemy>();
+					//jumpEnemy->position.x = i * CHIP_SIZE;
+					//jumpEnemy->position.y = j * CHIP_SIZE;
+				}
+				break;
+
+				// SkyEnemey2 = 上下移動の敵
+				case 5:
+				{
+					DrawRectGraph(x, y, 0, 0, CHIP_SIZE, CHIP_SIZE, backChipImage, TRUE);
+					//SkyEnemy2* enemy2 = Instantiate<SkyEnemy2>();
+					//enemy2->position.x = i * CHIP_SIZE;
+					//enemy2->position.y = j * CHIP_SIZE;
+				}
+				break;
+				// Shield = 盾
+				case 9:
+				{
+					DrawRectGraph(x, y, 0, 0, CHIP_SIZE, CHIP_SIZE, floorImage, TRUE);
+					//SkyEnemy2* enemy2 = Instantiate<SkyEnemy2>();
+					//enemy2->position.x = i * CHIP_SIZE;
+					//enemy2->position.y = j * CHIP_SIZE;
+				}
+				break;
 				default:
 					DrawRectGraph(x,y, 0, 0, CHIP_SIZE, CHIP_SIZE, backChipImage, TRUE);
 					break;
@@ -134,7 +180,7 @@ int Stage::IsWallUp(VECTOR2 pos)
 	int j = pos.y / CHIP_SIZE;
 	if (i < 0 || j < 0 || j >= HEIGHT)
 		return 0;
-	if (map[j][i] == 1 || map[j][i] == 2)
+	if (map[j][i] == 1)
 	{
 		int push = 64 - (int)pos.y % CHIP_SIZE;
 		return push;
@@ -148,7 +194,7 @@ int Stage::IsWallDown(VECTOR2 pos)
 	int j = pos.y / CHIP_SIZE;
 	if (i < 0 || j < 0 || j >= HEIGHT)
 		return 0;
-	if (map[j][i] == 1 || map[j][i] == 2)
+	if (map[j][i] == 1 )
 	{
 		int push = (int)pos.y % CHIP_SIZE + 1;
 		return push;
@@ -162,7 +208,7 @@ int Stage::IsWallRight(VECTOR2 pos)
 	int j = pos.y / CHIP_SIZE;
 	if (i < 0 || j < 0 || j >= HEIGHT)
 		return 0;
-	if (map[j][i] == 1 || map[j][i] == 2)
+	if (map[j][i] == 1 )
 	{
 		int push = (int)pos.x % CHIP_SIZE + 1;
 		return push;
@@ -176,7 +222,7 @@ int Stage::IsWallLeft(VECTOR2 pos)
 	int j = pos.y / CHIP_SIZE;
 	if (i < 0 || j < 0 || j >= HEIGHT)
 		return 0;
-	if (map[j][i] == 1 || map[j][i] == 2)
+	if (map[j][i] == 1 )
 	{
 		int push = 64 - (int)pos.x % CHIP_SIZE;
 		return push;
@@ -202,7 +248,7 @@ void Stage::CreateStage(int st)
 		{
 			map[j][i] = 0;
 			map[0][i] = 1;
-			map[HEIGHT-1][i] = 1;
+			map[HEIGHT - 1][i] = 1;
 		}
 	}
 
@@ -219,7 +265,7 @@ void Stage::CreateStage(int st)
 	}
 	for (int j = 0; j < HEIGHT; j++)
 	{
-		for (int i = 0; i < WIDTH; i++)
+		for (int i = 0; i < WORLD_WIDTH; i++)
 		{
 #if false
 			if (map[j][i] == 9)
@@ -232,17 +278,8 @@ void Stage::CreateStage(int st)
 			//	if分でもできるが、複数の設定を行う場合はswitch分のほうがお勧め(HORIKOSHI Masahiro)
 			switch (map[j][i])
 			{
-				// GroundEnemy1
-			case 3:
-			{
-				GroundEnemy1* enemy1 = Instantiate<GroundEnemy1>();
-				enemy1->position.x = i * CHIP_SIZE;
-				enemy1->position.y = j * CHIP_SIZE;
-			}
-			break;
-
-			// GroundEnemy2
-			case 4:
+				// GroundEnemy2＝踏める敵
+			case 2:
 			{
 				GroundEnemy2* enemy2 = Instantiate<GroundEnemy2>();
 				enemy2->position.x = i * CHIP_SIZE;
@@ -250,76 +287,96 @@ void Stage::CreateStage(int st)
 			}
 			break;
 
-			// SkyEnemey1
-			case 5:
+			// Object1＝とげ
+			case 3:
 			{
-				SkyEnemy1* enemy1 = Instantiate<SkyEnemy1>();
-				enemy1->position.x = i * CHIP_SIZE;
-				enemy1->position.y = j * CHIP_SIZE;
+				Object1* object1 = Instantiate<Object1>();
+				object1->position.x = i * CHIP_SIZE;
+				object1->position.y = j * CHIP_SIZE;
 			}
 			break;
 
-			// SkyEnemey2
-			case 6:
+			// JumpEnemy = 跳ねる敵（カンフー）
+			case 4:
+			{
+				JumpEnemy* jumpEnemy = Instantiate<JumpEnemy>();
+				jumpEnemy->position.x = i * CHIP_SIZE;
+				jumpEnemy->position.y = j * CHIP_SIZE;
+			}
+			break;
+
+			// SkyEnemey2 = 上下移動の敵
+			case 5:
 			{
 				SkyEnemy2* enemy2 = Instantiate<SkyEnemy2>();
 				enemy2->position.x = i * CHIP_SIZE;
-				enemy2->position.y = i * CHIP_SIZE;
+				enemy2->position.y = j * CHIP_SIZE;
 			}
 			break;
-
-			//	プレイヤー
+			// Shield = 盾
 			case 9:
 			{
-				Player* p = Instantiate<Player>();
-				p->position.x = i * CHIP_SIZE;	//	なぜ100足している？(HORIKOSHI Masahiro)
-				p->position.y = j * CHIP_SIZE;	//	なぜ100足している？(HORIKOSHI Masahiro)
+				Shield* shield = Instantiate<Shield>();
+				shield->position.x = i * CHIP_SIZE;
+				shield->position.y = j * CHIP_SIZE;
 			}
 			break;
-			//	ランダム敵(仮に7としている)
-			case 7:
-			{
-				int rand = GetRand(3);		//	0-3の乱数
-				//	乱数の結果で敵の出現を変える
-				switch (rand)
-				{
-				case 0:
-				{
-					GroundEnemy1* enemy1 = Instantiate<GroundEnemy1>();
-					enemy1->position.x = i * CHIP_SIZE;
-					enemy1->position.y = j * CHIP_SIZE;
 			}
-				break;
-				case 1:
-				{
-					GroundEnemy2* enemy2 = Instantiate<GroundEnemy2>();
-					enemy2->position.x = i * CHIP_SIZE;
-					enemy2->position.y = j * CHIP_SIZE;
-				}
-				break;
-				case 2:
-				{
-					SkyEnemy1* enemy3 = Instantiate<SkyEnemy1>();
-					enemy3->position.x = i * CHIP_SIZE;
-					enemy3->position.y = j * CHIP_SIZE;
-				}
-				break;
-				case 3:
-				{
-					SkyEnemy2* enemy4 = Instantiate<SkyEnemy2>();
-					enemy4->position.x = i * CHIP_SIZE;
-					enemy4->position.y = j * CHIP_SIZE;
-				}
-				break;
 		}
 	}
-			break;
 }
-		}
-	}
-	backGroundX = 0;
+			//	プレイヤー
+			//case 9:
+			//{
+			//	Player* p = Instantiate<Player>();
+			//	p->position.x = i * CHIP_SIZE;	//	なぜ100足している？(HORIKOSHI Masahiro)
+			//	p->position.y = j * CHIP_SIZE;	//	なぜ100足している？(HORIKOSHI Masahiro)
+			//}
+			//break;
+
+			//	ランダム敵(仮に7としている)
+			//case 7:
+		 //   {
+			//	int rand = GetRand(3);		//	0-3の乱数
+			//	//	乱数の結果で敵の出現を変える
+			//	switch (rand)
+			//	{
+			//	case 0:
+			//	{
+			//		GroundEnemy1* enemy1 = Instantiate<GroundEnemy1>();
+			//		enemy1->position.x = i * CHIP_SIZE;
+			//		enemy1->position.y = j * CHIP_SIZE;
+			//    }
+			//	break;
+			//	case 1:
+			//	{
+			//		GroundEnemy2* enemy2 = Instantiate<GroundEnemy2>();
+			//		enemy2->position.x = i * CHIP_SIZE;
+			//		enemy2->position.y = j * CHIP_SIZE;
+			//	}
+			//	break;
+			//	case 2:
+			//	{
+			//		SkyEnemy1* enemy3 = Instantiate<SkyEnemy1>();
+			//		enemy3->position.x = i * CHIP_SIZE;
+			//		enemy3->position.y = j * CHIP_SIZE;
+			//	}
+			//	break;
+			//	case 3:
+			//	{
+			//		SkyEnemy2* enemy4 = Instantiate<SkyEnemy2>();
+			//		enemy4->position.x = i * CHIP_SIZE;
+			//		enemy4->position.y = j * CHIP_SIZE;
+			//	}
+			//	break;
+		 //       }
+	        
+
+	
+
+	/*backGroundX = 0;
 	backGroundY = 0;
 	floorX = 300;
-	floorY = 520;
-}
+	floorY = 520;*/
+
 

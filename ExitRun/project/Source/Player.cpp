@@ -144,10 +144,8 @@ void Player::Update()
 
 	std::list<Enemy*>enemis = FindGameObjects<Enemy>();//すべての敵オブジェクトがEnemy*として格納される
 	std::list<Shield*> shield = FindGameObjects<Shield>();
-	std::list<GroundEnemy1*>groundenemy1 = FindGameObjects< GroundEnemy1>();
-	std::list<GroundEnemy2*>groundenemy2 = FindGameObjects< GroundEnemy2>();
-	std::list<SkyEnemy1*>skyenemy1 = FindGameObjects< SkyEnemy1>();
-	std::list<SkyEnemy2*>skyenemy2 = FindGameObjects< SkyEnemy2>();
+	//std::list<GroundEnemy2*>groundenemy2 = FindGameObjects< GroundEnemy2>();
+	//std::list<SkyEnemy2*>skyenemy2 = FindGameObjects< SkyEnemy2>();
 
 	for (Enemy* enemy : enemis) 
 	{

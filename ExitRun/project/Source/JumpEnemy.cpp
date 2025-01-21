@@ -7,8 +7,8 @@
 JumpEnemy::JumpEnemy()
 {
 	hImage = LoadGraph("data/kanfu.png");
-	position.x = 1080;
-	position.y = 575;
+	/*position.x = 1080;
+	position.y = 575;*/
 	basePosition = position;
 	dead = false;
 	timer = 0;
@@ -24,7 +24,7 @@ void JumpEnemy::Update()
 	timer += 0.05f;
 	position.y = basePosition.y - abs(sinf(timer)) * 100; //abs ê‚ëŒílÇÇ∆ÇÈä÷êî
 
-	position.x -= 1.0f;
+	//position.x -= 1.0f;
 
 	//std::list<Player*> player = FindGameObjects<Player>();
 	//std::list<Shield*> shielde = FindGameObjects<Shield>();

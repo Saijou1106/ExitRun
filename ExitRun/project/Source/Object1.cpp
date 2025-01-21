@@ -4,8 +4,8 @@
 Object1::Object1()
 {
 	hImage = LoadGraph("data/toge.png");
-	position.x = 1280;
-	position.y = 480;
+	/*position.x = 1280;
+	position.y = 480;*/
 	speed.x = 0.0f;
 }
 Object1::~Object1()
@@ -15,7 +15,7 @@ Object1::~Object1()
 
 void Object1::Update()
 {
-	position.x -= 1.5f;
+	//position.x -= 1.5f;
 }
 
 void Object1::Draw()

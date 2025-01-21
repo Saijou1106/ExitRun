@@ -18,13 +18,11 @@ PlayScene::PlayScene()
 {
 	Instantiate<Stage>();
 	Instantiate<Player>();
-	Instantiate<GroundEnemy2>();
-	Instantiate<SkyEnemy2>();
+	
 	Instantiate<Shield>();
-	Instantiate<JumpEnemy>();
+	
 
 	Instantiate<GameManager>();
-	Instantiate<Object1>();
 
 }
 
