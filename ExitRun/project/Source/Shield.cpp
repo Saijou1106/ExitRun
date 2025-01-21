@@ -11,8 +11,8 @@ Shield::Shield()
 {
 	shieldImage = LoadGraph("data/shield.png");
 	barrierImage = LoadGraph("data/barrier.png");
-	position.x = 250;  
-	position.y = 375;
+	/*position.x = 250;  
+	position.y = 375;*/
 
 	speed.x = 0.0f;
 

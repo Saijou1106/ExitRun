@@ -50,12 +50,12 @@ void GroundEnemy2::Draw()
 
 VECTOR2 GroundEnemy2::getPosition() const
 {
-#if false
+
 	Stage* s = FindGameObject<Stage>();
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
-	VECTOR2 groundEnemyPos = { position.x  + width / 2 - s->scroll , position.y + height / 2 };
+	VECTOR2 groundEnemyPos = { position.x  + width / 2  , position.y + height / 2 };
 	return groundEnemyPos;
-#endif
-	return centerPos;
+
+	//return centerPos;
 }

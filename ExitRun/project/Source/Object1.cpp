@@ -33,6 +33,6 @@ VECTOR2 Object1::getObjectPosition() const
 	Stage* s = FindGameObject<Stage>();
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
-	VECTOR2 ObjectPos = { position.x + width / 2 - s->scroll, position.y + height / 2 };
+	VECTOR2 ObjectPos = { position.x + width / 2, position.y + height / 2 };
 	return ObjectPos;
 }

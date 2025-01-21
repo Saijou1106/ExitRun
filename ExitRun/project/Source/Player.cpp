@@ -25,7 +25,7 @@ const float V0 = -sqrtf(2.0f * Gravity * JumpHeight);
 Player::Player()
 {
 	//aliveImage = LoadGraph("data/run1.png");
-	deadImage = LoadGraph("data/dead.jpeg");
+	deadImage = LoadGraph("data/dead.png");
 	hImage = LoadGraph("data/player.png");
 	jumpUpImage = LoadGraph("data/JumpUp.png");
 	jumpDownImage = LoadGraph("data/JumpDown.png");
@@ -41,7 +41,7 @@ Player::Player()
 	ground = 575;   //地面の位置
 	grounded = true;//地面にいる状態
 	maxJump = 2;   //最大ジャンプ回数
-	jumpPower = 10;//ジャンプ力
+	jumpPower = 12;//ジャンプ力
 	velocityY = 0; //Y方向の速度
 
 	prevSpaceKeyState = false;  //最初はスペースキーが押されていない
@@ -110,7 +110,7 @@ void Player::Update()
 
 	if (velocityY <= 0) {
 		int push1 = s->IsWallDown(position + VECTOR2(0, 64));
-		int push2 = s->IsWallDown(position + VECTOR2(63, 64));
+		int push2 = s->IsWallDown(position + VECTOR2(50, 64));
 		if (push1 > 0 || push2 > 0) {
 			position.y -= max(push1, push2) - 1;
 			velocityY = 0;        //Yの速度0にする
@@ -204,7 +204,7 @@ void Player::Update()
 			 if (playerPos.y < enemyPos.y)
 			 {
 				 jumpCount = 1;
-				 velocityY = jumpPower / 1.1; //敵を踏んだ時の上に跳ねる高さ
+				 velocityY = jumpPower / 1.5; //敵を踏んだ時の上に跳ねる高さ
 				 grounded = false;
 				 isDead = false;
 				 enemy->DestroyMe();

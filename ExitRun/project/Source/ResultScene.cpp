@@ -36,31 +36,19 @@ void ResultScene::Draw()
 
 	GameOver* go = FindGameObject <GameOver>();
 
-	
-	/*SetFontSize(50);*/
-
-
-	/*DrawString(200, 500, "PUSU SPACE KEY", GetColor(15, 15, 255));
-
-	SetFontSize(size);
-
-	DrawString(0, 0, "ReslutScene", GetColor(255, 255, 255));*/
-
-
 	Player* pl = FindGameObject<Player>();
 
 	int size = GetFontSize();
-	SetFontSize(100);
-
-	if (timer >= 1.0f) {
-		
-		//  スコア表示　プレイヤーが走り始める原点からの距離の表示
-		int score = ((pl->position.x - pl->startposition.x) - 1) / 64;
-		DrawFormatString(300, 300, GetColor(0, 120, 0), "%6d", score);
-	}
-	SetFontSize(size);
+	SetFontSize(50);
 
 	DrawGraph(0, 0, hImage, TRUE);
+
+     //  スコア表示　プレイヤーが走り始める原点からの距離の表示
+	DrawFormatString(240, 370, GetColor(25, 25, 25), "%6d", go->score);
+
+	SetFontSize(size);
+
+	
 }
 
 

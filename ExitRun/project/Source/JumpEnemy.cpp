@@ -24,31 +24,6 @@ void JumpEnemy::Update()
 	timer += 0.05f;
 	position.y = basePosition.y - abs(sinf(timer)) * 100; //abs â‘Î’l‚ğ‚Æ‚éŠÖ”
 
-	//position.x -= 1.0f;
-
-	//std::list<Player*> player = FindGameObjects<Player>();
-	//std::list<Shield*> shielde = FindGameObjects<Shield>();
-
-	//for (Player* pl : player) {
-	//	for (Shield* sh : shielde) {
-	//		VECTOR2 plCenter;
-	//		plCenter.x = pl->position.x + 32;
-	//		plCenter.y = pl->position.y + 32;
-
-	//		VECTOR2 SECenter;
-	//		SECenter.x = position.x + 32;
-	//		SECenter.y = position.y + 32;
-
-	//		if (CircleHit(plCenter, SECenter, 64))
-	//		{
-	//			if (isShield) {
-	//				sh->DestroyMe();
-	//			}
-	//		}
-	//	}
-
-
-	//}
 }
 
 void JumpEnemy::Draw()

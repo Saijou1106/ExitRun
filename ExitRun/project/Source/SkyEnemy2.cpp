@@ -5,7 +5,7 @@
 
 SkyEnemy2::SkyEnemy2()
 {
-	hImage = LoadGraph("data/same2.png");
+	hImage = LoadGraph("data/brid.png");
 	/*position.x = 1280;
 	position.y = 380;*/
 	speed.x = 0.0f;
@@ -45,7 +45,7 @@ VECTOR2 SkyEnemy2::getPosition() const
 	Stage* s = FindGameObject<Stage>();
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
-	VECTOR2 groundEnemyPos = { position.x  + width / 2 - s->scroll, position.y + height / 2 };
+	VECTOR2 groundEnemyPos = { position.x  + width / 2 , position.y + height / 2 };
 	//return groundEnemyPos;
 	return VECTOR2(0,0);
 }

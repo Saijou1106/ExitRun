@@ -14,6 +14,7 @@ GameOver::GameOver()
 	assert(GameOverImage > 0);
 	timer = 0.0f;
 
+	StayOnSceneChange();
 }
 
 GameOver::~GameOver()
@@ -49,7 +50,7 @@ void GameOver::Draw()
 	if (timer >= 6.0f) {
 		SetFontSize(25);
 		//  スコア表示　プレイヤーが走り始める原点からの距離の表示
-		int score = ((pl->position.x - pl->startposition.x) - 1) / 64;
+		score = ((pl->position.x - pl->startposition.x) - 1) / 64;
 		//DrawFormatString(200, 300, GetColor(15, 15, 255), "SCORE:%6d", score);
 		DrawGraph(430,380, NextImage, TRUE);
 
