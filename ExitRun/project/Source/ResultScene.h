@@ -1,5 +1,6 @@
 #pragma once
 #include "../Library/SceneBase.h"
+#include "HighScore.h"
 
 class ResultScene :public SceneBase
 {
@@ -10,6 +11,6 @@ public:
 	void Draw()override;
 	int hImage;
 	float timer;//表示される間の時間
-	int HighScore; // ハイスコア
-
+	
+	void CheckHighScore();
 };

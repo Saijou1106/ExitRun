@@ -36,16 +36,6 @@ void GameOver::Draw()
 	DrawGraph(220, 200, GameOverImage, TRUE);
 	int size = GetFontSize();
 	SetFontSize(50);
-	
-	//if (timer >= 1.0f) {
-	//	SetFontSize(25);
-	//	//  スコア表示　プレイヤーが走り始める原点からの距離の表示
-	//	score = ((pl->position.x - pl->startposition.x) - 1) / 64;
-	//	DrawFormatString(200, 300, GetColor(15, 15, 255), "SCORE:%6d", score);
-	//}
-	/*if (timer >= 2.0f) {
-		DrawString(200, 500, "PUSU SPACE KEY", GetColor(15, 15, 255));*/
-
 
 	if (timer >= 6.0f) {
 		SetFontSize(25);
@@ -53,6 +43,7 @@ void GameOver::Draw()
 		score = ((pl->position.x - pl->startposition.x) - 1) / 64;
 		//DrawFormatString(200, 300, GetColor(15, 15, 255), "SCORE:%6d", score);
 		DrawGraph(430,380, NextImage, TRUE);
+
 
 	}
 

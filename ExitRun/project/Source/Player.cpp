@@ -13,6 +13,7 @@
 #include "Stage.h"
 #include "GameOver.h"
 #include "Object1.h"
+#include "HighScore.h"
 
 
 //ƒWƒƒƒ“ƒvƒQ[ƒ€ì‚é‚Æ‚«•Ö—˜
