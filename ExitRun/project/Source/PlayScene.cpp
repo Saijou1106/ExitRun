@@ -9,6 +9,9 @@
 #include "GroundEnemy2.h"
 #include "Shield.h" 
 #include "JumpEnemy.h"
+#include "ResultScene.h"
+
+#include "HighScore.h"
 
 #include "GameManager.h"
 #include "Object1.h"

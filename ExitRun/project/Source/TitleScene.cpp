@@ -1,5 +1,6 @@
 #include "TitleScene.h"
 #include <DxLib.h>
+#include "HighScore.h"
 
 TitleScene::TitleScene()
 {
@@ -12,6 +13,12 @@ TitleScene::TitleScene()
 	frameCount = 0;
 	isVisible = true;
 	bkinkInterval = 50;  //“_–ÅŠÔŠu
+
+	HighScore* hs = FindGameObject<HighScore>();
+	if (hs == NULL)
+	{
+		hs = Instantiate<HighScore>();
+	}
 }
 
 TitleScene::~TitleScene()
@@ -38,9 +45,18 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
+	HighScore* hs = FindGameObject<HighScore>();
+
 	DrawGraph(position.x, position.y,hImage, TRUE);
 	if (isVisible) {
 		DrawGraph(spaceKey.x, spaceKey.y, spaceImage, TRUE);
 	}
 
+
+	int size = GetFontSize();
+	SetFontSize(50);
+
+	DrawFormatString(190, 425, GetColor(255, 255, 255), "%6d", hs->GetHighScore());
+
+	SetFontSize(size);
 }

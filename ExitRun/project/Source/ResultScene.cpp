@@ -3,16 +3,23 @@
 #include "GameManager.h"
 #include "ResultScene.h"
 #include "GameOver.h"
-
+#include "HighScore.h"
 
 
 ResultScene::ResultScene()
 {
 	hImage = LoadGraph("data/result2.png");
 	timer = 0.0f;
-	HighScore = 0;
 
-}
+	HighScore* hs = FindGameObject<HighScore>();
+	if(hs == NULL)
+	{
+		hs = Instantiate<HighScore>();
+	}
+
+	GameOver* go = FindGameObject <GameOver>();
+	hs->SetHighScore(go->score);
+};
 
 ResultScene::~ResultScene()
 {
@@ -33,34 +40,39 @@ void ResultScene::Update()
 
 void ResultScene::Draw()
 {
+	HighScore* hs = FindGameObject<HighScore>();
 
 	GameOver* go = FindGameObject <GameOver>();
-
-	
-	/*SetFontSize(50);*/
-
-
-	/*DrawString(200, 500, "PUSU SPACE KEY", GetColor(15, 15, 255));
-
-	SetFontSize(size);
-
-	DrawString(0, 0, "ReslutScene", GetColor(255, 255, 255));*/
-
 
 	Player* pl = FindGameObject<Player>();
 
 	int size = GetFontSize();
-	SetFontSize(100);
+	SetFontSize(50);
 
-	if (timer >= 1.0f) {
-		
-		//  スコア表示　プレイヤーが走り始める原点からの距離の表示
-		int score = ((pl->position.x - pl->startposition.x) - 1) / 64;
-		DrawFormatString(300, 300, GetColor(0, 120, 0), "%6d", score);
-	}
-	SetFontSize(size);
-
+	//if (timer >= 1.0f) {
+	//	
+	//	//  スコア表示　プレイヤーが走り始める原点からの距離の表示
+	//	/*int score = ((pl->position.x - pl->startposition.x) - 1) / 64;*/
+	//	DrawFormatString(250, 300, GetColor(255, 255, 255), "SCORE : %6d", go->score);
+	//}
 	DrawGraph(0, 0, hImage, TRUE);
+
+	DrawFormatString(240, 370, GetColor(25, 25, 25), "%6d", go->score);
+
+	DrawFormatString(750, 370, GetColor(25, 25, 25), "%6d", hs->GetHighScore());
+	SetFontSize(size);
 }
+
+void ResultScene::CheckHighScore()
+{
+	GameOver* go = FindGameObject<GameOver>();
+	HighScore* hs = FindGameObject<HighScore>();
+	if (go->score > hs->GetHighScore())
+	{
+		hs->SetHighScore(go->score);
+	}
+}
+
+
 
 
