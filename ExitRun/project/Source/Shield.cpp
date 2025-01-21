@@ -11,8 +11,8 @@ Shield::Shield()
 {
 	shieldImage = LoadGraph("data/shield.png");
 	barrierImage = LoadGraph("data/barrier.png");
-	/*position.x = 250;  
-	position.y = 375;*/
+	//position.x = 250;  
+	//position.y = 375;
 
 	speed.x = 0.0f;
 
@@ -30,14 +30,16 @@ Shield::Shield()
 
 Shield::~Shield()
 {
-	//DeleteGraph(hImage);
+	DeleteGraph(shieldImage);
+	DeleteGraph(barrierImage);
+
 }
 
 void Shield::Update()
 {
 	//shieldCount = 0;//盾のカウント最初は0にしておく
 	
-	position.x -= 3.5f;//盾の移動速度
+	//position.x -= 3.5f;//盾の移動速度
 
 	//if (position.x < -64) {//画面の左端
 	//	position.x = 1280;//画面右端

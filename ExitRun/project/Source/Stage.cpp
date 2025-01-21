@@ -70,7 +70,7 @@ Stage::Stage()
 	
 
 	mapNo = 0;
-	nextMapNo = -1;
+	nextMapNo = 0, 1, 2, 3, 4;
 	CreateStage(mapNo);
 	scroll = 2;
 }
@@ -86,6 +86,10 @@ void Stage::Update()
  		mapNo = nextMapNo;
 		nextMapNo = -1;
 		CreateStage(mapNo);
+	}
+
+	if (nextMapNo < 0) {
+		nextMapNo = 2;
 	}
 }
 

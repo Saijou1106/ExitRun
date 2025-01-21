@@ -38,5 +38,9 @@ void JumpEnemy::Draw()
 
 VECTOR2 JumpEnemy::getPosition() const
 {
-	return position;
+	Stage* s = FindGameObject<Stage>();
+	int width, height;
+	GetGraphSize(hImage, &width, &height);
+	VECTOR2 JumpPos = { position.x + width / 2, position.y + height / 2 };
+	return JumpPos;
 }

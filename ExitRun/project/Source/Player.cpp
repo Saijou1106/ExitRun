@@ -26,7 +26,7 @@ Player::Player()
 {
 	//aliveImage = LoadGraph("data/run1.png");
 	deadImage = LoadGraph("data/dead.png");
-	hImage = LoadGraph("data/player.png");
+	hImage = LoadGraph("data/player2.png");
 	jumpUpImage = LoadGraph("data/JumpUp.png");
 	jumpDownImage = LoadGraph("data/JumpDown.png");
 
@@ -68,8 +68,8 @@ void Player::Update()
 {
 	Stage* s = FindGameObject<Stage>();
 
-	s->scroll += 2;
-	position.x += 2.1f;
+	s->scroll += 3;
+	position.x += 3.1f;
 	int push = 0;
 	push = s->IsWallRight(position + VECTOR2(63, 0));
 	position.x -= push;
@@ -157,30 +157,32 @@ void Player::Update()
 
 		if (CircleHit(playerPos, enemyPos, 48))//プレイヤーと敵が当たったら
 		{
+	
   			int count = 0;//プレイヤーが持ってない盾の数の初期化
 
 			 for (Shield* sh : shield)
 	    	 {
 				 if (sh->isShield)//プレイヤーが盾を所持している時
 			     {
-					 //if (playerPos.y < enemyPos.y)
-					 //{
-						// jumpCount = 1;
-						// velocityY = jumpPower / 1.1; //敵を踏んだ時の上に跳ねる高さ
-						// grounded = false;
-						// isDead = false;
-						// enemy->DestroyMe();
-						// break;
-					 //}
-					 sh->DestroyMe();//盾だけ消える
-					 enemy->DestroyMe();
-					 break;
+					 if (playerPos.y < enemyPos.y)
+					 {
+						 if (velocityY < 0.0f)
+						 {
+							 jumpCount = 1;
+							 velocityY = jumpPower / 1.1; //敵を踏んだ時の上に跳ねる高さ
+							 grounded = false;
+							 isDead = false;
+							 enemy->DestroyMe();
+							 break;
+						 }
+					 }
+					 else {
+						 sh->DestroyMe();//盾だけ消える
+						 enemy->DestroyMe();
+						 break;
+					 }
 				 }
-				 //else {
-					// sh->DestroyMe();//盾だけ消える
-					// enemy->DestroyMe();
-					// break;
-				 //}
+				
 
 				count++;
 

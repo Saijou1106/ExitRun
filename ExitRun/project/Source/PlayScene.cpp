@@ -18,10 +18,6 @@ PlayScene::PlayScene()
 {
 	Instantiate<Stage>();
 	Instantiate<Player>();
-	
-	Instantiate<Shield>();
-	
-
 	Instantiate<GameManager>();
 
 }
