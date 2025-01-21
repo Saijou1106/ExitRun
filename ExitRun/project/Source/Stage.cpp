@@ -159,7 +159,7 @@ void Stage::Draw()
 				// Shield = èÇ
 				case 9:
 				{
-					DrawRectGraph(x, y, 0, 0, CHIP_SIZE, CHIP_SIZE, floorImage, TRUE);
+					DrawRectGraph(x, y, 0, 0, CHIP_SIZE, CHIP_SIZE, backChipImage, TRUE);
 					//SkyEnemy2* enemy2 = Instantiate<SkyEnemy2>();
 					//enemy2->position.x = i * CHIP_SIZE;
 					//enemy2->position.y = j * CHIP_SIZE;
