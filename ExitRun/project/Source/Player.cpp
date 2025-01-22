@@ -42,7 +42,7 @@ Player::Player()
 	ground = 575;   //地面の位置
 	grounded = true;//地面にいる状態
 	maxJump = 2;   //最大ジャンプ回数
-	jumpPower = 12;//ジャンプ力
+	jumpPower = 11;//ジャンプ力
 	velocityY = 0; //Y方向の速度
 
 	prevSpaceKeyState = false;  //最初はスペースキーが押されていない

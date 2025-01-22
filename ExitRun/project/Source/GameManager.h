@@ -29,6 +29,7 @@ private:
 	int TWO_HANDLE;
 	int ONE_HANDLE;
 	int START_HANDLE;
+	int operationImage;
 
 	Player* player;
 

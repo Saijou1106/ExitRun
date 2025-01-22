@@ -8,6 +8,7 @@ GameManager::GameManager()
 	TWO_HANDLE = LoadGraph("data/game_start_2.png");
 	ONE_HANDLE = LoadGraph("data/game_start_1.png");
 	START_HANDLE = LoadGraph("data/game_start_logo1 .png");
+	operationImage = LoadGraph("data/sousa.png");
 	playable = false;
 }
 
@@ -139,12 +140,15 @@ void GameManager::Draw()
 		break;
 	case GAME_STATE::START_COUNT:
 		DrawGraph(550, 100, THREE_HANDLE, TRUE);
+		DrawGraph(550, 200, operationImage, TRUE);
 		break;
 	case GAME_STATE::TWO_WAIT:
 		DrawGraph(550, 100, TWO_HANDLE, TRUE);
+		DrawGraph(550, 200, operationImage, TRUE);
 		break;
 	case GAME_STATE::ONE_WAIT:
 		DrawGraph(550, 100, ONE_HANDLE, TRUE);
+		DrawGraph(550, 200, operationImage, TRUE);
 		break;
 	case GAME_STATE::START_WAIT:
 		DrawGraph(380, 100, START_HANDLE, TRUE);
