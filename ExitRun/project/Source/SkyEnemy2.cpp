@@ -46,6 +46,5 @@ VECTOR2 SkyEnemy2::getPosition() const
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
 	VECTOR2 groundEnemyPos = { position.x  + width / 2 , position.y + height / 2 };
-	//return groundEnemyPos;
-	return VECTOR2(0,0);
+	return groundEnemyPos;
 }

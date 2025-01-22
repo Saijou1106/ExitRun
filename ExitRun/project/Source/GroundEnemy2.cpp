@@ -56,6 +56,4 @@ VECTOR2 GroundEnemy2::getPosition() const
 	GetGraphSize(hImage, &width, &height);
 	VECTOR2 groundEnemyPos = { position.x  + width / 2  , position.y + height / 2 };
 	return groundEnemyPos;
-
-	//return centerPos;
 }
