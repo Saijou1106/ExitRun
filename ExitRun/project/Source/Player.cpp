@@ -296,7 +296,7 @@ void Player::Draw()
 	}
 	if (shieldCount >= 1) {
 		for (int i = 0; i < shieldCount; i++) {
-			DrawGraph(10 + i * 66, 10, shieldImage, TRUE);
+			DrawGraph(6 + i * 66, 0, shieldImage, TRUE);
 
 		}
 	}
