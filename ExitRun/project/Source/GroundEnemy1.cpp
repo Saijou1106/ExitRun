@@ -40,9 +40,7 @@ void GroundEnemy1::Update()
 void GroundEnemy1::Draw()
 {
 	Stage* s = FindGameObject<Stage>();
-	if (dead = false) {
-		DrawGraph(position.x - s->scroll, position.y, hImage, true);
-	}
+	DrawGraph(position.x - s->scroll , position.y, hImage, true);
 
 	//	debug
 	int width, height;

@@ -211,7 +211,6 @@ void Player::Update()
 				 grounded = false;
 				 isDead = false;
 				 enemy->DestroyMe();
-
 				 break;
 			 }
 		}
@@ -278,6 +277,7 @@ void Player::Draw()
 		DrawGraph(position.x - s->scroll, position.y, jumpDownImage, TRUE);
 	}
 
+	 	
 	//	debug
 	int width, height;
 	GetGraphSize(hImage, &width, &height);

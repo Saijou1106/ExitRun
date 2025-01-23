@@ -12,7 +12,6 @@
 GroundEnemy2::GroundEnemy2()
 {
 	hImage = LoadGraph("data/dog.png");
-	deadImage = LoadGraph("data/same.png");
 	/*position.x = 1280;
 	position.y = 575;*/
 	speed.x = 0.0f;
@@ -35,7 +34,8 @@ void GroundEnemy2::Update()
 void GroundEnemy2::Draw()
 {
 	Stage* s = FindGameObject<Stage>();
-		DrawGraph(position.x - s->scroll, position.y, hImage, true);
+	DrawGraph(position.x - s->scroll, position.y, hImage, true);
+
 
 	//	debug
 	int width, height;
