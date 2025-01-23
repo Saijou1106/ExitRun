@@ -55,8 +55,6 @@ void TitleScene::Draw()
 
 	int size = GetFontSize();
 	SetFontSize(50);
-
 	DrawFormatString(190, 425, GetColor(255, 255, 255), "%6d m", hs->GetHighScore());
-
 	SetFontSize(size);
 }

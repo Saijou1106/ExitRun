@@ -33,6 +33,10 @@ void GroundEnemy1::Update()
 
 
 	position.x -= 5.5f;
+<<<<<<< HEAD
+=======
+	
+>>>>>>> origin/konno
 	
 
 }

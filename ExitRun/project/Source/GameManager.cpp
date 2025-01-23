@@ -8,8 +8,11 @@ GameManager::GameManager()
 	TWO_HANDLE = LoadGraph("data/game_start_2.png");
 	ONE_HANDLE = LoadGraph("data/game_start_1.png");
 	START_HANDLE = LoadGraph("data/game_start_logo1 .png");
+<<<<<<< HEAD
 	GameOverImage = LoadGraph("data/logo_game_over2.png");
 	NextImage = LoadGraph("data/next4.png");
+=======
+>>>>>>> origin/konno
 	operationImage = LoadGraph("data/sousa.png");
 	playable = false;
 }
@@ -72,7 +75,10 @@ void GameManager::Update()
 	case GAME_STATE::START_WAIT:
 		if (STRAT_WAIT() == GAME_STATE::NEXT_STATE)
 		{
+<<<<<<< HEAD
 			playable = true;
+=======
+>>>>>>> origin/konno
 			gameState = GAME_STATE::RUN_START;
 		}
 		break;
@@ -81,6 +87,10 @@ void GameManager::Update()
 	case GAME_STATE::RUN_START:
 		if (RUN_START() == GAME_STATE::NEXT_STATE)
 		{
+<<<<<<< HEAD
+=======
+			playable = true;
+>>>>>>> origin/konno
 			gameState = GAME_STATE::GAME_WAIT;
 		}
 		break;
@@ -142,6 +152,7 @@ void GameManager::Draw()
 		break;
 	case GAME_STATE::START_COUNT:
 		DrawGraph(550, 100, THREE_HANDLE, TRUE);
+<<<<<<< HEAD
 		DrawGraph(430, 270, operationImage, TRUE);
 		break;
 	case GAME_STATE::TWO_WAIT:
@@ -151,6 +162,17 @@ void GameManager::Draw()
 	case GAME_STATE::ONE_WAIT:
 		DrawGraph(550, 100, ONE_HANDLE, TRUE);
 		DrawGraph(430, 270, operationImage, TRUE);
+=======
+		DrawGraph(550, 200, operationImage, TRUE);
+		break;
+	case GAME_STATE::TWO_WAIT:
+		DrawGraph(550, 100, TWO_HANDLE, TRUE);
+		DrawGraph(550, 200, operationImage, TRUE);
+		break;
+	case GAME_STATE::ONE_WAIT:
+		DrawGraph(550, 100, ONE_HANDLE, TRUE);
+		DrawGraph(550, 200, operationImage, TRUE);
+>>>>>>> origin/konno
 		break;
 	case GAME_STATE::START_WAIT:
 		DrawGraph(380, 100, START_HANDLE, TRUE);
@@ -163,8 +185,12 @@ void GameManager::Draw()
 		DrawString(0, 700, "gameover", GetColor(255, 255, 255));
 		break;
 	case GAME_STATE::RESULT:
+<<<<<<< HEAD
 		DrawGraph(220, 200, GameOverImage, TRUE);
 		DrawGraph(430, 380, NextImage, TRUE);
+=======
+		DrawString(0, 700, "reslut", GetColor(255, 255, 255));
+>>>>>>> origin/konno
 		break;
 	case GAME_STATE::CONTINUE_STATE:
 		break;
@@ -260,7 +286,11 @@ GAME_STATE GameManager::GAME_WAIT()
 
 	SetFontSize(45);
 	int score = (pl->position.x - pl->startposition.x) / 64;
+<<<<<<< HEAD
 	DrawFormatString(900, 10, GetColor(0, 120, 0), "距離 :%6d m", score);
+=======
+	DrawFormatString(900, 10, GetColor(0, 120, 0), "SCORE:%6d", score);
+>>>>>>> origin/konno
 
 	// プレイヤーが死んだ場合ミス処理へ
 	if (pl->isDead)

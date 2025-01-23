@@ -37,7 +37,11 @@ void SkyEnemy2::Draw()
 	//	debug
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
+<<<<<<< HEAD
 	//DrawCircle(position.x + width / 2 - s->scroll, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ð¶ã‚¶‚á‚È‚­‚Ä’†S‚ðŠî€‚É‚·‚é
+=======
+	DrawCircle(position.x + width / 2 - s->scroll, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ð¶ã‚¶‚á‚È‚­‚Ä’†S‚ðŠî€‚É‚·‚é
+>>>>>>> origin/konno
 }
 
 VECTOR2 SkyEnemy2::getPosition() const

@@ -11,6 +11,9 @@ enum class GAME_STATE
 	ONE_WAIT, // 1 表示
 	START_WAIT,  // START 表示
 	RUN_START, // 走るのを始める
+	JUMP_START, // ジャンプ
+	SHIELD_START, // シールドが割れた時のサウンド
+
 	GAME_WAIT,  // ゲーム監視
 	MISS,  // ミス
 	GAME_OVER, // ゲームオーバー
@@ -25,12 +28,19 @@ enum class GAME_STATE
 class GameManager : public GameObject
 {
 private:
+
+	const char* JUMP_START_PATH = "data/Sound/jump.mp3";
+	const char* SHIELD_START_PATH = "data/Sound/Shield.mp3";
+private:
+
 	int THREE_HANDLE;
 	int TWO_HANDLE;
 	int ONE_HANDLE;
 	int START_HANDLE;
+
 	int GameOverImage;
 	int NextImage;
+
 	int operationImage;
 
 	Player* player;
@@ -43,6 +53,7 @@ public:
 
 public:
 	GAME_STATE gameState;
+
 
 	int score;
 

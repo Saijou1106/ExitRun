@@ -39,6 +39,8 @@ public:
 	int shieldImage;
 	int EnemyIsDeadImage;
 
+	int jumpSound;               //ジャンプサウンド
+
 	int patternX;				//表示パターン(アニメーションの絵)の横の番号
 	int patternY;				//表示パターンの縦の番号	
 
@@ -50,9 +52,16 @@ public:
 
 	bool isFollowingPlayer;  // 盾がプレイヤーに追従しているかのフラグ
 	bool isActivePlayer;
+	int hitSoundhandle;
+
+	void SetHitSoundHandle(int handle) { hitSoundhandle = handle; }
+	void SetjumpSound(int handle) { jumpSound = handle; }
 
 	VECTOR2 centerPosition;
 	VECTOR2 GetCenterPosition();
+private:
+	const char* JUMP_SOUND_PATH = "data/Sound/jump.mp3";
+	const char* SHIELD_SOUND_PATH = "data/Sound/Shield.mp3";
 };
 
 

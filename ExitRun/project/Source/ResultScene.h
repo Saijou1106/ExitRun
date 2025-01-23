@@ -10,7 +10,10 @@ public:
 	void Update()override;
 	void Draw()override;
 	int hImage;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/konno
 	float timer;//•\Ž¦‚³‚ê‚éŠÔ‚ÌŽžŠÔ
 	
 	void CheckHighScore();

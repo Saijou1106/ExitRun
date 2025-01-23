@@ -14,7 +14,7 @@ private:
 	bool dead;			//死んだらtrue
 	bool isShield;       //プレイヤーが盾を保持
 	int deadCounter;    //死んでる時間
-
+	int hitSoundHandle; // サウンドハンドル(hit)
 
 public:
 	GroundEnemy1();

@@ -45,6 +45,9 @@ public:
 	int nextMapNo;
 private:
 	void CreateStage(int st);
+<<<<<<< HEAD
 	bool created;
+=======
+>>>>>>> origin/konno
 };
 
