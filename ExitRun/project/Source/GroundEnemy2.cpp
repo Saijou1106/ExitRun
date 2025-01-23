@@ -43,7 +43,7 @@ void GroundEnemy2::Draw()
 	centerPos.x = position.x - s->scroll + width / 2;
 	centerPos.y = position.y + height / 2;
 	//DrawCircle(position.x + width / 2 - s->scroll, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ð¶ã‚¶‚á‚È‚­‚Ä’†S‚ðŠî€‚É‚·‚é
-	DrawCircle(centerPos.x, centerPos.y, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ð¶ã‚¶‚á‚È‚­‚Ä’†S‚ðŠî€‚É‚·‚é
+	//DrawCircle(centerPos.x, centerPos.y, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ð¶ã‚¶‚á‚È‚­‚Ä’†S‚ðŠî€‚É‚·‚é
 	scroll = s->scroll;
 
 }

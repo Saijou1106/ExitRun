@@ -33,7 +33,7 @@ void JumpEnemy::Draw()
 
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
-	DrawCircle(position.x + width / 2 - s->scroll, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);
+	//DrawCircle(position.x + width / 2 - s->scroll, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);
 }
 
 VECTOR2 JumpEnemy::getPosition() const

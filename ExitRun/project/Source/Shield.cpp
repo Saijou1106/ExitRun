@@ -113,7 +113,7 @@ void Shield::Draw()
 	SHCenter.x = position.x + 32;
 	SHCenter.y = position.y + 32;//画像の中心座標,プレイヤーの位置を取得
 
-	DrawCircle(SHCenter.x - s->scroll, SHCenter.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にす
+//	DrawCircle(SHCenter.x - s->scroll, SHCenter.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にす
 }
 
 //盾の追従停止メソッド

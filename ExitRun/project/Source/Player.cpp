@@ -42,7 +42,7 @@ Player::Player()
 	ground = 575;   //地面の位置
 	grounded = true;//地面にいる状態
 	maxJump = 2;   //最大ジャンプ回数
-	jumpPower = 11;//ジャンプ力
+	jumpPower = 11.5f;//ジャンプ力
 	velocityY = 0; //Y方向の速度
 
 	prevSpaceKeyState = false;  //最初はスペースキーが押されていない
@@ -69,7 +69,7 @@ void Player::Update()
 {
 	Stage* s = FindGameObject<Stage>();
 
-	s->scroll += 5;
+	s->scroll += 5*3;
 	position.x += 5.1f;
 	int push = 0;
 	push = s->IsWallRight(position + VECTOR2(63, 0));
@@ -148,6 +148,7 @@ void Player::Update()
 	//std::list<GroundEnemy2*>groundenemy2 = FindGameObjects< GroundEnemy2>();
 	//std::list<SkyEnemy2*>skyenemy2 = FindGameObjects< SkyEnemy2>();
 
+	return;
 	for (Enemy* enemy : enemis) 
 	{
 		VECTOR2 enemyPos = enemy->getPosition();  // 各敵の位置を取得
@@ -282,7 +283,7 @@ void Player::Draw()
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
 	VECTOR2 playerPos = GetCenterPosition();//画像の中心座標,プレイヤーの位置を取得
-	DrawCircle(playerPos.x - s->scroll, playerPos.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にする
+	//DrawCircle(playerPos.x - s->scroll, playerPos.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にする
 	
 }
 

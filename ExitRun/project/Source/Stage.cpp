@@ -67,12 +67,13 @@ Stage::Stage()
 	//blockImage = LoadGraph("data/floor1.png");
 	//	背景chip用画像読み込み(HORIKOSHI Masahiro)
 	backChipImage = LoadGraph("data/backchip.png");
-	
+	LevelUpImage = LoadGraph("data/LevelUpImage.png");
 
 	mapNo = 0;
 	nextMapNo = 0, 1, 2, 3, 4;
-	CreateStage(mapNo);
 	scroll = 2;
+	CreateStage(mapNo);
+	created = false;
 }
 
 Stage::~Stage()
@@ -82,14 +83,20 @@ Stage::~Stage()
 void Stage::Update()
 {
 	int sc = (scroll / CHIP_SIZE) % WORLD_WIDTH;
-	if (sc > WIDTH * 16 - CHIP_SIZE && nextMapNo>=0) {
- 		mapNo = nextMapNo;
-		nextMapNo = -1;
-		CreateStage(mapNo);
+	if (sc > WIDTH * 16 - 1) {
+		if (nextMapNo >= 0 && created == false) {
+			mapNo = nextMapNo;
+			nextMapNo = -1;
+			CreateStage(mapNo);
+			created = true;
+		}
+	}
+	else {
+		created = false;
 	}
 
-	if (nextMapNo < 0) {
-		nextMapNo = 2;
+	if (nextMapNo > 0) {
+		nextMapNo = 4;
 	}
 }
 
@@ -105,10 +112,7 @@ void Stage::Draw()
 		}
 		for (int j = 0; j < HEIGHT; j++) {
 			int y = j * CHIP_SIZE;
-#if false
-			if (map[j][i] == 1)
-				DrawRectGraph(x - scroll,y, 0, 0, 40, 40, floorImage, TRUE);
-#endif
+
 			//	if分でもできるが、複数の設定を行う場合はswitch分のほうがお勧め(HORIKOSHI Masahiro)
 			switch (map[j][i])
 			{
@@ -171,11 +175,10 @@ void Stage::Draw()
 			}
 		}
 	}
-#if false
-	DrawGraph(backGroundX - scroll , backGroundY, backGroundImage , TRUE);
 
-	DrawGraph(floorX - scroll , floorY, floorImage, TRUE);
-#endif
+	/*if (betweenScene) {
+		DrawGraph(400, 120,LevelUpImage, TRUE);
+	}*/
 }
 
 int Stage::IsWallUp(VECTOR2 pos)
@@ -245,7 +248,12 @@ void Stage::CreateStage(int st)
 	for (Shield* s : shields) {
 		s->DestroyMe();
 	}
+	std::list<Object*> objects = FindGameObjects<Object>();
+	for (Object* ob : objects) {
+		ob->DestroyMe();
+	}
 
+	//つなぎめ？
 	for (int i = 0; i < WORLD_WIDTH; i++)
 	{
 		for (int j = 0; j < HEIGHT; j++)
@@ -253,6 +261,7 @@ void Stage::CreateStage(int st)
 			map[j][i] = 0;
 			map[0][i] = 1;
 			map[HEIGHT - 1][i] = 1;
+			betweenScene = true;
 		}
 	}
 
@@ -271,14 +280,7 @@ void Stage::CreateStage(int st)
 	{
 		for (int i = 0; i < WORLD_WIDTH; i++)
 		{
-#if false
-			if (map[j][i] == 9)
-			{
-				Player* p = Instantiate<Player>();
-				p->position.x = 100 + i * 40;
-				p->position.y = 100 + j * 40;
-			}
-#endif
+			int x = i + ((scroll/CHIP_SIZE+20)/WORLD_WIDTH)*WORLD_WIDTH;
 			//	if分でもできるが、複数の設定を行う場合はswitch分のほうがお勧め(HORIKOSHI Masahiro)
 			switch (map[j][i])
 			{
@@ -286,7 +288,7 @@ void Stage::CreateStage(int st)
 			case 2:
 			{
 				GroundEnemy2* enemy2 = Instantiate<GroundEnemy2>();
-				enemy2->position.x = i * CHIP_SIZE;
+				enemy2->position.x = x * CHIP_SIZE;
 				enemy2->position.y = j * CHIP_SIZE;
 			}
 			break;
@@ -295,7 +297,7 @@ void Stage::CreateStage(int st)
 			case 3:
 			{
 				Object1* object1 = Instantiate<Object1>();
-				object1->position.x = i * CHIP_SIZE;
+				object1->position.x = x * CHIP_SIZE;
 				object1->position.y = j * CHIP_SIZE;
 			}
 			break;
@@ -304,8 +306,9 @@ void Stage::CreateStage(int st)
 			case 4:
 			{
 				JumpEnemy* jumpEnemy = Instantiate<JumpEnemy>();
-				jumpEnemy->position.x = i * CHIP_SIZE;
+				jumpEnemy->position.x = x * CHIP_SIZE;
 				jumpEnemy->position.y = j * CHIP_SIZE;
+				jumpEnemy->basePosition = jumpEnemy->position;
 			}
 			break;
 
@@ -313,7 +316,7 @@ void Stage::CreateStage(int st)
 			case 5:
 			{
 				SkyEnemy2* enemy2 = Instantiate<SkyEnemy2>();
-				enemy2->position.x = i * CHIP_SIZE;
+				enemy2->position.x = x * CHIP_SIZE;
 				enemy2->position.y = j * CHIP_SIZE;
 			}
 			break;
@@ -321,7 +324,7 @@ void Stage::CreateStage(int st)
 			case 9:
 			{
 				Shield* shield = Instantiate<Shield>();
-				shield->position.x = i * CHIP_SIZE;
+				shield->position.x = x * CHIP_SIZE;
 				shield->position.y = j * CHIP_SIZE;
 			}
 			break;

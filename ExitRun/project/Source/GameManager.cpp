@@ -140,15 +140,15 @@ void GameManager::Draw()
 		break;
 	case GAME_STATE::START_COUNT:
 		DrawGraph(550, 100, THREE_HANDLE, TRUE);
-		DrawGraph(550, 200, operationImage, TRUE);
+		DrawGraph(430, 270, operationImage, TRUE);
 		break;
 	case GAME_STATE::TWO_WAIT:
 		DrawGraph(550, 100, TWO_HANDLE, TRUE);
-		DrawGraph(550, 200, operationImage, TRUE);
+		DrawGraph(430, 270, operationImage, TRUE);
 		break;
 	case GAME_STATE::ONE_WAIT:
 		DrawGraph(550, 100, ONE_HANDLE, TRUE);
-		DrawGraph(550, 200, operationImage, TRUE);
+		DrawGraph(430, 270, operationImage, TRUE);
 		break;
 	case GAME_STATE::START_WAIT:
 		DrawGraph(380, 100, START_HANDLE, TRUE);
@@ -257,7 +257,7 @@ GAME_STATE GameManager::GAME_WAIT()
 
 	SetFontSize(45);
 	int score = (pl->position.x - pl->startposition.x) / 64;
-	DrawFormatString(900, 10, GetColor(0, 120, 0), "SCORE:%6d", score);
+	DrawFormatString(970, 10, GetColor(0, 120, 0), "SCORE:%6d", score);
 
 	// プレイヤーが死んだ場合ミス処理へ
 	if (pl->isDead)

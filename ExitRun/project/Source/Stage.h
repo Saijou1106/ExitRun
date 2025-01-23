@@ -28,8 +28,11 @@ public:
 	int backGroundX;
 	int backGroundY;
 	int floorImage;
+	int LevelUpImage;
 	int floorX;
 	int floorY;
+
+	bool betweenScene;
 
 	//	ブロック用画像ハンドル(HORIKOSHI Masahiro)
 	int blockImage;
@@ -42,5 +45,6 @@ public:
 	int nextMapNo;
 private:
 	void CreateStage(int st);
+	bool created;
 };
 
