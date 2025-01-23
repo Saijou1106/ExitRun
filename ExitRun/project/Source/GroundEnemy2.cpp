@@ -11,11 +11,7 @@
 
 GroundEnemy2::GroundEnemy2()
 {
-<<<<<<< HEAD
 	hImage = LoadGraph("data/enemy1.png");
-=======
-	hImage = LoadGraph("data/dog.png");
->>>>>>> origin/konno
 	/*position.x = 1280;
 	position.y = 575;*/
 	speed.x = 0.0f;
@@ -46,14 +42,6 @@ void GroundEnemy2::Draw()
 	GetGraphSize(hImage, &width, &height);
 	centerPos.x = position.x - s->scroll + width / 2;
 	centerPos.y = position.y + height / 2;
-	//DrawCircle(position.x + width / 2 - s->scroll, position.y + height / 2, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ğ¶ã‚¶‚á‚È‚­‚Ä’†S‚ğŠî€‚É‚·‚é
-<<<<<<< HEAD
-	//DrawCircle(centerPos.x, centerPos.y, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ğ¶ã‚¶‚á‚È‚­‚Ä’†S‚ğŠî€‚É‚·‚é
-=======
-	DrawCircle(centerPos.x, centerPos.y, width / 2, RGB(0, 0, 0), 0);//“–‚½‚è”»’è‚ğ¶ã‚¶‚á‚È‚­‚Ä’†S‚ğŠî€‚É‚·‚é
->>>>>>> origin/konno
-	scroll = s->scroll;
-
 }
 
 VECTOR2 GroundEnemy2::getPosition() const

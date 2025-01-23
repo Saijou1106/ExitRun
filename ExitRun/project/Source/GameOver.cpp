@@ -33,11 +33,7 @@ void GameOver::Draw()
 	Player* pl = FindGameObject<Player>();
 
 	if (pl == nullptr) return;
-<<<<<<< HEAD
 
-	score = ((pl->position.x - pl->startposition.x) - 1) / 64;
-
-=======
 	DrawGraph(220, 200, GameOverImage, TRUE);
 	int size = GetFontSize();
 	SetFontSize(50);
@@ -51,7 +47,5 @@ void GameOver::Draw()
 
 
 	}
-
 	SetFontSize(size);
->>>>>>> origin/konno
 }

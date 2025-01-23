@@ -10,12 +10,7 @@
 Shield::Shield()
 {
 	shieldImage = LoadGraph("data/shield.png");
-<<<<<<< HEAD
 	barrierImage = LoadGraph("data/shield3.png");
-=======
-	barrierImage = LoadGraph("data/barrier.png");
-	
->>>>>>> origin/konno
 	//position.x = 250;  
 	//position.y = 375;
 
@@ -42,19 +37,6 @@ Shield::~Shield()
 
 void Shield::Update()
 {
-<<<<<<< HEAD
-=======
-	//shieldCount = 0;//盾のカウント最初は0にしておく
-	
-	//position.x -= 3.5f;//盾の移動速度
-
-	//if (position.x < -64) {//画面の左端
-	//	position.x = 1280;//画面右端
-	//	position.y = rand() % 450;//この数字はy座標○○までランダムで表示する
-
-	//}
-	
->>>>>>> origin/konno
 	//プレイヤーと盾の衝突判定
 	std::list<Player*> player = FindGameObjects<Player>();
 	for (Player* pl : player) {
@@ -91,18 +73,9 @@ void Shield::Draw()
 
 	if (!isFollowingPlayer) {
 		DrawGraph(position.x - s->scroll, position.y, shieldImage, TRUE);
-<<<<<<< HEAD
-=======
 	}
 
-	//盾の所持数に応じて左上に盾を並べて表示する処理
-	if (shieldCount >= 1) {
-		for (int i = 0; i < shieldCount; i++) {
-			DrawGraph(10 + i *50, 10, shieldImage, TRUE);
 
-		}
->>>>>>> origin/konno
-	}
 
 	//もし盾がプレイヤーを追従している場合、プレイヤーの位置に基づいて縦の位置を更新
 	if (isFollowingPlayer) {
@@ -124,11 +97,6 @@ void Shield::Draw()
 	SHCenter.x = position.x + 32;
 	SHCenter.y = position.y + 32;//画像の中心座標,プレイヤーの位置を取得
 
-<<<<<<< HEAD
-//	DrawCircle(SHCenter.x - s->scroll, SHCenter.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にす
-=======
-	DrawCircle(SHCenter.x - s->scroll, SHCenter.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にす
->>>>>>> origin/konno
 }
 
 //盾の追従停止メソッド

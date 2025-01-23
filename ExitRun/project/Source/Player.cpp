@@ -111,15 +111,6 @@ void Player::Update()
 		isWalk = true;
 	}
 
-	
-	//地面に着地した時の処理
-	//if (position.y >= ground) {
-	//	position.y = ground;  //地面に着地
-	//	velocityY = 0;        //Yの速度0にする
-	//	grounded = true;      //地面に接した状態
-	//	jumpCount = 0;        //ジャンプ回数をリセット
-	//	onGround = true;
-	//}
 
 	if (velocityY <= 0) {
 		int push1 = s->IsWallDown(position + VECTOR2(0, 64));
@@ -155,45 +146,17 @@ void Player::Update()
 	//前回のスペースキーの状態を更新
 	prevSpaceKeyState = currentSpaceKeyState;
 
-
 	std::list<Enemy*>enemis = FindGameObjects<Enemy>();//すべての敵オブジェクトがEnemy*として格納される
 	std::list<Shield*> shield = FindGameObjects<Shield>();
-	//std::list<GroundEnemy2*>groundenemy2 = FindGameObjects< GroundEnemy2>();
-	//std::list<SkyEnemy2*>skyenemy2 = FindGameObjects< SkyEnemy2>();
+	
 
-	for (Enemy* enemy : enemis) 
->>>>>>> origin/konno
-	{
-		s->scroll += 5;
-		position.x += 5.1f;
-		int push = 0;
-		push = s->IsWallRight(position + VECTOR2(63, 0));
-		position.x -= push;
-		push = s->IsWallRight(position + VECTOR2(63, 63));
-		position.x -= push;
-	}
-		//Y座標の更新（垂直移動）
-		position.y -= velocityY;
+  for (Enemy* enemy : enemis) 
+  {
+	  VECTOR2 enemyPos = enemy->getPosition();//各敵の位置を取得
+	  VECTOR2 playerPos = GetCenterPosition();//各敵の位置を取得
 
-<<<<<<< HEAD
-		//地面にいない時だけ重力を適用
-		if (!grounded) {
-			velocityY -= Gravity;//重力で下に引っ張る
-			if (velocityY > 0.0f) {
-				//上昇中
-				isJumpUp = true;
-				isJumpDown = false;
-				isWalk = false;
-			}
-			else {
-				isJumpUp = false;
-				isJumpDown = true;
-				isWalk = false;
-			}
-=======
-		if (CircleHit(playerPos, enemyPos, 48))//プレイヤーと敵が当たったら
+	    if (CircleHit(playerPos, enemyPos, 48))//プレイヤーと敵が当たったら
 		{
-   			
   			int count = 0;//プレイヤーが持ってない盾の数の初期化
 
 			 for (Shield* sh : shield)
@@ -249,207 +212,51 @@ void Player::Update()
 				 enemy->DestroyMe();
 				 break;
 			 }
->>>>>>> origin/konno
 		}
-		else {
+		/*else {
 			isWalk = true;
+		}*/
+
+		if (isDead) {
+			//プレイヤーが死んだら移動しない
+			isJumpUp = false;
+			isJumpDown = false;
+			return;
 		}
 
-
-		//地面に着地した時の処理
-		//if (position.y >= ground) {
-		//	position.y = ground;  //地面に着地
-		//	velocityY = 0;        //Yの速度0にする
-		//	grounded = true;      //地面に接した状態
-		//	jumpCount = 0;        //ジャンプ回数をリセット
-		//	onGround = true;
-		//}
-
-		if (velocityY <= 0) {
-			int push1 = s->IsWallDown(position + VECTOR2(0, 64));
-			int push2 = s->IsWallDown(position + VECTOR2(50, 64));
-			if (push1 > 0 || push2 > 0) {
-				position.y -= max(push1, push2) - 1;
-				velocityY = 0;        //Yの速度0にする
-				grounded = true;      //地面に接した状態
-				jumpCount = 0;        //ジャンプ回数をリセット
-				onGround = true;
+		if (isWalk) {//歩いてるとき
+			freamcounter += 1;
+			if (freamcounter % 7 == 0) {       //10フレームに一回画像出せる
+				patternX = (patternX + 1) % 2;  //patternXが0，1の後、0にする
 			}
-			else {
-				grounded = false;      //地面に接した状態
-				onGround = false;
-			}
-		}
-		else {
-			int push1 = s->IsWallUp(position + VECTOR2(0, 0));
-			int push2 = s->IsWallUp(position + VECTOR2(63, 0));
-			if (push1 > 0 || push2 > 0) {
-				position.y += max(push1, push2);
-				velocityY = 0;        //Yの速度0にする
-			}
+			isJumpUp = false;
+			isJumpDown = false;
 		}
 
-		//スペースキーが押された瞬間だけ反応させる
-		bool currentSpaceKeyState = CheckHitKey(KEY_INPUT_SPACE);
-		if (currentSpaceKeyState && !prevSpaceKeyState) {
-			if (grounded || jumpCount < maxJump) {//地面にいるか、ジャンプ回数が残っていれば
-				Jump();
-			}
-		}
+		std::list<Object1*>object = FindGameObjects< Object1>();
 
-		//前回のスペースキーの状態を更新
-		prevSpaceKeyState = currentSpaceKeyState;
-
-
-		std::list<Enemy*>enemis = FindGameObjects<Enemy>();//すべての敵オブジェクトがEnemy*として格納される
-		std::list<Shield*> shield = FindGameObjects<Shield>();
-		//std::list<GroundEnemy2*>groundenemy2 = FindGameObjects< GroundEnemy2>();
-		//std::list<SkyEnemy2*>skyenemy2 = FindGameObjects< SkyEnemy2>();
-
-
-
-		for (Enemy* enemy : enemis)
+		//とげの判定
+		for (Object1* ob : object)
 		{
-			VECTOR2 enemyPos = enemy->getPosition();  // 各敵の位置を取得
-			//int width, height;
-			//GetGraphSize(aliveImage, &width, &height);
-			//VECTOR2 playerPos = { position.x + centerPosition.x, position.y + centerPosition.x };//画像の中心座標,プレイヤーの位置を取得
-			VECTOR2 playerPos = GetCenterPosition();//画像の中心座標,プレイヤーの位置を取得
-
-			if (CircleHit(playerPos, enemyPos, 48))//プレイヤーと敵が当たったら
+			VECTOR2 playerPos = GetCenterPosition();
+			VECTOR2 objectPos = ob->getObjectPosition();
+			if (CircleHit(playerPos, objectPos, 48))
 			{
-
-				for (Enemy* enemy : enemis)
+				for (Shield* sh : shield)
 				{
-					VECTOR2 enemyPos = enemy->getPosition();  // 各敵の位置を取得
-					//int width, height;
-					//GetGraphSize(aliveImage, &width, &height);
-					//VECTOR2 playerPos = { position.x + centerPosition.x, position.y + centerPosition.x };//画像の中心座標,プレイヤーの位置を取得
-					VECTOR2 playerPos = GetCenterPosition();//画像の中心座標,プレイヤーの位置を取得
-
-					if (CircleHit(playerPos, enemyPos, 48))//プレイヤーと敵が当たったら
-					{
-
-						int count = 0;//プレイヤーが持ってない盾の数の初期化
-
-						for (Shield* sh : shield)
-						{
-							if (sh->isShield)//プレイヤーが盾を所持している時
-							{
-								if (playerPos.y < enemyPos.y)
-								{
-									if (velocityY < 0.0f)
-									{
-										jumpCount = 1;
-										velocityY = jumpPower / 1.1; //敵を踏んだ時の上に跳ねる高さ
-										grounded = false;
-										isDead = false;
-										enemy->DestroyMe();
-										break;
-									}
-								}
-								else {
-									sh->DestroyMe();//盾だけ消える
-									enemy->DestroyMe();
-									break;
-								}
-							}
-
-
-							count++;
-
-							//	ゲーム中に盾はあるがプレイヤーは持ってない
-							if (count >= shield.size())
-							{
-								//プレイヤーが盾を所持していない場合
-								isDead = true; //プレイヤーが死んだことを記録
-								DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
-								break;
-							}
-
-							if (shield.size() == 0)
-							{
-								//プレイヤーが盾を所持していない場合
-								isDead = true; //プレイヤーが死んだことを記録
-								DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
-							}
-						}
-
-						if (playerPos.y < enemyPos.y)
-						{
-							jumpCount = 1;
-							velocityY = jumpPower / 1.5; //敵を踏んだ時の上に跳ねる高さ
-							grounded = false;
-							isDead = false;
-							enemy->DestroyMe();
-							break;
-						}
-					}
+					sh->DestroyMe();
 				}
-			}
-
-			if (isDead) {
-				//プレイヤーが死んだら移動しない
-				return;
-			}
-
-			if (isWalk) {//歩いてるとき
-				freamcounter += 1;
-				if (freamcounter % 7 == 0) {       //10フレームに一回画像出せる
-					patternX = (patternX + 1) % 2;  //patternXが0，1の後、0にする
-				}
-				isJumpUp = false;
-				isJumpDown = false;
-			}
-
-			std::list<Object1*>object = FindGameObjects< Object1>();
-
-			//とげの判定
-			for (Object1* ob : object)
-			{
-				VECTOR2 playerPos = GetCenterPosition();
-				VECTOR2 objectPos = ob->getObjectPosition();
-				if (CircleHit(playerPos, objectPos, 48))
-				{
-					for (Shield* sh : shield)
-					{
-						sh->DestroyMe();
-					}
-					isDead = true; //とげに触れたらシールドを持っていてもいなくてもプレイヤーは死亡
-					DestroyMe();
-					break;
-				}
-
+				isDead = true; //とげに触れたらシールドを持っていてもいなくてもプレイヤーは死亡
+				DestroyMe();
+				break;
 			}
 
 		}
-<<<<<<< HEAD
-=======
-		isJumpUp = false;
-		isJumpDown = false;
-	}
 
-	std::list<Object1*>object = FindGameObjects< Object1>();
+  }
 
-	//とげの判定
-	for (Object1* ob : object)
-	{
-		VECTOR2 playerPos = GetCenterPosition();
-		VECTOR2 objectPos = ob->getObjectPosition();
-		if (CircleHit(playerPos, objectPos, 48))
-		{
-			for (Shield* sh : shield)
-			{
-				sh->DestroyMe();
-			}
-			isDead = true; //とげに触れたらシールドを持っていてもいなくてもプレイヤーは死亡
-			DestroyMe();
-			break;
-		}
-
-	}
->>>>>>> origin/konno
 }
+
 
 void Player::Draw()
 {
@@ -461,10 +268,7 @@ void Player::Draw()
 		isJumpDown = false;
 		isWalk = false;
 		DrawGraph(position.x - s->scroll , position.y, deadImage, TRUE);
-<<<<<<< HEAD
-=======
 		Instantiate<GameOver>();
->>>>>>> origin/konno
 	}
 	if(isWalk){
 		//生きている時の画像を描画
@@ -485,11 +289,6 @@ void Player::Draw()
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
 	VECTOR2 playerPos = GetCenterPosition();//画像の中心座標,プレイヤーの位置を取得
-<<<<<<< HEAD
-	//DrawCircle(playerPos.x - s->scroll, playerPos.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にする
-=======
-	DrawCircle(playerPos.x - s->scroll, playerPos.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にする
->>>>>>> origin/konno
 	
 		//盾の所持数に応じて左上に盾を並べて表示する処理
 	int shieldCount = 0;
