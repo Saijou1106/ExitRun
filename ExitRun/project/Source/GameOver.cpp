@@ -33,19 +33,7 @@ void GameOver::Draw()
 	Player* pl = FindGameObject<Player>();
 
 	if (pl == nullptr) return;
-	DrawGraph(220, 200, GameOverImage, TRUE);
-	int size = GetFontSize();
-	SetFontSize(50);
 
-	if (timer >= 6.0f) {
-		SetFontSize(25);
-		//  スコア表示　プレイヤーが走り始める原点からの距離の表示
-		score = ((pl->position.x - pl->startposition.x) - 1) / 64;
-		//DrawFormatString(200, 300, GetColor(15, 15, 255), "SCORE:%6d", score);
-		DrawGraph(430,380, NextImage, TRUE);
+	score = ((pl->position.x - pl->startposition.x) - 1) / 64;
 
-
-	}
-
-	SetFontSize(size);
 }
