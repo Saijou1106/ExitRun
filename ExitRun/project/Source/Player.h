@@ -37,6 +37,7 @@ public:
 	int deadImage;                //死亡画像
 	int hImage;
 	int shieldImage;
+	int EnemyIsDeadImage;
 
 	int patternX;				//表示パターン(アニメーションの絵)の横の番号
 	int patternY;				//表示パターンの縦の番号	

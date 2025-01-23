@@ -32,6 +32,7 @@ Player::Player()
 	jumpUpImage = LoadGraph("data/JumpUp.png");
 	jumpDownImage = LoadGraph("data/JumpDown.png");
 	shieldImage = LoadGraph("data/shield.png");
+	EnemyIsDeadImage = LoadGraph("data/enemyKill.png");
 
 	position.x = 120;
 	position.y = 575;
@@ -72,7 +73,8 @@ void Player::Update()
 	GameManager* gm = FindGameObject<GameManager>();
 	Stage* s = FindGameObject<Stage>();
 
-	if (gm->playable == true) {
+	if (gm->playable == true) 
+	{
 		s->scroll += 5;
 		position.x += 5.1f;
 		int push = 0;
@@ -80,7 +82,7 @@ void Player::Update()
 		position.x -= push;
 		push = s->IsWallRight(position + VECTOR2(63, 63));
 		position.x -= push;
-
+	}
 		//Y座標の更新（垂直移動）
 		position.y -= velocityY;
 
@@ -155,122 +157,123 @@ void Player::Update()
 		//std::list<SkyEnemy2*>skyenemy2 = FindGameObjects< SkyEnemy2>();
 
 
-	
-	for (Enemy* enemy : enemis) 
-	{
-		VECTOR2 enemyPos = enemy->getPosition();  // 各敵の位置を取得
-		//int width, height;
-		//GetGraphSize(aliveImage, &width, &height);
-		//VECTOR2 playerPos = { position.x + centerPosition.x, position.y + centerPosition.x };//画像の中心座標,プレイヤーの位置を取得
-		VECTOR2 playerPos = GetCenterPosition();//画像の中心座標,プレイヤーの位置を取得
 
-		if (CircleHit(playerPos, enemyPos, 48))//プレイヤーと敵が当たったら
+		for (Enemy* enemy : enemis)
 		{
+			VECTOR2 enemyPos = enemy->getPosition();  // 各敵の位置を取得
+			//int width, height;
+			//GetGraphSize(aliveImage, &width, &height);
+			//VECTOR2 playerPos = { position.x + centerPosition.x, position.y + centerPosition.x };//画像の中心座標,プレイヤーの位置を取得
+			VECTOR2 playerPos = GetCenterPosition();//画像の中心座標,プレイヤーの位置を取得
 
-			for (Enemy* enemy : enemis)
+			if (CircleHit(playerPos, enemyPos, 48))//プレイヤーと敵が当たったら
 			{
-				VECTOR2 enemyPos = enemy->getPosition();  // 各敵の位置を取得
-				//int width, height;
-				//GetGraphSize(aliveImage, &width, &height);
-				//VECTOR2 playerPos = { position.x + centerPosition.x, position.y + centerPosition.x };//画像の中心座標,プレイヤーの位置を取得
-				VECTOR2 playerPos = GetCenterPosition();//画像の中心座標,プレイヤーの位置を取得
 
-				if (CircleHit(playerPos, enemyPos, 48))//プレイヤーと敵が当たったら
+				for (Enemy* enemy : enemis)
 				{
+					VECTOR2 enemyPos = enemy->getPosition();  // 各敵の位置を取得
+					//int width, height;
+					//GetGraphSize(aliveImage, &width, &height);
+					//VECTOR2 playerPos = { position.x + centerPosition.x, position.y + centerPosition.x };//画像の中心座標,プレイヤーの位置を取得
+					VECTOR2 playerPos = GetCenterPosition();//画像の中心座標,プレイヤーの位置を取得
 
-					int count = 0;//プレイヤーが持ってない盾の数の初期化
-
-					for (Shield* sh : shield)
+					if (CircleHit(playerPos, enemyPos, 48))//プレイヤーと敵が当たったら
 					{
-						if (sh->isShield)//プレイヤーが盾を所持している時
+
+						int count = 0;//プレイヤーが持ってない盾の数の初期化
+
+						for (Shield* sh : shield)
 						{
-							if (playerPos.y < enemyPos.y)
+							if (sh->isShield)//プレイヤーが盾を所持している時
 							{
-								if (velocityY < 0.0f)
+								if (playerPos.y < enemyPos.y)
 								{
-									jumpCount = 1;
-									velocityY = jumpPower / 1.1; //敵を踏んだ時の上に跳ねる高さ
-									grounded = false;
-									isDead = false;
+									if (velocityY < 0.0f)
+									{
+										jumpCount = 1;
+										velocityY = jumpPower / 1.1; //敵を踏んだ時の上に跳ねる高さ
+										grounded = false;
+										isDead = false;
+										enemy->DestroyMe();
+										break;
+									}
+								}
+								else {
+									sh->DestroyMe();//盾だけ消える
 									enemy->DestroyMe();
 									break;
 								}
 							}
-							else {
-								sh->DestroyMe();//盾だけ消える
-								enemy->DestroyMe();
+
+
+							count++;
+
+							//	ゲーム中に盾はあるがプレイヤーは持ってない
+							if (count >= shield.size())
+							{
+								//プレイヤーが盾を所持していない場合
+								isDead = true; //プレイヤーが死んだことを記録
+								DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
 								break;
+							}
+
+							if (shield.size() == 0)
+							{
+								//プレイヤーが盾を所持していない場合
+								isDead = true; //プレイヤーが死んだことを記録
+								DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
 							}
 						}
 
-
-						count++;
-
-						//	ゲーム中に盾はあるがプレイヤーは持ってない
-						if (count >= shield.size())
+						if (playerPos.y < enemyPos.y)
 						{
-							//プレイヤーが盾を所持していない場合
-							isDead = true; //プレイヤーが死んだことを記録
-							DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
+							jumpCount = 1;
+							velocityY = jumpPower / 1.5; //敵を踏んだ時の上に跳ねる高さ
+							grounded = false;
+							isDead = false;
+							enemy->DestroyMe();
 							break;
 						}
-
-						if (shield.size() == 0)
-						{
-							//プレイヤーが盾を所持していない場合
-							isDead = true; //プレイヤーが死んだことを記録
-							DestroyMe();  //プレイヤー削除.死んだ絵に変えるプレイヤーの移動量は死んだときに0にしてとまる	
-						}
-					}
-
-					if (playerPos.y < enemyPos.y)
-					{
-						jumpCount = 1;
-						velocityY = jumpPower / 1.5; //敵を踏んだ時の上に跳ねる高さ
-						grounded = false;
-						isDead = false;
-						enemy->DestroyMe();
-						break;
 					}
 				}
 			}
-		}
 
-		if (isDead) {
-			//プレイヤーが死んだら移動しない
-			return;
-		}
-
-		if (isWalk) {//歩いてるとき
-			freamcounter += 1;
-			if (freamcounter % 7 == 0) {       //10フレームに一回画像出せる
-				patternX = (patternX + 1) % 2;  //patternXが0，1の後、0にする
+			if (isDead) {
+				//プレイヤーが死んだら移動しない
+				return;
 			}
-			isJumpUp = false;
-			isJumpDown = false;
-		}
 
-		std::list<Object1*>object = FindGameObjects< Object1>();
+			if (isWalk) {//歩いてるとき
+				freamcounter += 1;
+				if (freamcounter % 7 == 0) {       //10フレームに一回画像出せる
+					patternX = (patternX + 1) % 2;  //patternXが0，1の後、0にする
+				}
+				isJumpUp = false;
+				isJumpDown = false;
+			}
 
-		//とげの判定
-		for (Object1* ob : object)
-		{
-			VECTOR2 playerPos = GetCenterPosition();
-			VECTOR2 objectPos = ob->getObjectPosition();
-			if (CircleHit(playerPos, objectPos, 48))
+			std::list<Object1*>object = FindGameObjects< Object1>();
+
+			//とげの判定
+			for (Object1* ob : object)
 			{
-				for (Shield* sh : shield)
+				VECTOR2 playerPos = GetCenterPosition();
+				VECTOR2 objectPos = ob->getObjectPosition();
+				if (CircleHit(playerPos, objectPos, 48))
 				{
-					sh->DestroyMe();
+					for (Shield* sh : shield)
+					{
+						sh->DestroyMe();
+					}
+					isDead = true; //とげに触れたらシールドを持っていてもいなくてもプレイヤーは死亡
+					DestroyMe();
+					break;
 				}
-				isDead = true; //とげに触れたらシールドを持っていてもいなくてもプレイヤーは死亡
-				DestroyMe();
-				break;
+
 			}
 
 		}
-	
-    }
+}
 
 void Player::Draw()
 {
