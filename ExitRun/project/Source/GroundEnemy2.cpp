@@ -11,7 +11,7 @@
 
 GroundEnemy2::GroundEnemy2()
 {
-	hImage = LoadGraph("data/dog.png");
+	hImage = LoadGraph("data/enemy1.png");
 	/*position.x = 1280;
 	position.y = 575;*/
 	speed.x = 0.0f;

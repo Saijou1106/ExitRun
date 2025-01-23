@@ -10,7 +10,7 @@
 Shield::Shield()
 {
 	shieldImage = LoadGraph("data/shield.png");
-	barrierImage = LoadGraph("data/barrier.png");
+	barrierImage = LoadGraph("data/shield3.png");
 	//position.x = 250;  
 	//position.y = 375;
 
@@ -19,7 +19,7 @@ Shield::Shield()
 	isShield = false;
 	isActiveShield = true; //初期状態でアクティブ
 
-	shieldCount = 0, 1, 2, 3;
+	shieldCount = 0;
 	shieldCountMax = 3;
 	
 	
@@ -37,16 +37,6 @@ Shield::~Shield()
 
 void Shield::Update()
 {
-	//shieldCount = 0;//盾のカウント最初は0にしておく
-	
-	//position.x -= 3.5f;//盾の移動速度
-
-	//if (position.x < -64) {//画面の左端
-	//	position.x = 1280;//画面右端
-	//	position.y = rand() % 450;//この数字はy座標○○までランダムで表示する
-
-	//}
-	
 	//プレイヤーと盾の衝突判定
 	std::list<Player*> player = FindGameObjects<Player>();
 	for (Player* pl : player) {
@@ -83,14 +73,6 @@ void Shield::Draw()
 
 	if (!isFollowingPlayer) {
 		DrawGraph(position.x - s->scroll, position.y, shieldImage, TRUE);
-	}
-
-	//盾の所持数に応じて左上に盾を並べて表示する処理
-	if (shieldCount >= 1) {
-		for (int i = 0; i < shieldCount; i++) {
-			DrawGraph(10 + i *50, 10, shieldImage, TRUE);
-
-		}
 	}
 
 	//もし盾がプレイヤーを追従している場合、プレイヤーの位置に基づいて縦の位置を更新

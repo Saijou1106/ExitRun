@@ -30,6 +30,7 @@ Player::Player()
 	hImage = LoadGraph("data/run13.png");
 	jumpUpImage = LoadGraph("data/JumpUp.png");
 	jumpDownImage = LoadGraph("data/JumpDown.png");
+	shieldImage = LoadGraph("data/shield.png");
 
 	position.x = 120;
 	position.y = 575;
@@ -69,7 +70,7 @@ void Player::Update()
 {
 	Stage* s = FindGameObject<Stage>();
 
-	s->scroll += 5*3;
+	s->scroll += 5;
 	position.x += 5.1f;
 	int push = 0;
 	push = s->IsWallRight(position + VECTOR2(63, 0));
@@ -148,7 +149,7 @@ void Player::Update()
 	//std::list<GroundEnemy2*>groundenemy2 = FindGameObjects< GroundEnemy2>();
 	//std::list<SkyEnemy2*>skyenemy2 = FindGameObjects< SkyEnemy2>();
 
-	return;
+	
 	for (Enemy* enemy : enemis) 
 	{
 		VECTOR2 enemyPos = enemy->getPosition();  // 各敵の位置を取得
@@ -285,6 +286,22 @@ void Player::Draw()
 	VECTOR2 playerPos = GetCenterPosition();//画像の中心座標,プレイヤーの位置を取得
 	//DrawCircle(playerPos.x - s->scroll, playerPos.y, 32, RGB(0, 0, 0), 0);//当たり判定を左上じゃなくて中心を基準にする
 	
+		//盾の所持数に応じて左上に盾を並べて表示する処理
+	int shieldCount = 0;
+	std::list<Shield*> sh = FindGameObjects<Shield>();
+	for (Shield* s : sh) {
+		if (s->isShield) {
+			shieldCount++;
+		}
+	}
+	if (shieldCount >= 1) {
+		for (int i = 0; i < shieldCount; i++) {
+			DrawGraph(10 + i * 66, 10, shieldImage, TRUE);
+
+		}
+	}
+
+
 }
 
 void Player::DestroyMe()

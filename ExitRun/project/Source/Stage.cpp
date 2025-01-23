@@ -70,7 +70,7 @@ Stage::Stage()
 	LevelUpImage = LoadGraph("data/LevelUpImage.png");
 
 	mapNo = 0;
-	nextMapNo = 0, 1, 2, 3, 4;
+	nextMapNo = -1;
 	scroll = 2;
 	CreateStage(mapNo);
 	created = false;
@@ -95,9 +95,13 @@ void Stage::Update()
 		created = false;
 	}
 
-	if (nextMapNo > 0) {
-		nextMapNo = 4;
+	
+	if (nextMapNo < 0) {
+		nextMapNo = mapNo+1;
+		if (nextMapNo > 4)
+			nextMapNo = 4;
 	}
+	
 }
 
 void Stage::Draw()

@@ -23,7 +23,7 @@ void SkyEnemy2::Update()
 {
 	//ã‰ºˆÚ“®‚Ì“®‚«
 	timer += 0.04f;
-	position.y += 5* sinf(timer);//•~sin(Šp)
+	position.y += 2* sinf(timer);//•~sin(Šp)
 
 	//position.x -= 2.0f;
 	
