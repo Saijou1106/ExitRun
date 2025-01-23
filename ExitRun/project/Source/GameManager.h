@@ -29,6 +29,8 @@ private:
 	int TWO_HANDLE;
 	int ONE_HANDLE;
 	int START_HANDLE;
+	int GameOverImage;
+	int NextImage;
 	int operationImage;
 
 	Player* player;
@@ -41,6 +43,8 @@ public:
 
 public:
 	GAME_STATE gameState;
+
+	int score;
 
 	bool playable;
 

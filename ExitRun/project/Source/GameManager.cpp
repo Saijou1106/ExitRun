@@ -8,6 +8,8 @@ GameManager::GameManager()
 	TWO_HANDLE = LoadGraph("data/game_start_2.png");
 	ONE_HANDLE = LoadGraph("data/game_start_1.png");
 	START_HANDLE = LoadGraph("data/game_start_logo1 .png");
+	GameOverImage = LoadGraph("data/logo_game_over2.png");
+	NextImage = LoadGraph("data/next4.png");
 	operationImage = LoadGraph("data/sousa.png");
 	playable = false;
 }
@@ -70,6 +72,7 @@ void GameManager::Update()
 	case GAME_STATE::START_WAIT:
 		if (STRAT_WAIT() == GAME_STATE::NEXT_STATE)
 		{
+			playable = true;
 			gameState = GAME_STATE::RUN_START;
 		}
 		break;
@@ -78,7 +81,6 @@ void GameManager::Update()
 	case GAME_STATE::RUN_START:
 		if (RUN_START() == GAME_STATE::NEXT_STATE)
 		{
-			playable = true;
 			gameState = GAME_STATE::GAME_WAIT;
 		}
 		break;
@@ -161,7 +163,8 @@ void GameManager::Draw()
 		DrawString(0, 700, "gameover", GetColor(255, 255, 255));
 		break;
 	case GAME_STATE::RESULT:
-		DrawString(0, 700, "reslut", GetColor(255, 255, 255));
+		DrawGraph(220, 200, GameOverImage, TRUE);
+		DrawGraph(430, 380, NextImage, TRUE);
 		break;
 	case GAME_STATE::CONTINUE_STATE:
 		break;
@@ -257,7 +260,7 @@ GAME_STATE GameManager::GAME_WAIT()
 
 	SetFontSize(45);
 	int score = (pl->position.x - pl->startposition.x) / 64;
-	DrawFormatString(900, 10, GetColor(0, 120, 0), "SCORE:%6d", score);
+	DrawFormatString(900, 10, GetColor(0, 120, 0), "距離 :%6d m", score);
 
 	// プレイヤーが死んだ場合ミス処理へ
 	if (pl->isDead)

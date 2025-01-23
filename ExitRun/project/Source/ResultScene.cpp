@@ -18,6 +18,9 @@ ResultScene::ResultScene()
 	}
 
 	GameOver* go = FindGameObject <GameOver>();
+
+
+
 	hs->SetHighScore(go->score);
 };
 
@@ -27,7 +30,6 @@ ResultScene::~ResultScene()
 
 void ResultScene::Update()
 {
-
 	GameOver* go = FindGameObject<GameOver>();
 	if (CheckHitKey(KEY_INPUT_N)) {
 		SceneManager::ChangeScene("TITLE");
@@ -46,25 +48,22 @@ void ResultScene::Draw()
 
 	Player* pl = FindGameObject<Player>();
 
+	GameManager* gm = FindGameObject<GameManager>();
+
 	int size = GetFontSize();
 	SetFontSize(50);
 
-	//if (timer >= 1.0f) {
-	//	
-	//	//  スコア表示　プレイヤーが走り始める原点からの距離の表示
-	//	/*int score = ((pl->position.x - pl->startposition.x) - 1) / 64;*/
-	//	DrawFormatString(250, 300, GetColor(255, 255, 255), "SCORE : %6d", go->score);
-	//}
 	DrawGraph(0, 0, hImage, TRUE);
 
-	DrawFormatString(240, 370, GetColor(25, 25, 25), "%6d", go->score);
+	DrawFormatString(240, 370, GetColor(25, 25, 25), "%6d m", go->score);
 
-	DrawFormatString(750, 370, GetColor(25, 25, 25), "%6d", hs->GetHighScore());
+	DrawFormatString(750, 370, GetColor(25, 25, 25), "%6d m", hs->GetHighScore());
 	SetFontSize(size);
 }
 
 void ResultScene::CheckHighScore()
 {
+	GameManager* gm = FindGameObject<GameManager>();
 	GameOver* go = FindGameObject<GameOver>();
 	HighScore* hs = FindGameObject<HighScore>();
 	if (go->score > hs->GetHighScore())
