@@ -19,7 +19,6 @@ public:
 	int patternX;
 	int patternY;
 	int dead;
-	bool isShield;       //ƒvƒŒƒCƒ„[‚ª‚‚ğ•Û
 	float timer;
 
 };

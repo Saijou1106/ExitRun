@@ -15,6 +15,8 @@ private:
 	bool isShield;      //‚‚Ì•Û
 	int deadCounter;    //€‚ñ‚Å‚éŠÔ
 
+	VECTOR2 centerPos;
+	int scroll;
 
 public:
 	GroundEnemy2();

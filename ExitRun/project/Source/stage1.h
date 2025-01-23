@@ -1,3 +1,4 @@
+
 #if false
 const int WIDTH = 17;
 const int HEIGHT = 14;
@@ -39,3 +40,4 @@ int map[HEIGHT][WIDTH] = {
 };
 // 0 = 背景 / 1 = 床 / 2 = ブロック / 7 = ランダム敵
 // 3 = GroundEnemy1 / 4 = GroundEnemy2 / 5 = SkyEnemy1 / 6 = SkyEnemy2
+

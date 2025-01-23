@@ -22,6 +22,7 @@ public:
 	int shieldCount;  //盾の所持カウント
 	int shieldCountMax; //盾の最大所持数
 	bool isActiveShield;   
+	int hitSoundhandle; // 盾が破壊されたときのサウンド
 
 
 private:
@@ -32,7 +33,7 @@ private:
 	float offsetY;
 	bool isFollowingPlayer;  // 盾がプレイヤーに追従しているかのフラグ
 	
-
+	const char* SHIELD_START_PATH = "data/Sound/Shield.mp3";
 	
 
 

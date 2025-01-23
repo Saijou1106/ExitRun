@@ -10,6 +10,7 @@ public:
 	Player();
 	~Player();
 	VECTOR2 position;
+	VECTOR2 startposition;
 	void Update();
 	void Jump();//ジャンプ処理
 	void Draw();
@@ -18,6 +19,10 @@ public:
 	bool isDead;    //プレイヤーが死んだかどうか
 	float velocity;//速度
 	
+	bool isJumpUp; //上昇中
+	bool isJumpDown;//下降中
+	int jumpUpImage;
+	int jumpDownImage;
 
 	const float Gravity = 0.5f; //重力
 	float velocityY;	         //Y方向の速度(垂直方向)
@@ -32,6 +37,8 @@ public:
 	int deadImage;                //死亡画像
 	int hImage;
 
+	int jumpSound;               //ジャンプサウンド
+
 	int patternX;				//表示パターン(アニメーションの絵)の横の番号
 	int patternY;				//表示パターンの縦の番号	
 
@@ -43,9 +50,16 @@ public:
 
 	bool isFollowingPlayer;  // 盾がプレイヤーに追従しているかのフラグ
 	bool isActivePlayer;
+	int hitSoundhandle;
+
+	void SetHitSoundHandle(int handle) { hitSoundhandle = handle; }
+	void SetjumpSound(int handle) { jumpSound = handle; }
 
 	VECTOR2 centerPosition;
 	VECTOR2 GetCenterPosition();
+private:
+	const char* JUMP_SOUND_PATH = "data/Sound/jump.mp3";
+	const char* SHIELD_SOUND_PATH = "data/Sound/Shield.mp3";
 };
 
 
