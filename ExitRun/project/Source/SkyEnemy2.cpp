@@ -6,11 +6,8 @@
 SkyEnemy2::SkyEnemy2()
 {
 	hImage = LoadGraph("data/brid.png");
-	/*position.x = 1280;
-	position.y = 380;*/
 	speed.x = 0.0f;
 	speed.y = 0.0f;
-	dead = false;
 	timer = 0;
 }
 

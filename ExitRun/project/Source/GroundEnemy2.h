@@ -8,10 +8,9 @@ class GroundEnemy2 : public Enemy
 {
 private:
 	int hImage;
-
+	int EnemyIsDeadImage;
 	int timer;
 	bool attacking;		//ƒvƒŒƒCƒ„[‚É“Ë“ü
-	bool dead;			//€‚ñ‚¾‚çtrue
 	bool isShield;      //‚‚Ì•Û
 	int deadCounter;    //€‚ñ‚Å‚éŠÔ
 
@@ -21,7 +20,7 @@ private:
 public:
 	GroundEnemy2();
 	~GroundEnemy2();
-
+	bool isDead;
 	void Update();
 	void Draw();
 	VECTOR2 speed;

@@ -15,6 +15,7 @@
 #include "Object1.h"
 #include "HighScore.h"
 #include "GameManager.h"
+#include "Explode.h"
 
 
 //ジャンプゲーム作るとき便利
@@ -58,6 +59,7 @@ Player::Player()
 	isJumpDown = false;
 	isJumpUp = false;
     isWalk = true;
+	isEnemyDead = false;
 
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
@@ -74,6 +76,7 @@ Player::~Player()
 
 void Player::Update()
 {
+    isEnemyDead = false;
 	GameManager* gm = FindGameObject<GameManager>();
 	Stage* s = FindGameObject<Stage>();
 
@@ -163,7 +166,6 @@ void Player::Update()
 	    	 {
 				 if (sh->isShield)//プレイヤーが盾を所持している時
 			     {
-					 PlaySoundMem(hitSoundhandle, DX_PLAYTYPE_BACK);
 					 if (playerPos.y < enemyPos.y)
 					 {
 						 if (velocityY < 0.0f)
@@ -173,12 +175,15 @@ void Player::Update()
 							 grounded = false;
 							 isDead = false;
 							 enemy->DestroyMe();
+							 new Explode(enemyPos);
 							 break;
 						 }
 					 }
 					 else {
+						 PlaySoundMem(hitSoundhandle, DX_PLAYTYPE_BACK);
 						 sh->DestroyMe();//盾だけ消える
 						 enemy->DestroyMe();
+						 new Explode(enemyPos);
 						 break;
 					 }
 				 }
@@ -210,12 +215,10 @@ void Player::Update()
 				 grounded = false;
 				 isDead = false;
 				 enemy->DestroyMe();
+				 new Explode(enemyPos);
 				 break;
 			 }
 		}
-		/*else {
-			isWalk = true;
-		}*/
 
 		if (isDead) {
 			//プレイヤーが死んだら移動しない
@@ -268,7 +271,6 @@ void Player::Draw()
 		isJumpDown = false;
 		isWalk = false;
 		DrawGraph(position.x - s->scroll , position.y, deadImage, TRUE);
-		Instantiate<GameOver>();
 	}
 	if(isWalk){
 		//生きている時の画像を描画
@@ -292,20 +294,6 @@ void Player::Draw()
 	
 		//盾の所持数に応じて左上に盾を並べて表示する処理
 	int shieldCount = 0;
-	std::list<Shield*> sh = FindGameObjects<Shield>();
-	for (Shield* s : sh) {
-		if (s->isShield) {
-			shieldCount++;
-		}
-	}
-	if (shieldCount >= 1) {
-		for (int i = 0; i < shieldCount; i++) {
-			DrawGraph(6 + i * 66, 0, shieldImage, TRUE);
-
-		}
-	}
-
-
 }
 
 void Player::DestroyMe()

@@ -12,11 +12,9 @@
 GroundEnemy2::GroundEnemy2()
 {
 	hImage = LoadGraph("data/enemy1.png");
-	/*position.x = 1280;
-	position.y = 575;*/
+	//EnemyIsDeadImage = LoadGraph("data/enemyKill.png");
 	speed.x = 0.0f;
 
-	dead = false;
 }
 
 GroundEnemy2::~GroundEnemy2()
@@ -34,15 +32,26 @@ void GroundEnemy2::Update()
 void GroundEnemy2::Draw()
 {
 	Stage* s = FindGameObject<Stage>();
+	Player* pl= FindGameObject<Player>();
+	
 	DrawGraph(position.x - s->scroll, position.y, hImage, true);
 
+	/*std::list<Enemy*>enemis = FindGameObjects<Enemy>();
 
+	for (Enemy* enemy : enemis)
+	{
+		if (enemy->isDead) {
+			return;
+		}
+	}*/
 	//	debug
 	int width, height;
 	GetGraphSize(hImage, &width, &height);
 	centerPos.x = position.x - s->scroll + width / 2;
 	centerPos.y = position.y + height / 2;
 }
+
+
 
 VECTOR2 GroundEnemy2::getPosition() const
 {
@@ -53,3 +62,5 @@ VECTOR2 GroundEnemy2::getPosition() const
 	VECTOR2 groundEnemyPos = { position.x  + width / 2  , position.y + height / 2 };
 	return groundEnemyPos;
 }
+
+

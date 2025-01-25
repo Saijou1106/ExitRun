@@ -7,10 +7,7 @@
 JumpEnemy::JumpEnemy()
 {
 	hImage = LoadGraph("data/kanfu.png");
-	/*position.x = 1080;
-	position.y = 575;*/
 	basePosition = position;
-	dead = false;
 	timer = 0;
 }
 

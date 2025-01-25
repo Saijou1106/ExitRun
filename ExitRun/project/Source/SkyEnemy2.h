@@ -20,5 +20,7 @@ public:
 	int patternY;
 	int dead;
 	float timer;
+	bool exploded ; // ”š”­ˆ—‚ªs‚í‚ê‚½‚©‚Ç‚¤‚©‚ğŠÇ—
+	bool isDead;
 
 };

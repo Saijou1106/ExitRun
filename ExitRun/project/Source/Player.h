@@ -49,6 +49,7 @@ public:
 	bool onGround;              //地面にいる状態
 	bool grounded;              //地面に接しているかどうか
 	bool prevSpaceKeyState;     //前回スペースキーが押されているか
+	bool isEnemyDead;
 
 	bool isFollowingPlayer;  // 盾がプレイヤーに追従しているかのフラグ
 	bool isActivePlayer;
