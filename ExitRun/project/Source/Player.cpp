@@ -152,7 +152,7 @@ void Player::Update()
 	std::list<Enemy*>enemis = FindGameObjects<Enemy>();//すべての敵オブジェクトがEnemy*として格納される
 	std::list<Shield*> shield = FindGameObjects<Shield>();
 	
-
+	
   for (Enemy* enemy : enemis) 
   {
 	  VECTOR2 enemyPos = enemy->getPosition();//各敵の位置を取得
@@ -229,7 +229,7 @@ void Player::Update()
 
 		if (isWalk) {//歩いてるとき
 			freamcounter += 1;
-			if (freamcounter % 7 == 0) {       //10フレームに一回画像出せる
+			if (freamcounter % 7== 0) {       //10フレームに一回画像出せる
 				patternX = (patternX + 1) % 2;  //patternXが0，1の後、0にする
 			}
 			isJumpUp = false;

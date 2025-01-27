@@ -6,6 +6,7 @@
 #include "Screen.h"
 #include "../ImGui/imgui.h"
 
+
 //	dataフォルダにあるcsvを読み込む方法ならこれらは不要(HORIKOSHI Masahiro)
 #if false
 #include "stage1.h"
@@ -48,14 +49,15 @@ Stage::Stage()
 	//blockImage = LoadGraph("data/floor1.png");
 	//	背景chip用画像読み込み(HORIKOSHI Masahiro)
 	backChipImage = LoadGraph("data/backchip.png");
-	LevelUpImage = LoadGraph("data/LevelUpImage.png");
+	//LevelUpImage = LoadGraph("data/LevelUpImage.png");
 
 	mapNo = 0;
 	nextMapNo = -1;
 	scroll = 2;
 	CreateStage(mapNo);
 	created = false;
-
+	betweenScene = false;
+	
 }
 
 Stage::~Stage()
@@ -162,9 +164,6 @@ void Stage::Draw()
 		}
 	}
 
-	/*if (betweenScene) {
-		DrawGraph(400, 120,LevelUpImage, TRUE);
-	}*/
 }
 
 int Stage::IsWallUp(VECTOR2 pos)
@@ -239,8 +238,7 @@ void Stage::CreateStage(int st)
 		ob->DestroyMe();
 	}
 
-	//つなぎめ？
-
+	//つなぎめ
 	for (int i = 0; i < WORLD_WIDTH; i++)
 	{
 		for (int j = 0; j < HEIGHT; j++)
@@ -248,10 +246,13 @@ void Stage::CreateStage(int st)
 			map[j][i] = 0;
 			map[0][i] = 1;
 			map[HEIGHT - 1][i] = 1;
-
 			betweenScene = true;
 		}
 	}
+
+	/*if (betweenScene) {
+		new LevelUp();
+	}*/
 
 	//CsvReader reader("data/仮.csv");
 	CsvReader reader(mapFile[st]);		//	Map番号に該当するmapファイルを読み込む

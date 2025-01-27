@@ -10,6 +10,7 @@ public:
 	void Update()override;
 	void Draw()override;
 	int hImage;
+	int sound;
 	float timer;//•\Ž¦‚³‚ê‚éŠÔ‚ÌŽžŠÔ
 	
 	void CheckHighScore();

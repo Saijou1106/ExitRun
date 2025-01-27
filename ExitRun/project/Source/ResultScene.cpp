@@ -9,6 +9,7 @@
 ResultScene::ResultScene()
 {
 	hImage = LoadGraph("data/result2.png");
+	sound = LoadSoundMem("data/Sound/ResultScene.mp3");
 	timer = 0.0f;
 
 	HighScore* hs = FindGameObject<HighScore>();
@@ -19,6 +20,8 @@ ResultScene::ResultScene()
 
 	GameOver* go = FindGameObject <GameOver>();
 	hs->SetHighScore(go->score);
+
+	PlaySoundMem(sound, DX_PLAYTYPE_BACK);
 };
 
 ResultScene::~ResultScene()
@@ -27,6 +30,7 @@ ResultScene::~ResultScene()
 
 void ResultScene::Update()
 {
+	
 
 	GameOver* go = FindGameObject<GameOver>();
 	if (CheckHitKey(KEY_INPUT_N)) {

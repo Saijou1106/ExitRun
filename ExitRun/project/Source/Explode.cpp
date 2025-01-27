@@ -1,6 +1,7 @@
 #include "Explode.h"
 #include "Stage.h"
 
+
 Explode::Explode(VECTOR2 pos)
 {
 	position = pos;
@@ -8,6 +9,7 @@ Explode::Explode(VECTOR2 pos)
 	timer = 20;
 	scale = 0.5f;
 }
+
 
 Explode::~Explode()
 {
