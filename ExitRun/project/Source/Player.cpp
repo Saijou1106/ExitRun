@@ -72,8 +72,8 @@ void Player::Update()
 	Stage* s = FindGameObject<Stage>();
 
 	if (gm->playable == true) {
-		s->scroll += 5;
-		position.x += 5.1f;
+		s->scroll += 2;
+		position.x += 3.1f;
 		int push = 0;
 		push = s->IsWallRight(position + VECTOR2(63, 0));
 		position.x -= push;
@@ -178,7 +178,17 @@ void Player::Update()
 								velocityY = jumpPower / 1.1; //“G‚ð“¥‚ñ‚¾Žž‚Ìã‚É’µ‚Ë‚é‚‚³
 								grounded = false;
 								isDead = false;
-								enemy->DestroyMe();
+								GroundEnemy2* GE2 = FindGameObject<GroundEnemy2>();
+
+								GE2->dead = true;
+								if (GE2->dead = true)
+								{
+									GE2->deadCounter++;
+									if (GE2->deadCounter = 30)
+									{
+										enemy->DestroyMe();
+									}
+								}
 								break;
 							}
 						}
@@ -215,8 +225,11 @@ void Player::Update()
 					velocityY = jumpPower / 1.5; //“G‚ð“¥‚ñ‚¾Žž‚Ìã‚É’µ‚Ë‚é‚‚³
 					grounded = false;
 					isDead = false;
-					enemy->DestroyMe();
+					GroundEnemy2* ge = dynamic_cast<GroundEnemy2*>(enemy);
+					if (ge != nullptr)
+						ge->Dead();
 					break;
+
 				}
 			}
 		}
