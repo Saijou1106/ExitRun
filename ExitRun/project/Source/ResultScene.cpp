@@ -8,7 +8,7 @@
 
 ResultScene::ResultScene()
 {
-	hImage = LoadGraph("data/result2.png");
+	hImage = LoadGraph("data/result1.png");
 	sound = LoadSoundMem("data/Sound/ResultScene.mp3");
 	timer = 0.0f;
 
