@@ -7,7 +7,7 @@
 class GroundEnemy2 : public Enemy
 {
 private:
-	
+	int hImage;
 
 	int timer;
 	bool attacking;		//プレイヤーに突入
@@ -18,8 +18,6 @@ private:
 	int scroll;
 
 public:
-	int hImage;
-
 	bool dead;			//死んだらtrue
 	int deadCounter;    //死んでる時間
 	int deadImage;      //死んだときのイメージ
