@@ -73,7 +73,6 @@ void GameManager::Update()
 	case GAME_STATE::START_WAIT:
 		if (STRAT_WAIT() == GAME_STATE::NEXT_STATE)
 		{
-			playable = true;
 			gameState = GAME_STATE::RUN_START;
 		}
 		break;

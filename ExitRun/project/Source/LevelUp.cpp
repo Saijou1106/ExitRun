@@ -38,7 +38,7 @@ void LevelUp::Draw()
 		Stage* s = FindGameObject<Stage>();
 		if (s->betweenScene) {
 			int  sz = (int)(scale * 32.0f);
-			DrawGraph(150, 130, hImage, TRUE);
+			DrawGraph(360, 130, hImage, TRUE);
 		}
 	}
 }
