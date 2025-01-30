@@ -17,6 +17,7 @@ public:
 	void DestroyMe();
 	bool isOnGround()const;//地面にいるかどうかを確認
 	bool isDead;    //プレイヤーが死んだかどうか
+	bool isOutOfBounds();
 	float velocity;//速度
 	
 	bool isJumpUp; //上昇中
