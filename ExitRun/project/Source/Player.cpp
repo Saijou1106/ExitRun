@@ -321,7 +321,7 @@ bool Player::isOnGround() const
 	return grounded;
 }
 
-//‰æ–ÊŠO‚É‚¢‚Á‚½‚çŽ€–S
+// ‰æ–ÊŠO‚É‚¢‚Á‚½‚çŽ€–S
 bool Player::isOutOfBounds()
 {
 	Stage* s = FindGameObject<Stage>();
