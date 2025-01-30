@@ -3,8 +3,9 @@
 
 LevelUp::LevelUp()
 {
-	hImage = LoadGraph("data/levelup.png");
-	timer = 35;//ここで表示時間変更
+	hImage = LoadGraph("data/level.png");
+	sound = LoadSoundMem("data/sound/LevelUp2.mp3");
+	timer = 40;//ここで表示時間変更
 	scale = 0.5f;
 
 }
@@ -17,6 +18,7 @@ LevelUp::~LevelUp()
 void LevelUp::Update()
 {
 	Stage* s = FindGameObject<Stage>();
+	
 	if (s->betweenScene) {
 		scale += 0.2f;
 		if (scale >= 1.5f) {
@@ -32,11 +34,11 @@ void LevelUp::Update()
 
 void LevelUp::Draw()
 {
-	if (timer % 10 < 3) {
+	if (timer % 15 < 8) {//15フレームのうち8フレーム表示（点滅表示）
 		Stage* s = FindGameObject<Stage>();
 		if (s->betweenScene) {
 			int  sz = (int)(scale * 32.0f);
-			DrawGraph(50, 130, hImage, TRUE);
+			DrawGraph(150, 130, hImage, TRUE);
 		}
 	}
 }

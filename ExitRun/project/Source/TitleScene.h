@@ -15,6 +15,7 @@ private:
 	int frameCount; //フレームカウンタ
 	bool isVisible; //画像を描画するかどうかのフラグ
 	int bkinkInterval; //点滅間隔
+	int sound;
 public:
 	TitleScene();
 	~TitleScene();

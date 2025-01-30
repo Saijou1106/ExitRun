@@ -10,6 +10,7 @@ ResultScene::ResultScene()
 {
 	hImage = LoadGraph("data/result1.png");
 	sound = LoadSoundMem("data/Sound/ResultScene.mp3");
+	sound2 = LoadSoundMem("data/Sound/buttom2.mp3");
 	timer = 0.0f;
 
 	HighScore* hs = FindGameObject<HighScore>();
@@ -34,6 +35,7 @@ void ResultScene::Update()
 
 	GameOver* go = FindGameObject<GameOver>();
 	if (CheckHitKey(KEY_INPUT_N)) {
+		PlaySoundMem(sound2, DX_PLAYTYPE_BACK);
 		SceneManager::ChangeScene("TITLE");
 			//SceneManager::ChangeScene("");
 	}

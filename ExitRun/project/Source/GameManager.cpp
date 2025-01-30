@@ -11,6 +11,7 @@ GameManager::GameManager()
 	GameOverImage = LoadGraph("data/logo_game_over2.png");
 	NextImage = LoadGraph("data/next4.png");
 	operationImage = LoadGraph("data/sousa.png");
+	sound = LoadSoundMem("data/Sound/buttom2.mp3");
 	playable = false;
 }
 
@@ -117,6 +118,7 @@ void GameManager::Update()
 		{
 			if (CheckHitKey(KEY_INPUT_SPACE))
 			{
+				PlaySoundMem(sound, DX_PLAYTYPE_BACK);
 				SceneManager::ChangeScene("RESULT");
 			}
 

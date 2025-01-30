@@ -13,4 +13,5 @@ private:
 	VECTOR2 position;
 	float scale;
 	int timer;
+	int sound;
 }; 

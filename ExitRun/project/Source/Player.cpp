@@ -152,7 +152,7 @@ void Player::Update()
 	std::list<Enemy*>enemis = FindGameObjects<Enemy>();//すべての敵オブジェクトがEnemy*として格納される
 	std::list<Shield*> shield = FindGameObjects<Shield>();
 	
-	return;
+	//return;
   for (Enemy* enemy : enemis) 
   {
 	  VECTOR2 enemyPos = enemy->getPosition();//各敵の位置を取得

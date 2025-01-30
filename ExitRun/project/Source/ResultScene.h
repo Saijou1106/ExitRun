@@ -11,6 +11,7 @@ public:
 	void Draw()override;
 	int hImage;
 	int sound;
+	int sound2;
 	float timer;//•\Ž¦‚³‚ê‚éŠÔ‚ÌŽžŠÔ
 	
 	void CheckHighScore();
