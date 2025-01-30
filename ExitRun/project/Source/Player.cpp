@@ -82,8 +82,8 @@ void Player::Update()
 
 	if (gm->playable == true)
 	{
-		s->scroll += 5;
-		position.x += 5.1f;
+		s->scroll += 3;
+		position.x += 3.1f;
 		int push = 0;
 		push = s->IsWallRight(position + VECTOR2(63, 0));
 		position.x -= push;
@@ -153,6 +153,7 @@ void Player::Update()
 	std::list<Shield*> shield = FindGameObjects<Shield>();
 	
 	
+	isOutOfBounds();
   for (Enemy* enemy : enemis) 
   {
 	  VECTOR2 enemyPos = enemy->getPosition();//各敵の位置を取得
@@ -314,10 +315,29 @@ void Player::Jump()
 }
 
 
+
 //プレイヤーが地面にいるかの確認
 bool Player::isOnGround() const
 {
 	return grounded;
+}
+
+//画面外にいったら死亡
+bool Player::isOutOfBounds()
+{
+	Stage* s = FindGameObject<Stage>();
+
+	if (position.x - s->scroll < -64)
+	{
+		isDead = true;
+		return true;
+	}
+	if (position.y >= 750)
+	{
+		isDead = true;
+		return true;
+	}
+	return false;
 }
 
 VECTOR2 Player::GetCenterPosition()
