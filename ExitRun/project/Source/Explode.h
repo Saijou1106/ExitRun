@@ -13,4 +13,13 @@ private:
 	VECTOR2 position;
 	float scale;
 	int timer;
+
+	int hitSoundhandle;
+	void SetHitSoundHandle(int handle) { hitSoundhandle = handle; }
+	bool nowPlaySE = false;
+
+	void destroyCountDownTimer();
+
+	float destroyTimer;
+	float destroyTimeLimit;
 };

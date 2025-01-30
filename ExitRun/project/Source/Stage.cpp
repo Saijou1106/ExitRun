@@ -52,10 +52,11 @@ Stage::Stage()
 	backChipImage = LoadGraph("data/backchip.png");
 	LevelUpImage = LoadGraph("data/LevelUpImage.png");
 
+	mapNo = -1;
+	scroll = 2;
+	CreateStage(0);
 	mapNo = 0;
 	nextMapNo = -1;
-	scroll = 2;
-	CreateStage(mapNo);
 	created = false;
 	betweenScene = false;
 	
@@ -70,9 +71,9 @@ void Stage::Update()
 	int sc = (scroll / CHIP_SIZE) % WORLD_WIDTH;
 	if (sc > WIDTH * 16 - 1) {
 		if (nextMapNo >= 0 && created == false) {
+			CreateStage(nextMapNo);
 			mapNo = nextMapNo;
 			nextMapNo = -1;
-			CreateStage(mapNo);
 			created = true;
 		}
 	}
@@ -251,8 +252,10 @@ void Stage::CreateStage(int st)
 		}
 	}
 
-	if (betweenScene) {
-		LevelUp* levelUp = new LevelUp();  // LevelUpオブジェクトを動的に生成し、ポインタに格納
+	if (st != mapNo) {
+		if (betweenScene) {
+			LevelUp* levelUp = new LevelUp();  // LevelUpオブジェクトを動的に生成し、ポインタに格納
+		}
 	}
 
 	//CsvReader reader("data/仮.csv");

@@ -6,6 +6,7 @@ Explode::Explode(VECTOR2 pos)
 {
 	position = pos;
 	hImage = LoadGraph("data/enemyKill.png");
+	hitSoundhandle = LoadSoundMem("data/Sound/stepon.mp3");
 	timer = 20;
 	scale = 0.5f;
 }
@@ -26,6 +27,17 @@ void Explode::Update()
 	if (timer <= 0) {
 		DestroyMe();
 	}
+
+	destroyTimer += Time::DeltaTime();
+	if (destroyTimer >= destroyTimeLimit)
+	{
+		if (!nowPlaySE)
+		{
+			PlaySoundMem(hitSoundhandle, DX_PLAYTYPE_BACK);
+			nowPlaySE = true;
+		}
+		return;
+	}
 }
 
 void Explode::Draw()
@@ -35,3 +47,4 @@ void Explode::Draw()
 	DrawExtendGraph(position.x - sz - st->scroll, position.y - sz,
 		position.x + sz - st->scroll, position.y + sz, hImage, TRUE);
 }
+
