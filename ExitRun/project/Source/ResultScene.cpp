@@ -57,9 +57,9 @@ void ResultScene::Draw()
 
 	DrawGraph(0, 0, hImage, TRUE);
 
-	DrawFormatString(240, 370, GetColor(25, 25, 25), "%6d m", go->score);
+	DrawFormatString(240, 370, GetColor(0, 65, 0), "%6d m", go->score);
 
-	DrawFormatString(750, 370, GetColor(25, 25, 25), "%6d m", hs->GetHighScore());
+	DrawFormatString(750, 370, GetColor(0, 65, 0), "%6d m", hs->GetHighScore());
 
 	SetFontSize(size);
 }
