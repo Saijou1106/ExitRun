@@ -23,6 +23,7 @@
 #include "SkyEnemy2.h"
 #include "Object1.h"
 #include "JumpEnemy.h"
+#include "LevelUp.h"
 
 
 //	チップ１つの大きさ
@@ -49,7 +50,7 @@ Stage::Stage()
 	//blockImage = LoadGraph("data/floor1.png");
 	//	背景chip用画像読み込み(HORIKOSHI Masahiro)
 	backChipImage = LoadGraph("data/backchip.png");
-	//LevelUpImage = LoadGraph("data/LevelUpImage.png");
+	LevelUpImage = LoadGraph("data/LevelUpImage.png");
 
 	mapNo = 0;
 	nextMapNo = -1;
@@ -250,9 +251,9 @@ void Stage::CreateStage(int st)
 		}
 	}
 
-	/*if (betweenScene) {
-		new LevelUp();
-	}*/
+	if (betweenScene) {
+		LevelUp* levelUp = new LevelUp();  // LevelUpオブジェクトを動的に生成し、ポインタに格納
+	}
 
 	//CsvReader reader("data/仮.csv");
 	CsvReader reader(mapFile[st]);		//	Map番号に該当するmapファイルを読み込む
@@ -322,58 +323,4 @@ void Stage::CreateStage(int st)
 		}
 	}
 }
-			//	プレイヤー
-			//case 9:
-			//{
-			//	Player* p = Instantiate<Player>();
-			//	p->position.x = i * CHIP_SIZE;	//	なぜ100足している？(HORIKOSHI Masahiro)
-			//	p->position.y = j * CHIP_SIZE;	//	なぜ100足している？(HORIKOSHI Masahiro)
-			//}
-			//break;
-
-			//	ランダム敵(仮に7としている)
-			//case 7:
-		 //   {
-			//	int rand = GetRand(3);		//	0-3の乱数
-			//	//	乱数の結果で敵の出現を変える
-			//	switch (rand)
-			//	{
-			//	case 0:
-			//	{
-			//		GroundEnemy1* enemy1 = Instantiate<GroundEnemy1>();
-			//		enemy1->position.x = i * CHIP_SIZE;
-			//		enemy1->position.y = j * CHIP_SIZE;
-			//    }
-			//	break;
-			//	case 1:
-			//	{
-			//		GroundEnemy2* enemy2 = Instantiate<GroundEnemy2>();
-			//		enemy2->position.x = i * CHIP_SIZE;
-			//		enemy2->position.y = j * CHIP_SIZE;
-			//	}
-			//	break;
-			//	case 2:
-			//	{
-			//		SkyEnemy1* enemy3 = Instantiate<SkyEnemy1>();
-			//		enemy3->position.x = i * CHIP_SIZE;
-			//		enemy3->position.y = j * CHIP_SIZE;
-			//	}
-			//	break;
-			//	case 3:
-			//	{
-			//		SkyEnemy2* enemy4 = Instantiate<SkyEnemy2>();
-			//		enemy4->position.x = i * CHIP_SIZE;
-			//		enemy4->position.y = j * CHIP_SIZE;
-			//	}
-			//	break;
-		 //       }
-	        
-
-	
-
-	/*backGroundX = 0;
-	backGroundY = 0;
-	floorX = 300;
-	floorY = 520;*/
-
-
+		

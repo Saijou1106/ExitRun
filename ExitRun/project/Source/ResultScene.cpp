@@ -8,8 +8,9 @@
 
 ResultScene::ResultScene()
 {
-	hImage = LoadGraph("data/result2.png");
+	hImage = LoadGraph("data/result1.png");
 	sound = LoadSoundMem("data/Sound/ResultScene.mp3");
+	sound2 = LoadSoundMem("data/Sound/buttom2.mp3");
 	timer = 0.0f;
 
 	HighScore* hs = FindGameObject<HighScore>();
@@ -34,6 +35,7 @@ void ResultScene::Update()
 
 	GameOver* go = FindGameObject<GameOver>();
 	if (CheckHitKey(KEY_INPUT_N)) {
+		PlaySoundMem(sound2, DX_PLAYTYPE_BACK);
 		SceneManager::ChangeScene("TITLE");
 			//SceneManager::ChangeScene("");
 	}
@@ -57,9 +59,9 @@ void ResultScene::Draw()
 
 	DrawGraph(0, 0, hImage, TRUE);
 
-	DrawFormatString(240, 370, GetColor(25, 25, 25), "%6d m", go->score);
+	DrawFormatString(240, 370, GetColor(0, 65, 0), "%6d m", go->score);
 
-	DrawFormatString(750, 370, GetColor(25, 25, 25), "%6d m", hs->GetHighScore());
+	DrawFormatString(750, 370, GetColor(0, 65, 0), "%6d m", hs->GetHighScore());
 
 	SetFontSize(size);
 }

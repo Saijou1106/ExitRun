@@ -6,6 +6,7 @@ TitleScene::TitleScene()
 {
 	hImage = LoadGraph("data/title.png");
 	spaceImage = LoadGraph("data/spaceKey.png");
+	sound = LoadSoundMem("data/Sound/buttom2.mp3");
 	position.x = 0;
 	position.y = 0;
 	spaceKey.x = 349;
@@ -29,6 +30,7 @@ void TitleScene::Update()
 {
 	if (CheckHitKey(KEY_INPUT_SPACE)) {
 		SceneManager::ChangeScene("PLAY");
+		PlaySoundMem(sound, DX_PLAYTYPE_BACK);
 	}
 
 	if (CheckHitKey(KEY_INPUT_ESCAPE)) {

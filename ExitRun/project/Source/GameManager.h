@@ -42,6 +42,7 @@ private:
 	int NextImage;
 
 	int operationImage;
+	int sound;
 
 	Player* player;
 
