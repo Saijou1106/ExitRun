@@ -81,6 +81,9 @@ void Player::Update()
 	Stage* s = FindGameObject<Stage>();
 
 	if (gm->playable == true) {
+
+		isOutOfBounds();
+
 		s->scroll += 5;
 		position.x += 5.1f;
 		int push = 0;
@@ -316,6 +319,24 @@ void Player::Jump()
 bool Player::isOnGround() const
 {
 	return grounded;
+}
+
+//‰æ–ÊŠO‚É‚¢‚Á‚½‚çŽ€–S
+bool Player::isOutOfBounds()
+{
+	Stage* s = FindGameObject<Stage>();
+
+	if (position.x - s->scroll < -64)
+	{
+		isDead = true;
+		return true;
+	}
+	if (position.y >= 750)
+	{
+		isDead = true;
+		return true;
+	}
+	return false;
 }
 
 VECTOR2 Player::GetCenterPosition()

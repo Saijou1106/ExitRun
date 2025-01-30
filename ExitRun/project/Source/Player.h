@@ -59,6 +59,7 @@ public:
 	void SetHitSoundHandle(int handle) { hitSoundhandle = handle; }
 	void SetjumpSound(int handle) { jumpSound = handle; }
 
+
 	VECTOR2 centerPosition;
 	VECTOR2 GetCenterPosition();
 private:
